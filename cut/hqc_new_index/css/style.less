@@ -1,7 +1,7 @@
 @default_font: Microsoft YaHei;
 @default_color: #444;
 @default_w: 980px;
-@header_h: 100px;
+@header_h: 90px;
 @base_color: #464646;
 
 @blue: #607D8B;
@@ -51,7 +51,7 @@ header {
 		display: inline-block;
 		height: 100%;
 		img {
-			height: 90%;
+			height: 100%;
 		}
 	}
 }
@@ -136,7 +136,7 @@ header {
 }
 
 .container nav {
-	margin: 0px 0 15px 0;
+	margin: 0px 0 5px 0;
 	text-align: center;
 	overflow: hidden;
 
@@ -258,6 +258,9 @@ header {
 		padding-bottom: 0;
 		position: relative;
 		box-shadow: inset 0 -10px 15px -5px rgba(0,0,0, .2);
+		height: 40%;
+		position: relative;
+		z-index: 1;
 
 		h1 {
 			margin-top: 0;
@@ -322,9 +325,15 @@ header {
 .secondary {
 	background: #F3F3F3;
 	padding: 14px 14px;
+	padding-top: 16px;
 	padding-bottom: 0;
 	overflow: hidden;
-	max-height: 230px;
+	/*max-height: 230px;*/
+	/*box-sizing: border-box;*/
+	height: 50.5%;
+	position: relative;
+	top: -8px;
+	z-index: 0;
 
 	h1 {
 		margin-top: 0;
@@ -341,7 +350,7 @@ header {
 	.notice_content {
 		width: 50%;
 		float: left;
-		padding: 0 2px;
+		padding: 4px 2px;
 		box-sizing: border-box;
 		margin-bottom: 7px;
 	}
@@ -485,8 +494,9 @@ header {
 
 			li {
 				border-right: 3px solid @brown;
-				padding: 10px 12px;
-				margin-bottom: 24px;
+				padding: 8px 10px;
+				margin-bottom: 15px;
+				overflow: hidden;
 
 				a {
 					display: block;
@@ -503,13 +513,17 @@ header {
 					margin-top: 10px;
 				}
 
+			}
+			.hqc_depart {
+
 				.hqc_link {
-					display: inline-block;
+				/*display: inline-block;*/
+					float: left;
 					padding: 5px 8px;
-					border-radius: 30px;
 					margin: 4px 4px;
 					background: #fff;
 					transition: all .3s;
+					width: 27%; height: 90px;
 
 					&:hover {
 						background: @brown;
@@ -517,9 +531,37 @@ header {
 					}
 				}
 
+				background: url(../img/1.jpg);
+				background-position: 14px 12px;
+
+				.hqc_link1 {
+					background: inherit;
+					background-position: 0px 0px;
+				}
+				.hqc_link2 {
+					background: inherit;
+					background-position: -146px 0px;
+				}
+				.hqc_link3 {
+					background: inherit;
+					background-position: -292px 0px;
+				}
+				.hqc_link4 {
+					background: inherit;
+					background-position: 0px 140px;
+				}
+				.hqc_link5 {
+					background: inherit;
+					background-position: -146px 140px;
+				}
+				.hqc_link6 {
+					background: inherit;
+					background-position: -292px 140px;
+				}
+
 			}
 		}
-		.hqc_depart, .hqc_service {
+		/*.hqc_depart, .hqc_service {
 			position: relative;
 
 			&:after {
@@ -549,10 +591,10 @@ header {
 			position: absolute;
 			bottom: 0; right: 0;
 			z-index: 0;
-		}
+		}*/
 	}
 	.guestbook {
-		height: 300px;
+		height: 230px;
 		overflow: hidden;
 
 		.message_area {
