@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>申请加入后勤网站</title>
+	<meta charset="utf-8">		
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="../../favicon.ico">
+	<link rel="stylesheet" href="css/style-guide.css"> <!-- Resource style -->
+	<link rel="stylesheet" href="css/style-my.css">
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="/Public/js/ie-emulation-modes-warning.js"></script>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+	<script src="/Public/js/jquery-1.10.2.min.js"></script>
+
+	<style type="text/css">
+		body {
+			background-image: none;
+			background: #fff;
+		}
+	</style>
+	<script type="text/javascript">
+	 function IsNum(e) {
+            var k = window.event ? e.keyCode : e.which;
+            if (((k >= 48) && (k <= 57)) || k == 8 || k == 0) {
+            } else {
+                if (window.event) {
+                    window.event.returnValue = false;
+                }
+                else {
+                    e.preventDefault(); //for firefox 
+                }
+            }
+        } 
+
+
+	function get() {
+		$.ajax({
+			url: '/Public/getInfo.php',//ajax请求路径
+			type: 'POST',//类型 post
+			data: { studentID:  $("#schoolCard").val()},//发送的数据
+			//请求失败执行函数
+			error: function(data) {
+				alert("学生卡号输入的不对哦，请检查一下");
+				window.location.href="/index.php/Home/Register/Register/index";
+				$("#name").val("");
+				$("#phone").val("");
+				$("#major").val("");
+							
+			},
+			success: function(data) {
+				//获得json数组
+				//输出到控制台
+				console.log(data);
+				//添加html元素
+				$("#name").val(data['memberName']);
+				$("#sex").val(data['memberSex']);
+				$("#major").val(data['memberCollege']);
+				var name=document.getElementById("memberName").value;
+				
+			}
+			
+		});		
+	}
+
+
+	function validate_required(field,alerttxt)
+	{
+	with (field)
+	  {
+	  if (value==null||value==""||value=="个人介绍：")
+		{alert(alerttxt);return false}
+	  else {return true}
+	  }
+	}
+	function phone_required(field,alerttxt)
+	{
+	with (field)
+	  {
+	  var phonelength = value.length;
+		  if(phonelength==11){
+			if (value==null||value=="")
+			{alert(alerttxt);return false}
+			else {return true}
+		  }
+		  else{
+			{alert('手机号码不正确，不能为'+phonelength+'位!');return false}
+		  }
+	  }
+	  
+	}
+	function validate_form(thisform)
+	{
+	with (thisform)
+	  {
+	  
+	  if (phone_required(phone,"请填写手机号码！")==false)
+		{phone.focus();return false}
+	  if (validate_required(introduction,"请填写自我介绍！")==false)
+		{introduction.focus();return false}
+	  }
+	}
+	
+	</script>
+
+</head>
+<body>
+	<div class="cd-testimonials-all join-form">
+		<div class="cd-testimonials-all-wrapper">
+
+			<form class="form-signin" method="post" onsubmit="return validate_form(this)" action="/index.php/Home/Register/register">
+				<h1>加入我们</h1>
+				<label for="inputSchoolCard">学号</label><br>
+				<input type="text" id="schoolCard" name="schoolCard" placeholder="校园卡号(12位，例如：220140011001)" maxlength="12" onkeypress="return IsNum(event)"  onblur="get()" ><br>
+				<label for="inputName">姓名</label><br>
+				<input type="text" id="name" name="name" disabled><br>
+				<label for="inputSex">性别</label><br>
+				<input type="text" id="sex" name="sex" disabled><br>
+				<label for="inputMajor">学院</label><br>
+				<input type="text" id="major" name="major" disabled><br>
+				<label for="inputPhone">手机</label><br>
+				<input type="text" id="phone" name="phone" onkeypress="return IsNum(event)"><br>
+				<div class="cd-input-wrapper cd-select">
+					<label for="inputDepartment">你想加入的部门</label>
+					<select id="department" name="department" style="background:none">
+					  	<option value="0">不确定</option>
+						<option value="1">技术部</option>
+						<option value="2">硬件部</option>
+						<option value="3">采编部</option>
+						<option value="4">秘书部</option>
+					</select>
+				</div>
+				<label for="inputIntroduction">个人简介</label><br>
+				<textarea id="introduction" name="introduction" onfocus="this.value ='';"></textarea>
+				<div class="tips">
+					Hey! 请在这里留下与你申请部门有关的经历（例如你曾经学习过某一语言\装过系统\有美术基础\会PS\喜欢写文章等等），以便让我们尽快的了解你。^_^
+				</div>
+				<input type="submit" value="提交" class="btn">
+				<!-- <button class="btn" type="submit">报名</button> -->
+			</form>
+		</div>
+	</div>
+</body>
+</html>

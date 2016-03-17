@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE-edge,chrome=1">
+	<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+	<title>Image Gallery Demo</title>
+
+	<style type="text/css">
+	html {
+		font-size: 16px;
+	}
+	body, ul, div {
+		margin: 0 auto;
+		text-align: center;
+	}
+	body {
+		font-family: 微软雅黑;
+	}
+	a {
+		text-decoration: none;
+	}
+	h1 {
+		margin-top: 0;
+		padding-top: 10px;
+		text-shadow: 0 1px 3px #bbb; 
+	}
+	#image-list {
+            
+            /*-webkit-column-width: 120px;
+        -moz-column-width: 120px;
+        -o-colum-width: 120px;
+        column-width: 120px;
+        -webkit-column-gap: 10px;
+        -moz-column-gap: 10px;
+        -o-column-gap: 10px;
+            column-gap: 10px;*/
+            
+		list-style-type: none;
+		padding-right: 5px;
+		padding-left: 5px;
+		clear: both;
+	}
+	#image-list li {
+        
+        	// float: left;
+        
+        display: inline-block;
+		width: 100px; height: 100px;
+		overflow: hidden;
+		margin: 5px;
+		box-shadow: 0 0 5px #aaa;
+	}
+	.clr {
+		clear: both;
+	}
+	.popup {
+		width: 100%; height: 100%;
+		position: fixed;
+	}
+	.shade-layer{
+		width: 100%; height: 100%;
+		background: #ccc;
+		opacity: 0.8;
+		position: absolute;
+		z-index: 2;
+	}
+	.popup img {
+		max-width: 90%; max-height: 80%;
+		box-shadow: 0 1px 10px #444;
+		z-index: 3;
+		position: relative;
+		top: 50%;
+		visibility: visible;
+	}
+	.popup a {
+		background: #444;
+		color: #ddd;
+		position: relative;
+		top: 52%;
+		padding: 5px;
+		margin-left: 5px;
+		margin-right: 5px;
+		box-shadow: 0 1px 5px #444;
+		font-size: 0.9rem;
+		z-index: 4
+	}
+	.footer {
+		font-size: 0.8rem;
+		color: #bbb;
+		margin-top: 20px;
+		margin-bottom: 10px;
+	}
+	.user-add {
+		font-size: 120px;
+		font-weight: 900;
+		line-height: 80px;
+		display: block;
+		width: 100%; height: 100%;
+		color: #444;
+		margin: 0;padding: 0;
+	}
+	.add-layer {
+		background: #ccc;
+		width: 100%; height: 15%;
+		position: fixed;
+		bottom: 0;
+		padding-top: 25px;
+	}
+	.add-layer form {
+		line-height: 40px;
+	}
+	.url-input {
+		width: 55%; height: 40px;
+		border-radius: 5px;
+		border: 2px solid #aaa;
+		padding: 0;
+		font-size: 1rem;
+		font-family: 微软雅黑;
+	} 
+	.url-btn {
+		background: #89BFB1;
+		height: 40px; width: 15%;
+		font-size: 1.5rem;
+		font-weight: 900;
+		font-family: 微软雅黑;
+		border-radius: 5px;
+		margin: 0;
+		color: #eee;
+	}
+	</style>
+</head>
+<body>
+	<div class="popup" id="popup" style="display: none">
+		<div class="shade-layer" id="shade-layer"></div>
+		<img src="" id="showed-img"><br>
+		<a href="#" id="pre-img">上一张</a>
+		<a href="#" id="showed-img-url">查看原图</a>
+		<a href="#" id="next-img">下一张</a>
+	</div>
+	<!-- <div class="add-layer">
+		<form>
+			<input class="url-input" type="text" placeholder="在这里填入图片url">
+			<input class="url-btn" type="submit" value="发射！">
+		</form>
+	</div> -->
+	<h1>图片分享（伪）社区</h1>
+	<ul id="image-list">
+		<li><a class="user-add" href="#">+</a></li>
+	</ul>
+
+	<div class="footer">
+		地球上为什么会有IE这种浏览器啊啊啊啊啊
+	</div>
+<script type="text/javascript">
+	var imageList = [
+		'http://www.espier.org/files/20120823/view/2043c1b1f9e743029bfca8e55e2b6133.jpg',
+		'http://wallpaper.zhutiwo.com/bluepic/360X640/N97%E6%A2%A6%E5%B9%BB%E6%89%8B%E6%9C%BA%E5%A3%81%E7%BA%B8%E5%9B%BE%E7%89%87360X640/1.jpg',
+		'http://samsung.tgbus.com/UploadFiles_3297/201203/20120329091737663.jpg',
+		'http://down1.cnmo.com/cnmo-app/a190/lvjingbz.jpg',
+		'http://www.zhuti.org/uploads/allimg/1103/1-11031GK1320-L.jpg',
+		'http://ww2.sinaimg.cn/mw1024/a15b4afegw1etsa790xqpj21kw0pndqm',
+		'http://mtmos.com/v1/mss_3d027b52ec5a4d589e68050845611e68/ff/n0/0b/v9/s0_453975.jpg',
+		'http://mtmos.com/v1/mss_3d027b52ec5a4d589e68050845611e68/ff/n0/0b/tg/j6_120148.jpg',
+		'http://mtmos.com/v1/mss_3d027b52ec5a4d589e68050845611e68/ff/n0/0b/se/gb_241055.jpg',
+		'http://mtmos.com/v1/mss_3d027b52ec5a4d589e68050845611e68/ff/n0/0b/r4/0t_197520.jpg',
+		'http://mtmos.com/v1/mss_3d027b52ec5a4d589e68050845611e68/ff/n0/0b/qw/z0_25846.jpg',
+		'http://mtmos.com/v1/mss_3d027b52ec5a4d589e68050845611e68/ff/n0/0b/q7/31_34677.jpg',
+		'http://mtmos.com/v1/mss_3d027b52ec5a4d589e68050845611e68/ff/n0/0b/ph/a0_511574.jpg',
+		'http://mtmos.com/v1/mss_3d027b52ec5a4d589e68050845611e68/ff/n0/0b/bt/by_162412.jpg',
+		'http://mtmos.com/v1/mss_3d027b52ec5a4d589e68050845611e68/ff/n0/0b/bt/df_162619.jpg',
+		'http://mtmos.com/v1/mss_3d027b52ec5a4d589e68050845611e68/ff/n0/0b/bv/3x_161641.jpg',
+		'http://mtmos.com/v1/mss_3d027b52ec5a4d589e68050845611e68/ff/n0/0b/c3/1v_333743.jpg',
+		'http://mtmos.com/v1/mss_3d027b52ec5a4d589e68050845611e68/ff/n0/0b/c3/3a_333696.jpg',
+		'http://mtmos.com/v1/mss_3d027b52ec5a4d589e68050845611e68/ff/n0/0b/c3/3n_333665.jpg',
+		'http://mtmos.com/v1/mss_3d027b52ec5a4d589e68050845611e68/ff/n0/0b/c3/3s_333677.jpg',
+		'http://mtmos.com/v1/mss_3d027b52ec5a4d589e68050845611e68/ff/n0/0b/c6/pg_331206.jpg',
+		'http://mtmos.com/v1/mss_3d027b52ec5a4d589e68050845611e68/ff/n0/0b/c8/ff_340731.jpg',
+		'http://mtmos.com/v1/mss_3d027b52ec5a4d589e68050845611e68/ff/n0/0b/c8/fg_340710.jpg',
+		'http://mtmos.com/v1/mss_3d027b52ec5a4d589e68050845611e68/ff/n0/0b/c8/fj_340712.jpg',
+		'http://mtmos.com/v1/mss_3d027b52ec5a4d589e68050845611e68/ff/n0/0b/cb/4x_342025.jpg',
+		'http://mtmos.com/v1/mss_3d027b52ec5a4d589e68050845611e68/ff/n0/0b/cd/tr_335950.jpg',
+		'http://mtmos.com/v1/mss_3d027b52ec5a4d589e68050845611e68/ff/n0/0b/cs/bs_323181.jpg',
+		'http://mtmos.com/v1/mss_3d027b52ec5a4d589e68050845611e68/ff/n0/0b/cz/39_321405.jpg',
+		'http://mtmos.com/v1/mss_3d027b52ec5a4d589e68050845611e68/ff/n0/0b/d1/bf_364155.jpg',
+		'http://mtmos.com/v1/mss_3d027b52ec5a4d589e68050845611e68/ff/n0/0b/d6/ak_363079.jpg',
+		'http://mtmos.com/v1/mss_3d027b52ec5a4d589e68050845611e68/ff/n0/0b/d6/c3_363287.jpg',
+		'http://mtmos.com/v1/mss_3d027b52ec5a4d589e68050845611e68/ff/n0/0b/d6/cc_363290.jpg',
+		'http://mtmos.com/v1/mss_3d027b52ec5a4d589e68050845611e68/ff/n0/0b/dm/fx_344809.jpg',
+		'http://mtmos.com/v1/mss_3d027b52ec5a4d589e68050845611e68/ff/n0/0b/dq/sa_346304.jpg',
+		'http://mtmos.com/v1/mss_3d027b52ec5a4d589e68050845611e68/ff/n0/0b/dq/v7_346227.jpg',
+		'http://mtmos.com/v1/mss_3d027b52ec5a4d589e68050845611e68/ff/n0/0b/fy/46_289812.jpg',
+		'http://mtmos.com/v1/mss_3d027b52ec5a4d589e68050845611e68/ff/n0/0b/gj/h4_449970.jpg',
+		'http://mtmos.com/v1/mss_3d027b52ec5a4d589e68050845611e68/ff/n0/0b/je/mj_405000.jpg',
+		'http://mtmos.com/v1/mss_3d027b52ec5a4d589e68050845611e68/ff/n0/0b/k2/7a_433152.jpg',
+		'http://mtmos.com/v1/mss_3d027b52ec5a4d589e68050845611e68/ff/n0/0b/ky/7c_420858.jpg'
+	]
+
+	var aImageUl = document.getElementById('image-list');
+	var popup = document.getElementById("popup");
+	var showedImg = document.getElementById('showed-img');
+	var showedImgUrl = document.getElementById('showed-img-url');
+	var pre = document.getElementById('pre-img');
+	var next = document.getElementById('next-img');
+    var viewHeight = document.body.scrollHeight;
+	
+	function addImage(){ //生成图片列表
+		for (var i=0; i<imageList.length; i++){
+			var aImageLi = document.createElement('li');
+			var aImageLink = document.createElement('a');
+			var aImageImg = document.createElement('img');
+			aImageImg.setAttribute('src', imageList[i]);
+			aImageLink.appendChild(aImageImg);
+			aImageLink.setAttribute('href', imageList[i]);
+			aImageLink.setAttribute('data-index', i);
+			aImageLi.appendChild(aImageLink);
+			aImageUl.appendChild(aImageLi);
+		}
+		var clr = document.createElement('div');
+		clr.setAttribute('class', 'clr');
+		aImageUl.appendChild(clr)
+	}
+	
+	function showOrCloseImg(){ //控制弹出层的显示
+		if(popup.style.display == "none"){
+			popup.setAttribute('style', 'display:block');
+		}
+		else
+			popup.setAttribute('style', 'display:none');
+		return false
+	}
+
+	function setImgUrl(element){ //设置被显示图片的src和url
+		var imgIndex = element.getAttribute('data-index');
+		var imgUrl = imageList[imgIndex];
+		
+		showedImg.setAttribute('src', imgUrl);
+		showedImgUrl.setAttribute('href', imgUrl);
+		showedImg.setAttribute('data-index', imgIndex);
+
+		pre.setAttribute('data-index', imgIndex-1);
+		next.setAttribute('data-index', parseInt(imgIndex)+1);
+		if(showedImg.getAttribute('data-index') == 0) {
+			pre.style.display = 'none';
+		}else{
+			pre.style.display = 'inline';
+		}
+		if(showedImg.getAttribute('data-index') == imageList.length-1) {
+			next.style.display = 'none';
+		}else{
+			next.style.display = 'inline';
+		}
+	}
+
+	function setPreAndNext(){
+		pre.setAttribute('onclick', 'setImgUrl(this);center("showed-img");false');
+		next.setAttribute('onclick', 'setImgUrl(this);center("showed-img");false')
+	}
+
+	function setEvent(){ //设置点击事件
+		document.getElementById('shade-layer').setAttribute('onclick', 'showOrCloseImg()');
+        //document.getElementById('showed-layer').setAttribute('onclick', 'showOrCloseImg()');
+
+		var imageListElement = aImageUl.getElementsByTagName('a');
+		for(var i=1; i<imageListElement.length+1; i++){
+			imageListElement[i].setAttribute('onclick', 'showOrCloseImg();setImgUrl(this);center("showed-img");setPreAndNext();return false;');
+		}
+	}
+
+	function getStyle(obj, attr){ //获取外部样式表中的样式
+		return obj.currentStyle ? obj.currentStyle[attr] : getComputedStyle(obj, null)[attr];
+	}
+
+	function center(id){ //设置展示图片高度,将div居中
+		var dom = document.getElementById(id);
+        //showedImg.style.maxHeight =  viewHeight*0.7 + 'px';
+		dom.style.marginTop = -parseInt(getStyle(dom, 'height')) / 2 - 10 + 'px';
+		dom.style.visibility = "visible"; 
+	}
+
+	window.onload = function(){
+		addImage();
+		setEvent();
+	}
+    
+	
+</script>
+</body>
+</html>

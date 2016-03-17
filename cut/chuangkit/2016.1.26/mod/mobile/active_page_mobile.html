@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>Active Detail</title>
+	<link rel="stylesheet" type="text/css" href="../../css/base.css" />
+	<link rel="stylesheet" type="text/css" href="css/active_page_mobile.css" />
+	<link rel="stylesheet" type="text/css" href="../iconfont/2/iconfont.css">
+</head>
+<body class="active_detail_mobile active_page_mobile">
+
+	<div class="content">
+		<p class="active_heat">
+			<i class="iconfont icon-peoplefill"></i>
+			<span>参与人数：<span>9999</span></span>
+		</p>
+		<div class="content_header">
+			<img class="header_img" src="../../img/banner.png">
+			<nav>
+				<a href="#">活动详情</a>
+				<a href="#" class="active">全部作品</a>
+				<a href="#">结果公示</a>
+			</nav>
+		</div>
+
+		<div class="sort_select">
+			<span>排序：</span>
+			<select name="sort_way">
+				<option value="new">最新上传</option>
+				<option value="comments">最多评论</option>
+				<option value="support">最多点赞</option>
+			</select>
+		</div>
+
+		<div class="works">
+			<div class="work_item" href="#">
+<!-- 				<i id="support_btn" class="iconfont icon-thumbactivated support_btn"></i>
+ -->			<img id="work_img" src="../../img/bg.jpg">
+				<div class="work_info">
+					<h1 id="workname" class="workname"><a href="#">万圣节狂欢趴</a></h1>
+					<p class="username">by <a href="#">用户名</a></p>
+					<div class="work_heat">
+						<i class="iconfont icon-eye"></i><span id="watch_data">99999</span>
+						<i id="support_btn" class="iconfont icon-thumbactivated supported"></i><span id="support_data">999</span>
+					</div>
+				</div>
+			</div>
+
+			<div class="work_item" href="#">
+<!-- 				<i id="support_btn" class="iconfont icon-thumbactivated support_btn"></i>
+ -->			<img id="work_img" src="../../img/banner.png">
+				<div class="work_info">
+					<h1 id="workname" class="workname"><a href="#">万圣节狂欢趴</a></h1>
+					<p class="username">by <a href="#">用户名</a></p>
+					<div class="work_heat">
+						<i class="iconfont icon-eye"></i><span id="watch">99999</span>
+						<i id="support_btn" class="iconfont icon-thumbactivated"></i><span id="support_data">999</span>
+					</div>
+				</div>
+			</div>
+
+
+		</div>
+
+	</div>
+
+	<div id="work_preview" class="work_preview">
+		<img id="work" class="work" src="../../img/img3.jpg" />
+		<nav id="options" class="options">
+			<a href="#">查看详情</a>
+			<a id="close_preview" href="#">关闭</a>
+		</nav>
+	</div>
+
+	<script src="../../components/require.js" data-main="js/active_page_mobile.js"></script>
+</body>

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <title>线上组队 - 队伍首页</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <link rel="stylesheet" type="text/css" href="css/login.css" />
+    <link rel="stylesheet" type="text/css" href="css/create-team.css" />
+    <script type="text/javascript" src="js/login.js"></script>
+</head>
+<body>
+    <!-- 登陆框开始 -->
+    <div style="width:350px;">
+        <div id="login-box" class="login-a">
+            <a href="javascript:void(0)" onclick="hide()" style="float:right;font:16px 微软雅黑;position:relative;top:-10px">X</a>
+            <div id="login-manu">
+                <ul>
+                    <li id="login-link" class="login-active"><a href="#" onclick="login()">登陆</a></li>
+                    <li id="register-link"><a href="#" onclick="register()">注册</a></li>
+                </ul>   
+            </div>
+            <div id="form-holder">
+                <div id="login" class="user-form">
+                    <form name="login-form">
+                        <input class="login-input" type="text" name="username" placeholder="用户名" /><br />
+                        <input class="login-input" type="password" name="password" placeholder="密码" /><br />
+                        <span id="remb">
+                            <input class="login-cb" type="checkbox" name="remenber"/><span class="login-words">记住我的登录状态</span>
+                        </span>
+                        <div id="forget-pw"><a href="#">忘记密码？</a></div>
+                        <input class="login-btn" type="button" name="login" value="登陆" /> 
+                    </form>
+                </div>  
+
+                <div id="register" class="user-form">
+                    <form name="register-form">
+                        <input class="login-input" type="text" name="username" placeholder="请输入用户名" /><br />
+                        <input class="login-input" type="password" name="password" placeholder="请输入密码密码" /><br />
+                        <input class="login-input" type="password" name="password-twice" placeholder="请确认密码" /><br />
+                        <input class="login-input" type="text" name="identify" placeholder="请输入验证码"><br />
+                        <input class="login-btn" type="button" name="register" value="注册">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="background"></div>
+    <!-- 登陆框结束 -->
+
+    <div id="top-nav">
+        <ul id="left-nav" class="nav flo-l">
+            <li><a href="#">我的主页</a></li>
+            <li><a href="#">我的队伍</a></li>
+            <li><a href="#">联系人</a></li>
+        </ul>
+        <ul id="right-nav" class="nav flo-r">
+            <li><a href="javascript:void(0)" onclick="show();login()">登陆</a></li>
+            <li><a href="#" onclick="show();register()">注册</a></li>
+        </ul>
+    </div>
+
+    <div id="header" class="header-height">
+        <div id="header-con" class="page-width header-height">
+            <div id="logo" class="flo-l header-height"></div>
+            <ul class="main-nav nav flo-l">
+                <li id="active"><a href="index.html">首页</a></li>
+                <li><a href="#">随便看看</a></li>
+                <li><a href="#">作品广场</a></li>
+                <li><a href="#">主办方</a></li>                
+            </ul>
+            <div id="search" class="flo-r">
+                <form>
+                    <div id="inp" class="flo-l">
+                        <input type="text" name="search-inp" autocomplete="off" placeholder="搜索你感兴趣的队伍/队员/活动" />
+                    </div>
+                    <div id="inp-btn" class="flo-r">
+                        <input type="button" name="search-btn" />
+                    </div>
+                </form> 
+            </div>
+        </div>
+    </div>
+
+    <div id="container" class="page-width">
+        <h2>创建队伍</h2>
+        <div id="main-content" class="flo-l">
+            <form id="create-team-form">
+                <table>
+                    <tbody>
+                        <tr>
+                            <td class="create-item">队伍名称</td>
+                            <td><input class="input-text" type="text" id="team-name" />*</td>
+                        </tr>
+                        <tr>
+                            <td class="create-item">所属比赛</td>
+                            <td>
+                                <select id="team-class" class="input-text">
+                                <volist name="team-class" id="vo">
+                                    <option id="{$vo.id}">{$vo.name}</option>
+                                </volist>
+                                </select>*
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="create-item">队员人数上限</td>
+                            <td>
+                                <select id="team-mub" class="input-text">
+                                <volist name="team-mub" id="vo">
+                                    <option id="2">2</option>
+                                    <option id="3">3</option>
+                                    <option id="4">4</option>
+                                    <option id="5">5</option>
+                                </volist>
+                                </select>*
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="create-item">队徽</td>
+                            <td><input class="input-text" type="file" id="team-logo" /><input type="button" class="file-up-btn" value="上传"></td>
+                        </tr>
+                        <tr>
+                            <td class="create-item">队伍标签</td>
+                            <td><input class="input-text" type="text" id="team-label" placeholder="相邻标签间用空格隔开" />*</td>
+                        </tr>
+                        <tr>
+                            <td class="create-item">描述</td>
+                            <td><textarea class="input-text" id="team-des"></textarea></td>
+                        </tr>
+                        <tr>
+                            <td class="create-item"></td>
+                            <td><input id="create" type="submit" value="创建"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </form>
+        </div>
+        <div id="sidebar" class="flo-r">
+            <div class="create-team-tips">
+                <h3>Tips</h3>
+                <p>> * 为必填</p>
+                <p>> 一个炫酷的队徽能让你的队伍更加特别和突出</p>
+                <p>> 准确填写标签可以加大寻找到合适队员的几率</p>
+                <p>> 详细的队伍描述可以使你的队伍更快地被人关注和了解</p>
+            </div>
+
+        </div>
+    </div>
+    <div class="clear"></div>
+    <div id="footer">
+        <div class="page-width">
+            <span>基于百度云的应用开发 - 第十三届齐鲁软件设计大赛作品</span>
+            <ul class="nav flo-r">
+                <li><a href="#">关于本站</a></li>
+                <li><a href="#">联系我们</a></li>
+                <li><a href="#">加入我们</a></li>
+                <li><a href="#">帮助中心</a></li>
+                <li><a href="#">免责声明</a></li>
+            </ul>
+        </div>
+    </div> 
+</body>
+</html>

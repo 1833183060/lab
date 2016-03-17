@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <title>线上组队 - 测试首页</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <link rel="stylesheet" type="text/css" href="css/login.css">
+    <script type="text/javascript" src="js/login.js"></script>
+</head>
+<body>
+    <!-- 登陆框开始 -->
+    <div style="width:350px;">
+        <div id="login-box" class="login-a">
+            <a href="javascript:void(0)" onclick="hide()" style="float:right;font:16px 微软雅黑;position:relative;top:-10px">X</a>
+            <div id="login-manu">
+                <ul>
+                    <li id="login-link" class="login-active"><a href="#" onclick="login()">登陆</a></li>
+                    <li id="register-link"><a href="#" onclick="register()">注册</a></li>
+                </ul>   
+            </div>
+            <div id="form-holder">
+                <div id="login" class="user-form">
+                    <form name="login-form">
+                        <input class="login-input" type="text" name="username" placeholder="用户名" /><br />
+                        <input class="login-input" type="password" name="password" placeholder="密码" /><br />
+                        <span id="remb">
+                            <input class="login-cb" type="checkbox" name="remenber"/><span class="login-words">记住我的登录状态</span>
+                        </span>
+                        <div id="forget-pw"><a href="#">忘记密码？</a></div>
+                        <input class="login-btn" type="button" name="login" value="登陆" /> 
+                    </form>
+                </div>  
+
+                <div id="register" class="user-form">
+                    <form name="register-form">
+                        <input class="login-input" type="text" name="username" placeholder="请输入用户名" /><br />
+                        <input class="login-input" type="password" name="password" placeholder="请输入密码密码" /><br />
+                        <input class="login-input" type="password" name="password-twice" placeholder="请确认密码" /><br />
+                        <input class="login-input" type="text" name="identify" placeholder="请输入验证码"><br />
+                        <input class="login-btn" type="button" name="register" value="注册">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="background"></div>
+    <!-- 登陆框结束 -->
+
+    <div id="top-nav">
+        <ul id="left-nav" class="nav flo-l">
+            <li><a href="user-page.html">我的主页</a></li>
+            <li><a href="#">我的队伍</a></li>
+            <li><a href="#">联系人</a></li>
+        </ul>
+        <ul id="right-nav" class="nav flo-r">
+            <li><a href="javascript:void(0)" onclick="show();login()">登陆</a></li>
+            <li><a href="#" onclick="show();register()">注册</a></li>
+        </ul>
+    </div>
+
+    <div id="header" class="header-height">
+        <div id="header-con" class="page-width header-height">
+            <div id="logo" class="flo-l header-height"></div>
+            <ul class="main-nav nav flo-l">
+                <li id="active"><a href="#">首页</a></li>
+                <li><a href="#">随便看看</a></li>
+                <li><a href="#">作品广场</a></li>
+                <li><a href="#">主办方</a></li>                
+            </ul>
+            <div id="search" class="flo-r">
+                <form>
+                    <div id="inp" class="flo-l">
+                        <input type="text" name="search-inp" autocomplete="off" placeholder="搜索你感兴趣的队伍/队员/活动" />
+                    </div>
+                    <div id="inp-btn" class="flo-r">
+                        <input type="button" name="search-btn" />
+                    </div>
+                </form> 
+            </div>
+        </div>
+    </div>
+
+    <div id="container" class="page-width">
+        <div id="main-content" class="flo-l">
+            <div class="banner" id="banner1">
+                <a class="close flo-r" href="#" onclick="document.getElementById('banner1').style.display = 'none';">x</a>
+            </div>
+
+            <div class="item item-sponsor">
+                <span><a href="#" class="pushsender">齐鲁软件设计大赛</a></span> <span class="pushcon">发布了题目：</span>
+                <div class="item-con item-font">
+                    第十三届齐鲁大学生软件设计大赛命题1_Smart Protecter基于智能移动端的后勤报修系统1.5<br />
+                    第十三届齐鲁大学生软件设计大赛命题2_手机游戏<br />
+                    第十三届齐鲁大学生软件设计大赛命题3_“互联网+”应用软件的创意设计与实现<br />
+                    第十三届齐鲁大学生软件设计大赛命题4_云终端应用软件开发
+                    <span class="item-more flo-r"><a href="#" class="item-font">查看完整内容</a></span>
+                </div>
+                <div class="item-info">
+                    <span class="item-time item-font">3分钟前</span><span class="item-re"><a href="#" class="item-font">回复（5）</a></span>
+                </div>
+            </div>
+
+            <div class="item item-teampush">
+                <span><a href="#" class="pushsender">你可能感兴趣的队伍：</a></span>
+                <div class="item-con item-font">
+                    <a href="#" class="item-font"><div class="teampush-img"><img src="img/teamicon1.png" /><span class="teampush-name">队伍1</span></div></a>
+                    <a href="#" class="item-font"><div class="teampush-img"><img src="img/teamicon2.png" /><span class="teampush-name">队伍2</span></div></a>
+                    <a href="#" class="item-font"><div class="teampush-img"><img src="img/teamicon3.png" /><span class="teampush-name">队伍3</span></div></a>
+                    <a href="#" class="item-font"><div class="teampush-img"><img src="img/teamicon4.png" /><span class="teampush-name">队伍4</span></div></a>
+                    <a href="#" class="item-font"><div class="teampush-img"><img src="img/teamicon5.png" /><span class="teampush-name">队伍5</span></div></a>
+                    <div class="clear"></div>
+                </div>
+            </div>
+        </div>
+        <style type="text/css">
+            
+
+        </style>
+        <div id="sidebar" class="flo-r">
+            <div id="add-team">
+                <a href="#" id="add-team-btn">+</a>
+                <div id="triangle-box"><canvas id="triangle" width="20px" height="15px"></canvas></div>
+                <div id="add-info">点此创建一个队伍：）</div>
+                <script type="text/javascript">
+                    var c=document.getElementById("triangle");
+                    var cxt=c.getContext("2d");
+                    cxt.beginPath();
+                    cxt.moveTo(10,0);
+                    cxt.lineTo(0,15);
+                    cxt.lineTo(20,15);
+                    cxt.closePath();
+                    cxt.fillStyle="#d8d8d8";
+                    cxt.fill();
+                </script>
+            </div>
+            <div class="tips sidebar-margin-top">
+                <span style="color:#f26c4f;font-size:14px">|小贴士</span>
+                <p>如果你暂时还不想当队长，建议你试试搜索功能，查找与自己的技能树相匹配的队伍。<br />另外，我们会根据你所填写的个人标签向你的首页推送你可能感兴趣的比赛和队伍，也会向与你的标签关联度较高的队伍推荐你。<br />如果你不想被自动推荐，可以点此关闭此功能。</p>
+            </div>
+            <div id="myteam" class="sidebar-width sidebar-margin-top">
+                <span class="sidebar-title">我的队伍</span>
+                <div class="sidebar-img-mini">
+                    <a href="#"><img src="img/sidebaricon1.png"></a>
+                    <a href="#"><img src="img/sidebaricon2.png"></a>
+                    <a href="#"><img src="img/sidebaricon1.png"></a>
+                    <a href="#"><img src="img/sidebaricon2.png"></a>
+                    <a href="#"><img src="img/sidebaricon1.png"></a>
+                    <a href="#"><img src="img/sidebaricon2.png"></a>
+                </div>
+            </div>
+            <div id="following" class="sidebar-width sidebar-margin-top">
+                <span class="sidebar-title">我关注的比赛</span>
+                <div class="sidebar-img-mini">
+                    <a href="#"><img src="img/sidebaricon3.png"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="clear"></div>
+    <div id="footer">
+        <div class="page-width">
+            <span>基于百度云的应用开发 - 第十三届齐鲁软件设计大赛作品</span>
+            <ul class="nav flo-r">
+                <li><a href="#">关于本站</a></li>
+                <li><a href="#">联系我们</a></li>
+                <li><a href="#">加入我们</a></li>
+                <li><a href="#">帮助中心</a></li>
+                <li><a href="#">免责声明</a></li>
+            </ul>
+        </div>
+    </div> 
+</body>
+</html>

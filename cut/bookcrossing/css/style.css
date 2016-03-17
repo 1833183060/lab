@@ -1,0 +1,356 @@
+/******初始化*******/
+body, div {
+	margin: 0 auto;
+}
+body {
+	font-family: Microsoft JhengHei;
+	overflow: hidden;
+}
+a {
+	color: #eee;
+	text-decoration: none;
+	border-radius: 5px;
+	padding: 3px;
+	transition: all 0.3s;
+}
+a:hover {
+	border-radius: 15px;
+	background: rgba(0,0,0,.2);
+	color: #fff;
+}
+.main-box a {
+	color: #eee;
+	text-decoration: none;
+	border-radius: 5px;
+	padding: 5px;
+	transition: all 0.3s;
+}
+.main-box a:hover {
+	background: rgba(0,0,0,.2);
+	color: #fff;
+
+}
+.user{
+	display: none;
+}
+button {
+	cursor: pointer;
+}
+.main-box button {
+	width: 100px;
+	height: 40px;
+	border-radius: 5px;
+	cursor: pointer;
+	border: none;
+	font-family: Microsoft JhengHei;
+	font-size: 16px;
+	outline: none;
+}
+input[type='text'], input[type='password'] {
+	display: block;
+	font-family: Microsoft JhengHei;
+	font-size: 20px;
+	width: 100%; height: 40px;
+	margin: 20px 0;
+	background: #eee;
+	border-radius: 10px;
+	border: none;
+	padding: 5px 9px;
+	outline: none;
+}
+textarea {
+	display: block;
+	font-family: Microsoft JhengHei;
+	font-size: 20px;
+	width: 100%; height: 160px;
+	margin: 20px 0;
+	background: #eee;
+	border-radius: 10px;
+	border: none;
+	padding: 5px 9px;
+	outline: none;
+}
+
+/********遮罩层*******/
+
+.layer {
+	display: none;
+	position: absolute;
+	z-index: 10;
+	width: 100%; height: 100%;
+	background: rgba(0,0,0,0.8);
+	opacity: 0;
+	transition: opacity 0.3s;
+}
+.open-layer {
+	opacity: 1;
+}
+.layer h1 {
+	font-family: Microsoft JhengHei;
+	font-size: 40px;
+	color: #eee;
+}
+/********用户书籍********/
+.my-book-box {
+	display: none;
+	text-align: center;
+	margin: 20px 0;
+	overflow-y: scroll;
+	height: 100%; 
+	color: #eee;
+}
+.books-class {
+	list-style-type: none;
+	text-align: center;
+	font-size: 20px;
+	margin: 20px 0;
+	color: #eee;
+}
+.books-class li {
+	display: inline-block;
+	margin: 0 10px;
+}
+.books-class li a {
+	color: #eee;
+}
+.books-list {
+	list-style-type: none;
+	text-align: center;
+}
+.books-list li {
+	display: inline-block;
+	margin: 10px;
+	position: relative;
+	transition: all 0.3s;
+}
+.books-list li:hover .my-book-opts {
+	opacity: 1;
+}
+.books-list img {
+	max-height: 200px;
+	border-radius: 10px;
+}
+.my-book-opts {
+	position: absolute;
+	top: 0;
+	padding: 0;
+	opacity: 0;
+	transition: all 0.3s;
+}
+.my-book-opts li button {
+	width: 60px;
+}
+#unavailable {
+	display: none;
+}
+#available, #unavailable {
+	width: 80%;
+	margin: 0 auto;
+	padding-bottom: 30px;
+}
+.books-list-btn-active {
+	background: #259;
+	border-radius: 5px;
+	padding: 5px;
+	transition: all 0.3s;
+}
+.books-list-btn-active:hover {
+	background: #259;
+	border-radius: 5px;
+}
+
+.books-close {
+	top: 10px;
+	left: 7px;
+}
+
+/*********表单**********/
+form {
+	margin: 15% auto;
+	text-align: center;
+}
+.lend-book-form, .borrow-book-form {
+	display: none;
+	width: 60%;
+}
+.register-form, .login-form {
+	display: none;
+	width: 50%;
+}
+
+.layer button {
+	width: 120px;
+	height: 50px;
+	font-family: Microsoft JhengHei;
+	font-size: 20px;
+	border-radius: 10px;
+	border: none;
+	//box-shadow: inset 0 -3px #bbb, 0 7px 0 #259;
+	margin: 10px 10px;
+	outline: none;
+	transition: all 0.3s;
+}
+.layer button:hover {
+	background: #259;
+	color: #fff;
+}
+.layer button:active {
+	background: #ccc;
+	//box-shadow: inset 0 -3px #bbb, 0 7px 0 #259;
+}
+
+@media (max-width: 500px) {
+	.lend-book-form,
+	.borrow-book-form,
+	.register-form,
+	.login-form {
+		width: 80%;
+	}
+	.layer button {
+		width: 100px;
+	}
+}
+/********推荐页（首页）********/
+.bg-color {
+	position: absolute;
+	background: rgba(0,0,0,0.4);
+	width: 100%; min-height: 100%;
+	z-index: -1;
+}
+.background {
+	position: absolute;
+	z-index: -2;
+	filter:blur(10px);
+	-webkit-filter:blur(10px);
+	width: 100%; height: 100%;
+	transition: opacity 0.5s;
+}
+
+.search-btn {
+	width: 45px;
+}
+.search-btn-box {
+	float: left;
+}
+.user-btn-box {
+	float: right;
+}
+.user-btn-box a {
+	margin-left: 10px;
+}
+.toolbar, .search-btn-box, .user-btn-box {
+	height: 50px;
+	line-height: 50px;
+	margin: 0px 10px;
+}
+/*书*/
+.book-box {
+	margin-top: 20px;
+	text-align: center;
+	position: relative;
+	transition: all 0.5s;
+}
+.book-box #book-img {
+	height: 330px;
+	min-width: 230px;
+	border-radius: 10px;
+	margin-bottom: 10px;
+	border: 10px solid rgba(255,255,255,0.3);
+	transition: all 0.2s;
+}
+.book-img-box {
+	display: inline-block;
+	overflow: hidden;
+	height: 350px;
+}
+.book-intro {
+	max-width: 90%;
+	background: rgba(255,255,255,0.7);
+	padding: 10px 0;
+	text-overflow:ellipsis;
+	cursor: default;
+	height: 300px;
+	border-radius: 10px;
+	margin:0 auto;
+	transition: all 0.2s;
+}
+.book-img-box img:hover {
+	opacity: 0.7;
+}
+.book-img-box:hover .book-intro {
+	transform: translateY(-350px);
+}
+.book-intro p {
+	color: #000;
+	margin: 5px 12px;
+	line-height: 25px;
+	text-align: left;
+	word-break: break-all;
+}
+.book-name {
+	display: inline-block;
+	font-weight: bold;
+}
+.book-options {
+	margin-top: 15px;
+	text-align: center;
+}
+.book-options button {
+	margin: 20px;
+	transition: all 0.3s;
+	opacity: 0.7;
+}
+.book-options button:hover {
+	opacity: 1;
+}
+
+/*********菜单**********/
+.manu-box {
+	position: absolute;
+	width: 300px;
+	height: 100%;
+	background: rgba(0,0,0,0.8);
+	top: 0; right: 0;
+	color: #eee;
+	transform: translateX(300px);
+	transition: all 0.5s;
+}
+.manu-box h1, .manu p, .manu ul li {
+	color: #eee;
+	margin: 20px;
+}
+.manu-open {
+	transform: translateX(0px);
+}
+.manu-box ul {
+	list-style-type: none;
+}
+.manu-box ul li {
+	font-size: 20px;
+	height: 50px;
+	line-height: 50px;
+	width: 100%;
+	margin-top: 10px;
+	padding-left: 10px;
+}
+.manu-box ul li:hover {
+	//border-left: 3px solid #eee;
+	background: #259;
+}
+.manu-box ul li a {
+	display: block;
+}
+
+
+.d-show {
+	display: block;
+}
+.d-hide {
+	display: none;
+}
+.o-show {
+	opacity: 1;
+}
+.o-hide {
+	opacity: 0;
+}

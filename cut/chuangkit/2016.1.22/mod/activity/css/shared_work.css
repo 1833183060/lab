@@ -1,0 +1,97 @@
+.shared_work {
+	background: url(../../../img/bg.jpg);
+	color: #444;
+}
+.shared_work .content {
+	width: 850px;
+	margin: 0 auto;
+	background: #fff;
+	box-shadow: 3px 0 3px #ddd;
+	padding: 20px 30px 30px 30px;
+}
+.shared_work .statement {
+	text-align: center;
+	font-size: 12px;
+	color: #1baeba;
+}
+.shared_work .statement a {
+	text-decoration: underline;
+	font-size: 14px;
+}
+
+.shared_work .work_info {
+	margin-top: 60px;
+	overflow: hidden;
+}
+.work_demo_btn {
+	background: #4c4c4c;
+	color: #fff;
+	display: inline-block;
+	padding: 10px 10px;
+	float: right;
+}
+.shared_work .work_name {
+	font-size: 20px;
+	margin-bottom: 24px;
+}
+.shared_work .work_info p {
+	font-size: 14px;
+	margin-bottom: 10px;
+}
+.work_info_by_worker {
+	overflow: hidden;
+	width: 100%
+}
+.work_info_by_worker p {
+	float: left;
+}
+.work_info_by_worker p:nth-child(2){
+	width: 90%;
+}
+.work_heat {
+	text-align: right;
+	margin-bottom: 15px;
+}
+.work_heat span {
+	font-size: 12px;
+	margin-left: 3px;
+	margin-right: 10px;
+}
+.work_content img {
+	width: 100%;
+}
+.work_support {
+	text-align: center;
+	margin-top: 42px;
+	margin-bottom: 160px;
+}
+.work_support_btn {
+	width: 60px; height: 60px;
+	border-radius: 60px;
+	display: inline-block;
+	cursor: pointer;
+	background: #ffc706;
+}
+.work_support .supported {
+	background: #aaa;
+}
+.work_support_btn i {
+	color: #fff;
+	font-size: 28px;
+	line-height: 37px;
+}
+.work_support_btn p {
+	color: #fff;
+}
+.work_support > p {
+	margin-top: 10px;
+	font-size: 12px;
+}
+
+.shared_work footer {
+	text-align: center;
+	font-size: 12px;
+}
+.shared_work footer > div {
+	display: inline-block;
+}

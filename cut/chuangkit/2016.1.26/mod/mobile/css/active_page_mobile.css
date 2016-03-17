@@ -1,0 +1,250 @@
+html {
+	font-size: 16px;
+}
+.active_page_mobile {
+	background: #f4f4f4;
+	color: #444;
+	font-size: 2rem;
+	overflow-x: hidden;
+}
+
+/******header&nav*******/
+.active_heat i {
+	font-size: 2rem;
+}
+.active_detail_mobile .content_header nav a {
+	font-size: 2.3rem;
+	padding: 2.1rem 2.1rem;
+}
+.active_heat {
+	line-height: 4rem;
+	margin-right: 1rem;
+}
+
+.active_detail_mobile .content {
+	width: 100%;
+	margin: 0 auto;
+}
+.active_heat {
+	text-align: right;
+}
+.active_detail_mobile .content_header .header_img {
+	width: 100%;
+	margin-bottom: -8px;
+}
+.active_detail_mobile .content_header nav {
+	width: 100%;
+	background: #fff;
+	overflow: hidden;
+}
+.active_detail_mobile .content_header nav a {
+	display: block;
+	float: left;
+	color: #444;
+	font-weight: bold;
+}
+.active_detail_mobile .content_header nav a.active {
+	background: #db2e69;
+	color: #fff;
+}
+
+.works {
+	//display: inline-block;
+	margin-bottom: 1.437rem;
+	overflow: hidden;
+	margin: 0 auto;
+	padding: 0 .937rem;
+	//max-width: 67.5rem;
+	//width: 96%;
+}
+.work_item {
+	width: 47.2%;
+	border-radius: 5px;
+	background: #fff;
+	box-shadow: 0 0 6px #ccc;
+	display: inline-block;
+	color: #444;
+	position: relative;
+	color: #555;
+	margin: .8rem .8rem;
+	float: left;
+}
+.work_item img {
+	width: 100%;
+	border-top-right-radius: 5px;
+	border-top-left-radius: 5px;
+}
+.work_item .work_info {
+	padding: .812rem;
+}
+
+.work_item .supported,
+.work_item .supported + span,
+.templete_item .collected {
+	color: #1baeba;
+}
+.work_item .work_info .workname {
+	font-size: 2.125rem;
+	margin-bottom: 3px;
+}
+.work_item .work_info .username {
+	font-size: 1.75rem;
+	margin-bottom: .5rem;
+}
+.work_item .work_heat i {
+	margin-right: 3px;
+	font-size: 2.125rem;
+}
+.work_item .work_heat span {
+	font-size: 2.125rem;
+	margin-right: 19px;
+}
+.work_item .work_info a {
+	color: #555;
+}
+.work_item .work_info a:hover {
+	color: #1baeba;
+	opacity: 1;
+}
+
+.sort_select {
+	text-align: right;
+}
+.sort_select select {
+	font-size: 2.125rem;
+	padding: .625rem .625rem;
+	margin: 2.375rem 1.687rem;
+	background: #fff;
+}
+
+.work_preview {
+	width: 120%; height: 120%;
+	position: fixed;
+	top: -10%; left: -10%;
+	background: #fff;
+	display: none;
+}
+.work_preview .work {
+	//margin-top: 7%;
+	position: absolute;
+	//left: 10%;
+	display: none;
+}
+.work_preview .options {
+	width: 100%;
+	padding: 1.25rem 10%;
+	position: absolute;
+	background: #252525;
+}
+.work_preview .options a {
+	font-size: 3.125rem;
+	padding: 10px 0;
+	padding-bottom: 10px;
+	width: 48%;
+	text-align: center;
+	display: inline-block;
+	color: #fff;
+}
+.work_preview .options a:first-child {
+	border-right: 1px solid #151515;
+	margin-right: -.625rem;
+	margin-left: .625rem;
+}
+.work_preview .options a:last-child {
+	border-left: 1px solid #151515;
+}
+
+
+@media screen and (max-width: 1080px) {
+	html {
+		font-size: 16px;
+	}
+}
+@media screen and (max-width: 1000px) {
+	html {
+		font-size: 13px;
+	}
+}
+@media screen and (max-width: 780px) {
+	.work_item {
+		width: 46.9%;
+	}
+}
+
+@media screen and (max-width: 750px) {
+	html {
+		font-size: 12px;
+	}
+}
+@media screen and (max-width: 700px) {
+	html {
+		font-size: 11px;
+	}
+}
+@media screen and (max-width: 655px) {
+	.work_item {
+		width: 46.5%;
+	}
+}
+@media screen and (max-width: 585px) {
+	.work_item {
+		width: 46.1%;
+	}
+}
+@media screen and (max-width: 530px) {
+	.work_item {
+		width: 45.5%;
+	}
+	.work_item .work_info .workname {
+		font-size: 1.9rem;
+		margin-bottom: 3px;
+	}
+	.work_item .work_info .username {
+		font-size: 1.45rem;
+		margin-bottom: .5rem;
+	}
+	.work_item .work_heat i {
+		margin-right: 3px;
+		font-size: 1.9rem;
+	}
+	.work_item .work_heat span {
+		font-size: 1.9rem;
+		margin-right: 19px;
+	}
+}
+@media screen and (max-width: 509px) {
+	html {
+		font-size: 10px;
+	}
+}
+@media screen and (max-width: 463px) {
+	.sort_select select {
+		padding: .625rem .625rem;
+		margin: 2rem 1.187rem;
+		background: #fff;
+	}
+	.work_item {
+		width: 100%;
+		margin-right: 0;
+		margin-left: 0;
+	}
+	.work_item .work_info .workname {
+		font-size: 2.125rem;
+		margin-bottom: 3px;
+	}
+	.work_item .work_info .username {
+		font-size: 1.75rem;
+		margin-bottom: .5rem;
+	}
+	.work_item .work_heat i {
+		margin-right: 3px;
+		font-size: 2.125rem;
+	}
+	.work_item .work_heat span {
+		font-size: 2.125rem;
+		margin-right: 19px;
+	}
+	.work_preview .options {
+		padding-bottom: 2.2rem;
+	}
+}

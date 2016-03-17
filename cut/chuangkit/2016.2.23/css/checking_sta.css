@@ -1,0 +1,18 @@
+.lower_level_content .simple_sta .commit,
+.lower_level_content .simple_sta .done {
+	display: inline-block;
+	margin-left: 30px;
+}
+.lower_level_content .simple_sta {
+	text-align: right;
+	margin-bottom: 30px;
+	font-size: 14px;
+	color: #555;
+}
+.lower_level_content .simple_sta span {
+	color: #1baeba;
+	font-size: 20px;
+}
+.checking_sta .vip_record_table tr td:nth-child(2) {
+	color: inherit;
+}

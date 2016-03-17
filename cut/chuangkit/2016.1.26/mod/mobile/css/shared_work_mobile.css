@@ -1,0 +1,158 @@
+html {
+	font-size: 16px;
+}
+.shared_work_mobile {
+	background: url(../../../img/bg.jpg);
+	color: #444;
+}
+.shared_work_mobile .content {
+	width: 100%;
+	margin: 0 auto;
+	background: #fff;
+	box-shadow: 3px 0 3px #ddd;
+	padding: 1.25rem 0 1.875rem 0;
+}
+.work_info_head {
+	padding: 0 2.625rem;
+}
+.shared_work_mobile .statement,
+.shared_work_mobile .statement i {
+	text-align: center;
+	font-size: 1.5rem;
+	color: #1baeba;
+}
+.shared_work_mobile .statement a {
+	text-decoration: underline;
+	font-size: 1.5rem;
+}
+
+.shared_work_mobile .work_info {
+	margin-top: 3.75rem;
+	overflow: hidden;
+}
+.work_demo_btn {
+	background: #1baeba;
+	color: #fff;
+	display: inline-block;
+	padding: 1.25rem 1.25rem;
+	float: right;
+	font-size: 2.375rem;
+}
+.shared_work_mobile .work_name {
+	font-size: 2.875rem;
+	margin-bottom: 1.5rem;
+}
+.shared_work_mobile .work_info p {
+	font-size: 2rem;
+	margin-bottom: 1.437rem;
+}
+.work_info_by_worker {
+	overflow: hidden;
+	width: 100%
+}
+.work_info_by_worker p:nth-child(1) {
+	float: left;
+	width: 10rem;
+}
+.work_info_by_worker p:nth-child(2){
+	line-height: 3.437rem;
+	margin-left: 10rem;
+}
+.work_heat {
+	text-align: right;
+	margin-bottom: 1rem;
+}
+.work_heat span {
+	font-size: 1.5rem;
+	margin-left: 3px;
+	margin-right: .625rem;
+}
+.work_heat i {
+	font-size: 1.5rem;
+}
+.work_content img {
+	width: 100%;
+}
+.work_support {
+	text-align: center;
+	margin-top: 2.625rem;
+	margin-bottom: 10rem;
+}
+.work_support_btn {
+	width: 7.625rem; height: 7.625rem;
+	border-radius: 7.625rem;
+	display: inline-block;
+	cursor: pointer;
+	background: #ffc706;
+}
+.work_support .supported {
+	background: #aaa;
+}
+.work_support_btn i {
+	color: #fff;
+	font-size: 3.125rem;
+	line-height: 4.375rem;
+}
+.work_support_btn p {
+	color: #fff;
+}
+.work_support > p {
+	margin-top: .625rem;
+	font-size: 1.5rem;
+}
+
+.shared_work_mobile footer {
+	text-align: center;
+	font-size: 1.5rem;
+}
+.shared_work_mobile footer a {
+	color: #1baeba;
+}
+.shared_work_mobile footer > div {
+	display: inline-block;
+}
+
+.work_demo {
+	width: 100%; min-height: 100%;
+	position: absolute;
+	background: rgba(0, 0, 0, .8);
+	top: 0; left: 0;
+}
+.work_demo img {
+	width: 100%;
+}
+
+
+@media screen and (max-width: 1080px) {
+	html {
+		font-size: 16px;
+	}
+}
+@media screen and (max-width: 1000px) {
+	html {
+		font-size: 13px;
+	}
+}
+
+@media screen and (max-width: 750px) {
+	html {
+		font-size: 12px;
+	}
+}
+@media screen and (max-width: 509px) {
+	html {
+		font-size: 10px;
+	}
+}
+@media screen and (max-width: 463px) {
+	.shared_work_mobile .content {
+		padding: 1.25rem 0 1rem 0;
+	}
+	.work_info_head {
+		padding: 0 2rem;
+	}
+	.work_info_by_worker p:nth-child(2){
+		line-height: 2.8rem;
+		margin-left: 10rem;
+	}
+}

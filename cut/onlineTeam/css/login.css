@@ -1,0 +1,118 @@
+﻿/*登陆框公用类*/
+.login-words {
+    color: #222;
+    font-size: 12px;
+}
+.login-a a {
+    color: #b3c883;
+}
+/*登陆框与背景*/
+#login-box {
+    padding: 20px;
+    width: 350px;
+    background: #eaf1d8;
+    text-align: center;
+    position: fixed;
+    top: 100px;
+    opacity: 0.9;
+    border-radius: 10px;
+    display: none;
+    z-index:1002;
+}
+#background {
+    background: #fff;
+    opacity: 0.4;
+    display: none;
+    position: fixed;
+    top: 0%;
+    left: 0%;
+    width: 100%;
+    height: 100%;
+    z-index:1001;
+}
+/*包裹内容的div*/
+.user-form {
+    width: 220px;
+}
+#form-holder {
+    width: 100%;
+    position: relative;
+}
+#login-manu, #form-holder {
+    opacity: 1;
+}
+
+/*表单样式*/
+.login-input {
+    width: 200px; height: 30px;
+    margin: 7px;
+    padding: 3px;
+    font: 14px 微软雅黑;
+}
+.login-btn {
+    width: 100px; height: 30px;
+    margin: 10px;
+    margin-top: 30px;
+    background: #b3c883;
+    border: 1px solid #b3c883;
+    color: #fff;
+}
+.login-cb {
+    margin: 0;
+    margin-left: 8px;
+    margin-right: 5px;
+    position: relative;
+    top: 2px;
+}
+
+/*表单内容位置*/
+#login {
+    position: relative;
+}
+#register {
+    display: none;
+}
+#remb {
+    float: left;
+}
+
+/*忘记密码*/
+#forget-pw {
+    width: 100%;
+    text-align: right;
+}
+#forget-pw a {
+    color: #bbb;
+    font-size: 12px;
+}
+
+/*登录注册切换菜单*/
+#login-manu {
+    margin-top: 20px;
+    position: relative;
+    width: 100%;
+    text-align: center;
+}
+#login-manu ul {
+    height: 50px;
+    list-style-type: none;
+    margin: 10px auto;
+    padding: 0;
+    padding-left: 10%;
+    padding-right: 10%;
+}
+#login-manu li {
+    float: left;
+    width: 49%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border: 1px solid #b3c883;
+    font: 16px 微软雅黑 ;
+    color: #444;
+}
+.login-active {
+    background: #b3c883;
+}
+.login-active a {
+    color: #fff;
+}

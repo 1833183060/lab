@@ -1,0 +1,89 @@
+.record_filter_form {
+	margin-bottom: 30px;
+	text-align: left;
+}
+.record_filter_form .form_group {
+	display: inline-block;
+	margin-bottom: 20px;
+	margin-right: 42px;
+}
+.record_filter_form .form_group input[type=radio]{
+	width: 55px; height: 28px;
+	position: relative;
+	visibility: hidden;
+}
+
+.record_filter_form .form_group input[type=radio]:checked:after{
+	color: #1baeba;
+	border: 1px solid #1baeba;
+}
+.record_filter_form .form_group input[type=radio]:after{
+	content: "dd";
+	width: 48px;
+	text-align: center;
+	padding: 5px 0;
+	background: #fff;
+	position: absolute;
+	top: 10px;
+	visibility: visible;
+	cursor: pointer;
+	color: #555;
+	border: 1px solid #555;
+	border-radius: 3px;
+}
+.record_filter_form .form_group input[value="7"]:after{
+	content: "7天";
+}
+.record_filter_form .form_group input[value="15"]:after{
+	content: "15天";
+}
+.record_filter_form .form_group input[value="30"]:after{
+	content: "30天";
+}
+.record_filter_form .form_group input[type=text]{
+	border: 1px solid #e6e6e6;
+	margin: 0 10px;
+	padding: 0 10px;
+	width: 130px; height: 33px;
+}
+.record_filter_form .form_group select {
+	width: 84px; height: 28px;
+	border: 1px solid #e6e6e6;
+	color: #555;
+	margin-left: 10px;
+	background: #fff;
+	text-align: center;
+}
+.record_filter_form .form_group select:focus {
+	outline: none;
+}
+.record_filter_form .filter_search_btn {
+	color: #fff;
+	background: #1baeba;
+	padding: 7px 35px;
+	border: 0;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+.checking_record .vip_record_table tr td:nth-child(2) {
+	color: inherit;
+	width: 177px;
+}
+.checking_record .vip_record_table tr td:nth-child(5) {
+	width: 182px;
+}
+
+.vip_record_table .cover {
+	width: 75px; height: 75px;
+}
+
+.untreated {
+	color: #aaa;
+}
+.passed {
+	color: #1baeba;
+}
+.failed {
+	color:#ff671c;
+}

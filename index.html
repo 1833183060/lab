@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Sev酱的实验室|日行一折腾</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+	
+	<style type="text/css">
+		html {
+			font-size: 10px;
+		}
+		html, body {
+			margin: 0 auto;
+			width:100%; height: 100%;
+			text-align: center;
+		}
+		body {
+			transition: all .3s;
+		}
+		body,p,div,h1,h2,h3,h4,h5,h6,a {
+			font-family: "Time New Roman", "Ubuntu Mono", "Microsoft JhengHei";
+		}
+		a {
+			text-decoration: none;
+		}
+		header {
+			margin: 0;
+			padding: 0;
+			background: #428BC6;
+			text-align: center;
+			width: 100%; height: 100%;
+			position: relative;
+			display: table;
+		}
+
+		.header_content {
+			display: table-cell;
+			vertical-align: middle;
+		}
+		.header_content h1 {
+			color: #fff;
+			font-size: 5rem;
+		}
+		.bottle {
+			background: transparent;
+		}
+		.bottle_main {
+			fill: transparent;
+			stroke:rgba(255,255,255,0.8);
+			stroke-width:2
+		}
+		.bottle_liquid {
+			fill: #fff;
+			opacity: 0.6;
+		}
+		.bottle_des {
+			color: #fff;
+			font-size: 1.2rem;
+		}
+		.content {
+			background: #fff;
+			padding: 50px 0px;
+		}
+		.content h2 {
+			font-size: 3rem;
+			color: #428BC6;
+			margin-top: 0;
+			border-bottom: 3px solid #428BC6;
+			display: inline-block;
+			padding-bottom: .9rem;
+		}
+		.item_box {
+			width: 70%;
+			margin: 0 auto;
+			padding-bottom: 60px;
+		}
+		.project_item {
+			display: inline-block;
+			padding: 10px 15px;
+			transition: all .3s;
+			border: 3px solid transparent;
+			border: 3px solid #428BC6;
+			border-radius: 20px;
+			margin: 10px;
+			color: #428BC6;
+		}
+		.disabled {
+			background: #eee;
+			cursor: default;
+		}
+		.abled:hover {
+			background: #428BC6;
+			color: #fff;
+		}
+		.project_item h3 {
+			font-size: 2.2rem;
+			margin: 15px 0 5px 0;
+			height: 2.3rem;
+			line-height: 2.3rem;
+		}
+		.project_item p {
+			margin-top: 0;
+		}
+		.item_icon {
+			width: 50px; height: 50px;
+			border-radius: 50px;
+			margin: 0px auto;
+			margin-top: 7px;
+			font-size: 30px;
+			line-height: 50px;
+			background-color: #ddd;
+			color: #666;
+		}
+		.demo_item {
+			display: inline-block;
+			border-radius: 20px;
+			background: #eee;
+			font-size: 18px;
+			padding: 10px;
+			color: #428BC6;	
+			margin: 10px;
+			transition: all .3s;
+		}
+		.demo_item:hover {
+			background: #428BC6;
+			color: #fff;
+		}
+		.contact_box ul {
+			list-style: none;
+			margin: 0;
+			padding: 0;
+			margin-top: 10px; 
+		}
+		.contact_box ul li {
+			display: inline-block;
+			margin: 0 8px;
+		}
+		.contact_box ul li a {
+			display: inline-block;
+			width: 50px; height: 50px;
+			border-radius: 50px;
+			line-height: 50px;
+			font-size: 40px;
+			background: #428BC6;
+			color: #fff;
+			transition: all .3s;
+		}
+		.contact_box ul li a:hover {
+			background-color: #eee;
+			color: #428BC6;
+		}
+
+		@media screen and (max-width: 500px) {
+			html {
+				font-size: 8px;
+			}
+		}
+		@media screen and (max-width: 650px) {
+			.item_box {
+				width: 100%;
+			}
+			.project_item,
+			.demo_item {
+				width: 100%;
+				display: block;
+				margin: 0;
+				border: 0;
+				border-radius: 0;
+				padding-right: 0;
+				padding-left: 0;
+			}
+			.disabled {
+				display: none;
+			}
+			.demo_item {
+				background-color: #fff;
+			}
+		}
+	</style>
+
+	<script type="text/javascript">
+	var projects = {
+		'躺倒记录_(:з」∠)_ - Beta':[1,'sleep/index.html','','要早睡觉啊少年！'],
+		'一棵圣诞树':[1,'xmastree/index.html','xmastree.jpg','圣诞快乐w'],
+		'jquery-viewpager.js':[1,'viewpager/index.html','','一个简单的jquery轮播插件'],
+		'todoList':[1,'todo/index.html','','轻量todoList离线应用'],
+		'日轨':[1,'http://2.sevplay.sinaapp.com/','','记录日常规律性活动状态的轻量应用'],
+		'LightDOC':[1,'doc/index.html','','轻量文档应用'],
+		'UJN学生证件照':[1,'UJNphotosWall.php','ujnphotos.jpg','诶嘿嘿嘿嘿'],
+		'简单的博客程序':[0,'http://sevenskey.sinaapp.com/','blog.jpg','自己用，目前还很丑（躺'],
+	};
+	var demo = [
+		'太阳系','solarSystem/index.html',
+		'示波器demo','webAudioAPI/index.html',
+		'书享前端（部分）','bookcrossing/index.html',
+		'hqc203迎新页第二版demo','nnhqc203/index.html',
+		'路灯工作情况监控前端','streetLightMonitoring/index.html',
+		'新生信息查询系统前端','freshmanTool/index.html',
+		'hqc203迎新页demo','hqc203/index.html',
+		'线上组队网站首页','onlineTeam/index.html',
+		'第二个网页','homepage/index.html',
+		'跳动的字母君','alphabet/index.html',
+		'计算器','calculator/calculator.html',
+		'第一个网页','profile/index.html'
+	];
+	</script>
+</head>
+<body>
+	<header>
+		<div class="header_content">
+			<h1>Sevenskey's Lab</h1
+>			<svg class="bottle" width="100" height="101" version="1.1" xmlns="http://www.w3.org/2000/svg">
+				<polyline class="bottle_main" points="40,1 60,1 55,30 80,90 80,100 20,100 20,90 45,30 40,1"/>
+				<polyline class="bottle_liquid" points="25,78 20,90 20,100 80,100 80,90 75,78">
+			</svg>
+			<p class="bottle_des">y = -12 / 5 * x + 138</p>
+		</div>
+	</header>
+	<div class="content">
+		<section class="projects">
+			<h2>Projects</h2>
+			<div id="projects_box" class="item_box">
+				
+			</div>
+		</section>
+
+		<section class="demo">
+			<h2>Demo</h2>
+			<div id="demo_box" class="item_box">
+
+			</div>
+		</section>
+
+		<section class="contact">
+			<h2>Contact</h2>
+			<div class="item_box contact_box">
+				<ul>
+					<li><a href="http://sevenskey.cnblogs.com/" target="_blank">B</a></li>
+					<li><a href="http://photo.163.com/sevenskey/" target="_blank">P</a></li>
+					<li><a href="#" title="792824***" onclick="return false;">Q</a></li>
+					<li><a href="#" title="sevenskey###163.com" onclick="return false;">M</a></li>
+				</ul>
+			</div>
+		</section>
+	</div>
+
+
+	<script type="text/javascript">
+	
+	var projectsBox = document.getElementById('projects_box');
+	var demoBox = document.getElementById('demo_box');
+	for(var item1 in projects){
+		if(projects[item1][0] == 1){
+			if(projects[item1][2] != ''){
+				projectsBox.innerHTML += '<a href="'+projects[item1][1]+'" target="_blank" class="project_item abled"><img class="item_icon" src="./img/'+projects[item1][2]+'"><h3>'+item1+'</h3><p>'+projects[item1][3]+'</p></a>';
+			} else {
+				projectsBox.innerHTML += '<a href="'+projects[item1][1]+'" target="_blank" class="project_item abled"><div class="item_icon">'+item1.substr(0, 1)+'</div><h3>'+item1+'</h3><p>'+projects[item1][3]+'</p></a>';
+			}
+		} else {
+			projectsBox.innerHTML += '<a target="_blank" class="project_item disabled"><div class="item_icon">'+item1.substr(0, 1)+'</div><h3>'+item1+'</h3><p>'+projects[item1][3]+'</p></a>';
+		}
+		
+	}
+	for(var i=0; i<demo.length; i+=2){
+		demoBox.innerHTML += '<a href="demo/'+demo[i+1]+'" target="_blank" class="demo_item">'+demo[i]+'</a>'
+	}
+	</script>
+</body>
+</html>

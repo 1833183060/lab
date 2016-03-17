@@ -1,0 +1,219 @@
+@charset "utf-8";
+/* CSS Document */
+
+#mybody {
+	width:1024px;
+	background:center;
+	text-align:center;
+	margin:0 auto;
+    }
+
+.page {
+	margin:0px;
+	background:url(../_img/background.png) center;
+	background-position:center;
+	display:none;
+	}
+	
+#top {
+	margin:0px;
+	}
+	
+#words {
+	text-align:center;
+	background:url(../_img/bio.png);
+	background-repeat:no-repeat;
+	position: relative;
+	top: 30px;
+    }
+	
+#words1 {
+	text-align:center;
+	color:#4c5a5a;
+	font-size:30px;
+	font-family:MingLiU;
+    }
+	
+#words2 {
+	text-align:center;
+	color:#d05c45;
+	font-size:24px;
+	font-family:MingLiU;
+    }
+	
+#words3 {
+	text-align:center;
+	color:#808000;
+	font-size:30px;
+	font-family:MingLiU;
+    }
+	
+#words4 {
+	text-align:center;
+	color:#de8685;
+	font-size:24px;
+	font-family:MingLiU;
+    }
+	
+#words5 {
+	text-align:center;
+	color:#d4bc21;
+	font-size:30px;
+	font-family:MingLiU;
+    }
+	
+#words6{
+	text-align:center;
+	color:#9a9b9b;
+	font-size:24px;
+	font-family:MingLiU;
+    }
+	
+#introduc {
+	background:url(../_img/bubble.png) center ;
+	width: 1024px; height: 849px;
+	background-repeat:no-repeat;
+	position: relative;
+	top: 22px;
+    }
+
+#introduc1 {
+	position: relative;
+	top: 130px;
+	left: 450px;
+	width: 126px;
+	height: 195px;
+    }
+	
+#introduc2 {
+	position: relative;
+	top: -180px;
+	left: 250px;
+	width: 126px;
+	height: 156px;
+    }
+	
+#introduc3 {
+	position: relative;
+	top: -335px;
+	left: 640px;
+	width: 126px;
+	height: 156px;
+    }
+	
+#introduc4 {
+	position: relative;
+	top: -300px;
+	left: 198px;
+	width: 126px;
+	height: 156px;
+    }
+	
+#introduc5 {
+	position: relative;
+	top: -395px;
+	left: 710px;
+	width: 126px;
+	height: 156px;
+    }
+	
+#introduc6 {
+	position: relative;
+	top: -270px;
+	left: 380px;
+	width: 126px;
+	height: 156px;
+    }
+	
+.my {
+	color:#f2f2f2;
+	font-family:"Microsoft YaHei UI";
+	font-size: 14px;
+	text-align:left;
+    }
+   
+.big {
+	font-size:16px;
+	text-align:left;
+	font-weight:bold;
+	color:#e1e1e1;
+	font-family: "Microsoft YaHei UI";
+    }
+	
+#mailtip {
+	font-size:36px;
+	text-align:center;
+	font-family:Verdana, Geneva, sans-serif;
+	color:#3ba5a1;
+    }
+	
+#bottom {
+	background:url(../_img/bottom.png);
+	width:1024px;height:406px;
+    }
+	
+#link {
+	width:700px;height:100px;
+	text-align:left;
+	position: relative;
+	top: 252px;
+	left: 80px;
+    }
+	
+#link1 {
+	background:url(../_img/link-blog.png);
+	position:relative;
+	top: 0px;
+	left: 0px;
+	width:70px; height:70px;
+	}
+#link1:hover {
+	background:url(../_img/link-blog2.png);
+    }
+
+#link2 {
+	background:url(../_img/link-douban.png);
+	position:relative;
+	top: -87px;
+	left: 90px;
+	width:70px; height:70px;
+	}
+#link2:hover {
+	background:url(../_img/link-douban2.png);
+    }
+	
+#link3 {
+	background:url(../_img/link-fanfou.png);
+	position:relative;
+	top: -174px;
+	left: 180px;
+	width:70px; height:70px;
+	}
+#link3:hover {
+	background:url(../_img/link-fanfou2.png);
+    }
+		
+#link4 {
+	background:url(../_img/link-shu.png);
+	position:relative;
+	top: -261px;
+	left: 270px;
+	width:70px; height:70px;
+	}
+#link4:hover {
+	background:url(../_img/link-shu2.png);
+    }
+		
+#link5 {
+	background:url(../_img/link-ps.png);
+	position:relative;
+	top: -348px;
+	left: 360px;
+	width:70px; height:70px;
+	}
+#link5:hover {
+	background:url(../_img/link-ps2.png);
+    }
+	
+	
+	

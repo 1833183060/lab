@@ -1,0 +1,222 @@
+html {
+	font-size: 16px;
+}
+body, input {
+	font-family: 微软雅黑;
+}
+h1 {
+	margin-bottom: 1.3rem;
+	line-height: 3rem;
+}
+h3 {
+	margin-bottom: 1.3rem;
+	line-height: 2.4rem;
+}
+.welcome {
+	text-align: center;
+}
+.welcome h1{
+	font-weight: 900;
+	font-size: 3.4rem;
+	color: #fff;
+}
+.welcome form {
+	display: inline-block;
+	width: 100%;
+}
+input {
+	display: inline-block;
+	margin-bottom: 10px;
+}
+.input-box {
+	width: 40%; height: 3.3rem;
+	border: 4px solid #666;
+	border-radius: 10px;
+	padding: 3px;
+	padding-right: 7px;
+	padding-left: 7px;
+	font-size: 1rem;
+	vertical-align: middle;
+}
+.input-btn {
+	width: 40%; height: 3rem;
+	border: 4px solid #666;
+	border-radius: 10px;
+	background: #666;
+	color: #fff;
+	font-size: 1rem;
+}
+.cd-navigation-wrapper {
+	padding: 70px 15%;
+}
+.cd-navigation-wrapper h1{
+	font-size: 2.5rem;
+}
+em {
+	background: #9CB3A8;
+	padding-left: 3px;
+	padding-right: 3px;
+	margin-right: 5px;
+	margin-left: 5px;
+}
+.part {
+	color: #FFFFFF;
+	margin-bottom: 2.7rem;
+}
+.mebr {
+	margin-bottom: 1.3rem;
+	margin-left: 0px;
+	padding-left: 3px;
+}
+/*.mebr div {
+	background: #9CB3A8;
+	margin: 2px;
+	padding-top: 0.5rem;
+	padding-bottom: 0.5rem;
+}*/
+.mebr img {
+	max-width: 500px;
+	width: 100%;
+	border: 3px solid #9CB3A8;
+	border-radius: 0.7rem;
+}
+.stu-name {
+	font-size: 0.8rem;
+}
+.chart {
+	margin-top: 15px;
+	margin-bottom: 40px;
+}
+.cd-nav-trigger {
+	display: none;
+}
+.mebr-label-area {
+	position: absolute;
+	max-width: 500px;
+	width: 100%;
+	overflow: hidden;
+	height: 100%; 
+}
+.mebr-label {
+	position: relative;
+	max-width: 8rem;
+}
+#label1 {
+	top: 3rem; left: 7rem;
+}
+#label2 {
+	top: 12rem; left: 3rem;
+}
+#label3 {
+	top: -2rem; left: 1rem;
+}
+#label4 {
+	top: -1rem; left: 21rem;
+}
+#label5 {
+	top: 9rem; left: 22rem;
+}
+#label6 {
+	top: -5rem; left: 25rem;
+}
+
+
+@media only screen and (max-width: 1024px){
+	html {
+		font-size: 14px;
+	}
+	#label1 {
+		top: 3rem; left: 8rem;
+	}
+	#label2 {
+		top: 15rem; left: 3rem;
+	}
+	#label3 {
+		top: -2rem; left: 1rem;
+	}
+	#label4 {
+		top: 0rem; left: 24rem;
+	}
+	#label5 {
+		top: 11rem; left: 24rem;
+	}
+	#label6 {
+		top: -5rem; left: 30rem;
+	}
+}
+@media only screen and (max-width: 650px){
+	html {
+		font-size: 12px;
+	}
+	#label1 {
+		top: 11%; left: 21%;
+	}
+	#label2 {
+		top: 60%; left: 13%;
+	}
+	#label3 {
+		top: -2rem; left: 1rem;
+	}
+	#label4 {
+		top: -9%; left: 57%;
+	}
+	#label5 {
+		top: 40%; left: 57%;
+	}
+	#label6 {
+		top: -16%; left: 72%;
+	}
+}
+@media only screen and (max-width: 500px){
+	html {
+		font-size: 9px;
+	}
+	.chart {
+		margin-left: -30px
+	}
+	.input-box {
+		width: 90%; 
+	}
+	main {
+	    padding: 150px 10%;
+	}
+	.welcome h1{
+		font-size: 2.9rem;
+	}
+	.input-box {
+		height: 5rem;
+		font-size: 1.5rem;
+	}
+	.input-btn {
+		height: 4rem;
+		font-size: 1.5rem;
+	}
+
+}
+/************charts.css************/
+.circliful {
+    position: relative; 
+}
+
+.circle-text, .circle-info, .circle-text-half, .circle-info-half {
+    width: 100%;
+    position: absolute;
+    text-align: center;
+    display: inline-block;
+    top: -5px;
+}
+.circle-text {
+	color: #333;
+}
+.circle-info {
+	font-size: 14px;
+}
+.circle-info, .circle-info-half {
+	color: #999;
+}
+
+.circliful .fa {
+	margin: -10px 3px 0 3px;
+	position: relative;
+	bottom: 4px;
+}

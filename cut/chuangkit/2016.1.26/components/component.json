@@ -1,0 +1,11 @@
+{
+  "version": "1.11.3",
+  "repos": "https://github.com/jquery/jquery.git",
+  "name": "jquery",
+  "main": "jquery.js"
+}
+{
+  "version": "2.1.11",
+  "name": "require",
+  "main": "require.js"
+}

@@ -1,0 +1,132 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>MyHome</title>
+<link type="text/css" rel="stylesheet" href="css/index.css"></link>
+<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+
+</head>
+<body>
+	<div id="bg">
+		<div id="bg1"><div id="bg2"><div id="bg3"></div></div>
+		<div id="bg-circle"></div>
+	</div>
+
+	<div id="backtop" class="shortcut pointer"><i class="iconfont" style="font-size:40px;">&#xf012c;</i></div>
+	<a href="#block2"><div id="backdiary" class="shortcut pointer"><i class="iconfont" style="font-size:26px;">&#x344e;</i></div></a>
+	<a href="#block3"><div id="backabout" class="shortcut pointer"><i class="iconfont" style="font-size:29px;">&#xf0136;</i></div></a>
+	<a href="#block4"><div id="backskill" class="shortcut pointer"><i class="iconfont" style="font-size:35px;">&#xf0069;</i></div></a>
+	<a href="#block5"><div id="backcontect" class="shortcut pointer"><i class="iconfont" style="font-size:33px;">&#xf00b9;</i></div></a>
+
+	<div id="block1">
+		<div id="sev"><p>Sevenskey</p></div>
+		<div id="display-text"><br><br><br><br>Sevenskey</div>
+		<div id="display"  class="pointer"></div>
+		<div class="column pointer" id="column1">
+			<div class="column-icon"><i class="iconfont" style="font-size:90px;">&#x344e;</i></div>
+			<div class="column-text">Diary</div>
+		</div>
+		<div class="column pointer" id="column2">
+			<div class="column-icon"><i class="iconfont" style="font-size:90px;">&#xf0136;</i></div>
+			<div class="column-text">About</div>
+		</div>
+		<div class="column pointer" id="column3">
+			<div class="column-icon"><i class="iconfont" style="font-size:100px;">&#xf0069;</i></div>
+			<div class="column-text">Skill</div>
+		</div>
+		<div class="column pointer" id="column4">
+			<div class="column-icon"><i class="iconfont" style="font-size:100px;">&#xf00b9;</i></div>
+			<div class="column-text">Contect</div>
+		</div>
+	</div>
+
+	<div id="canvasandblock">
+		<div id="canvas"><canvas id="large" width="1300" height="4100"></canvas></div>
+		<div id="block2">
+			<div id="diary">Diary</div>
+			<ul id="box">
+				<li><div class="text-box">
+					<a href="#"><div class="text-box-content">喵喵喵喵喵喵喵~！</div><a>
+				</div></li>
+				<li><div class="img-box">
+					<a href="#"><div class="img-box-content"></div><a>
+				</div><li>
+				<li><div class="text-box">
+					<a href="#"><div class="text-box-content">miao</div><a>
+				</div></li>
+				<li><div class="img-box">
+					<a href="#"><div class="img-box-content"></div><a>
+				</div><li>
+			</ul>
+			<div id="more"><a href="#">>>more</a></div>
+		</div>
+
+		<div id="block3" class="default">
+			<div id="about">About</div>
+			<div id="intro1" class="intro">
+				<div id="title1" class="title">Attribute</div>
+				<div id="intro-content1" class="intro-content"></div>
+			</div>
+			<div id="intro2" class="intro">
+				<div id="title2" class="title">KeyWords</div>
+				<div id="intro-content2" class="intro-content">喵喵喵喵</div>
+			</div>
+			<div id="intro3" class="intro">
+				<div id="title3" class="title">Experience</div>
+				<div id="intro-content3" class="intro-content"></div>
+			</div>
+			<div id="intro4" class="intro">
+				<div id="title4" class="title">Firends</div>
+				<div id="intro-content4" class="intro-content"></div>
+			</div>
+		</div>
+
+		<div id="block4" class="default">
+			<canvas id="graph" width="700" height="600"></canvas>
+			<div id="Skill">Skill</div>
+			<div id="unbelievable" class="skillclass">unbelievable</div>
+			<div id="good" class="skillclass">good</div>
+			<div id="normal" class="skillclass">normal</div>
+			<div id="skill1" class="skill">skill1</div>
+			<div id="skill2" class="skill">skill2</div>
+			<div id="skill3" class="skill">skill3</div>
+			<div id="skill4" class="skill">skill4</div>
+		</div>
+
+		<div id="block5">
+			<div id="contect-icon" class="default">
+				<div id="contectme">Contect Me</div>
+				<div id="mail"><i class="iconfont">&#xf0138;</i></div>
+				<div id="qq"><i class="iconfont">&#xf01c7;</i></div>
+				<div id="wechat"><i class="iconfont">&#xf0106;</i></div>
+				<div id="weibo"><i class="iconfont">&#xf0105;</i></div>
+			</div>
+			<a href="mail:sevenskey@163.com"><div id="contect1" class="contect-text"><span>sevenskey@163.com</span></div></a>
+			<a href="#"><div id="contect2" class="contect-text"><span>792824890</span></div></a>
+			<div id="contect3" class="contect-text"><img src="img/wechat.jpg" width="280px" /></div>
+			<a href="#"><div id="contect4" class="contect-text"><span>@Sevenskey</span></div></a>
+		</div>
+
+		<div id="block6" class="default">
+			<div id="likeme">
+				<div id="likeme-text">你喜欢我嘛(=￣ω￣=)？（歪头</div>
+				<div id="likeme-box">
+					<button id="likeme-option1" class="likeme-option pointer" onclick="like()">喜欢你(*。∀。) </button>
+					<button id="likeme-option2" class="likeme-option pointer" onclick="dislike()">不喜欢你(＞д＜)</button>
+					<div id="likeme-icon"><i class="iconfont" style="font-size:90px;">&#xf00fd;</i></div>
+					<div id="likeme-num">1000</div>
+					<div id="likeme-feedback"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+
+
+	
+<script type="text/javascript" src="js/index-js.js"></script>
+
+</body>
+
+</html>

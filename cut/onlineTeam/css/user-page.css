@@ -1,0 +1,109 @@
+.basic-info {
+	background: #F9FBF5;
+	padding: 13px;
+	font: 14px 宋体;
+	color: #666666;
+	margin-bottom: 40px;
+}
+.basic-info p {
+	margin: 7px;
+}
+.infobox {
+	border-radius: 5px;
+	padding: 25px;
+	text-align: center;
+	border: 1px solid #F9FBF5;
+	color: #666666;
+	box-shadow: 0px 0px 7px #F9FBF5;
+}
+.userface {
+	width: 120px;
+	border-radius: 120px;
+	border: 1px solid #aaa;
+	margin-bottom: 15px;
+}
+.user-option a {
+	font: 12px 宋体 ;
+	color: #3377AA;
+	padding: 5px;
+	background: #f6f6f6;
+	border-radius: 3px;
+	border: 1px solid #b8b8b8;
+}
+.user-option a:hover {
+	background: #b8b8b8;
+	color: #fff;
+}
+.infobox h3 {
+	margin: 0;
+	margin-bottom: 20px;
+}
+#user-defined-con {
+	color: #666;
+	font: 14px 宋体;
+	line-height: 24px;
+	padding: 10px;
+	padding-top: 0px;
+	margin-top: -5px;
+}
+.info-label {
+	margin-top: 15px;
+	margin-bottom: 5px;
+}
+.user-label {
+	font: 12px 宋体 ;
+	color: #3377AA;
+	padding: 5px;
+	background: #f6f6f6;
+	border-radius: 3px;
+	border: 1px solid #b3c883;
+	margin-right: 6px;
+	margin-top: 6px;
+	float: left;
+}
+.user-label:hover {
+	background: #b3c883;
+	color: #fff;
+}
+.edit-info {
+	float: right;
+	font: 12px 宋体;
+	color: #3377AA;
+	display: none;
+}
+#basic-info-form {
+	display: none;
+}
+#user-defined-form {
+	display: none;
+}
+.add-user-label {
+	font: 12px 宋体 ;
+	color: #fff;
+	padding: 5px;
+	background: #b3c883;
+	border-radius: 3px;
+	border: 1px solid #b3c883;
+	margin-right: 6px;
+	margin-top: 6px;
+	float: left;
+}
+.add-user-label:hover {
+	opacity: 0.7;
+}
+.del-label {
+	display: block;
+	width: 10px; height: 10px;
+	border-radius: 10px;
+	background: #b3c883;
+	opacity: 0.8;
+	font: 12px Arial;
+	line-height: 10px;
+	float: right;
+	text-align: center;
+	margin-left: -10px;
+	color: #fff;
+}
+.user-label-box {
+	float: left;
+}

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>The First Try of Web Audio API</title>
+
+	<style type="text/css">
+	body {
+		text-align: center;
+	}
+	footer {
+		margin-top: 50px;
+	}
+	</style>
+</head>
+<body>
+
+	<canvas id="audio_canvas" width="500" height="300">
+		Your browser does not support canvas tag.
+	</canvas>
+	<br>
+	<audio src="music2.mp3" id="audio_source" controls>
+		Your browser does not support audio tag.
+	</audio>
+
+	<footer>
+        <p>Please browse the page width PC browser, and it's better to be Chrome or Firefox.</p>
+        <p>If you want to learn the API, you can visit <a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Web_Audio_API/Visualizations_with_Web_Audio_API" target="_blank">the page</a>.</p>
+		<p>DEMO By Sevenskey</p>
+		<p>Music: 线性代数起床专用铃声</p>
+		<p>2015.12.18</p>
+	</footer>
+	
+	<script type="text/javascript">
+	window.onload = function() {
+		launch('audio_source', 'audio_canvas');
+	}
+
+	function launch(audioId, canvasId) {
+		var audioNode = document.getElementById(audioId);
+		var canvasNode = document.getElementById(canvasId);
+
+		var test = new Audio(audioNode, canvasNode);
+		test.render();
+	}
+
+	function Audio(audioNode, canvasNode) {
+		
+		//获取audio和canvas对象
+		this.audioNode = audioNode;
+		this.canvasNode = canvasNode;
+
+		//初始化canvas
+		this.WIDTH = this.canvasNode.width;
+		this.HEIGHT = this.canvasNode.height;
+		this.canvasCtx = this.canvasNode.getContext('2d');
+		this.canvasCtx.clearRect(0, 0, this.WIDTH, this.HEIGHT);
+		this.canvasCtx.fillStyle = '#ccc';
+			this.canvasCtx.fillRect(0, 0, this.WIDTH, this.HEIGHT);
+		this.canvasCtx.lineWidth = 2;
+			this.canvasCtx.strokeStyle = '#fff';
+			this.canvasCtx.beginPath();
+			this.canvasCtx.moveTo(0, this.HEIGHT / 2)
+			this.canvasCtx.lineTo(this.WIDTH, this.HEIGHT / 2);
+			this.canvasCtx.stroke();
+
+		//
+		this.audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+		this.analyser = this.audioCtx.createAnalyser();
+		this.source = this.audioCtx.createMediaElementSource(this.audioNode);
+		this.source.connect(this.analyser);
+		this.analyser.connect(this.audioCtx.destination);
+		this.analyser.fftSize = 1024;
+		this.bufferLength = this.analyser.fftSize;
+		this.dataArray = new Uint8Array(this.bufferLength);
+	}
+
+	Audio.prototype.draw = function() {
+
+		this.canvasCtx.fillStyle = '#ccc';
+			this.canvasCtx.fillRect(0, 0, this.WIDTH, this.HEIGHT);
+
+		this.canvasCtx.lineWidth = 2;
+			this.canvasCtx.strokeStyle = '#fff';
+			this.canvasCtx.beginPath();
+
+		var sliceWidth = this.WIDTH / this.bufferLength;
+		var x = 0;
+
+		for(var i=0; i<this.bufferLength; i++) {
+			var v = this.dataArray[i] / 128.0;
+			var y = v * this.HEIGHT / 2;
+
+			if(i===0) {
+				this.canvasCtx.moveTo(x, y);
+			} else {
+				this.canvasCtx.lineTo(x, y);
+			}
+
+			x += sliceWidth;
+		}
+
+		this.canvasCtx.lineTo(this.WIDTH, this.HEIGHT / 2);
+			this.canvasCtx.stroke();
+	}
+
+	Audio.prototype.render = function() {
+		if (!this.audioNode.paused) {
+			this.analyser.getByteTimeDomainData(this.dataArray);
+			this.draw();
+		}
+
+		var _this = this;
+		this.drawVisual = requestAnimationFrame(function(){
+			_this.render()
+		});
+	}
+
+	</script>
+
+</body>
+</html>

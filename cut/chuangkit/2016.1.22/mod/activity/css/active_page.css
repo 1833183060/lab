@@ -1,0 +1,90 @@
+.active_page {
+	background: #f4f4f4;
+	color: #444;
+}
+.work_filter {
+	font-size: 17px;
+	margin: 30px 0;
+}
+.work_filter > div {
+	margin: 20px 0;
+}
+.work_filter > div > p {
+	display: inline-block;
+	width: 90px;
+	text-align: right;
+	color: #aaa;
+}
+.work_filter > div > a {
+	display: inline-block;
+	color: #515151;
+	margin: 0 10px;
+}
+.work_filter > div > a:hover {
+	color: #1baeba;
+	opacity: 1;
+}
+
+.works {
+	margin-bottom: 23px;
+	overflow: hidden;
+}
+.work_item {
+	width: 223px;
+	border-radius: 5px;
+	background: #fff;
+	box-shadow: 0 0 6px #ccc;
+	display: inline-block;
+	color: #444;
+	position: relative;
+	color: #555;
+	margin: 6px 6px;
+	float: left;
+}
+.work_item img {
+	width: 100%;
+	border-top-right-radius: 5px;
+	border-top-left-radius: 5px;
+}
+.work_item .work_info {
+	padding: 13px;
+}
+.work_item .support_btn {
+	padding: 5px 8px;
+	background: #fff;
+	font-size: 22px;
+	position: absolute;
+	border-radius: 5px;
+	top: 10px; left: 10px;
+	cursor: pointer;
+}
+.work_item .supported,
+.templete_item .collected {
+	color: #1baeba;
+}
+.work_item .work_info .workname {
+	font-size: 14px;
+	margin-bottom: 3px;
+}
+.work_item .work_info .username {
+	font-size: 12px;
+	margin-bottom: 8px;
+}
+.work_item .work_heat i {
+	margin-right: 3px;
+}
+.work_item .work_heat span {
+	font-size: 12px;
+	margin-right: 19px;
+}
+.work_item .work_info a {
+	color: #555;
+}
+.work_item .work_info a:hover {
+	color: #1baeba;
+	opacity: 1;
+}
+
+#support_btn {
+	display: none;
+}

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0,maximum-scale=1.0, user-scalable=no">
+    <title>Sev酱的实验室|日行一折腾</title>
+    <style type="text/css">
+    	body {
+			max-width: 1366px;
+			margin: 0 auto;
+		}
+		p {
+			margin:8px; 
+		}
+		span {
+			font-family: 微软雅黑;
+		}
+		#logo {
+			width: 303px; height: 286px;
+			float: left;
+		}
+		img {
+			width: 100%;
+		}
+		#content {
+			padding-top: 10px;
+			padding-right: 20px;
+			float: left;
+			width: 75%;
+		}
+		.item {
+			height: 80px;
+			border-top: solid 3px #3a89c9; 
+			border-left: solid 1px #dce5ed;
+			border-right: solid 1px #dce5ed;
+			border-bottom: solid 1px #dce5ed;
+			float: right;
+			margin: 5px;
+		}
+		.icon {
+			width: 60px; height: 60px;
+			border-radius: 60px;
+			background: #ccc;
+			margin: 10px;
+			float: left;
+		}
+		.text {
+			float: left;
+			font: 12px 宋体;
+			color:  #626262;
+			margin: 10px;
+			margin-left: 0px;
+		}
+		.title {
+			font: 14px 微软雅黑;
+		}
+		.disable {
+			background: #f1f1f1;
+		    cursor: default;
+		}
+		.able {
+			transition: all 0.5s;
+		    -moz-transition: all 0.5s;
+		    -webkit-transition: all 0.5s;
+		    -o-transition: all 0.5s;
+		}
+		.able:hover {
+			background: #f1f1f1;
+		}
+		#little-logo {
+			display: none;
+		}
+		.practice {
+		    height: 37px;
+		    border-left: 3px solid #3a89c9;
+		    float: right;
+		    background: #f8f8f8;
+		    padding-left: 5px;
+		    padding-right: 5px;
+		    text-decoration: none;
+		    margin: 9px;
+		    font: 14px 微软雅黑;
+		    color: #626262;
+		    transition: all 0.5s;
+		    -moz-transition: all 0.5s;
+		    -webkit-transition: all 0.5s;
+		    -o-transition: all 0.5s;
+		}
+		.practice:hover {
+			background: #eee;
+		}
+		#content2 {
+		    width: 100%;
+		    clear: both;
+		}
+
+		@media screen and (max-width: 1365px){
+			body {
+				width: 100%;
+			}
+		    #content {
+		        width: 68%;
+		    }
+		    #logo {
+		    	width: 303px;
+		    }
+		}
+		@media screen and (max-width: 1024px){
+			body {
+				width: 100%;
+			}
+		    #content {
+		        width: 70%;
+		    }
+		    #logo {
+		    	width: 27%;
+		    }
+		}
+		@media screen and (max-width: 700px){
+			body {
+				width: 100%;
+			}
+		    #content {
+		    	margin: 0 auto;
+		        width: 90%;
+		        float: left;
+		        padding-right: 0px;
+		    	padding-left: 20px;
+		    }
+		    .item {
+		    	float: left;
+		    }
+		    #logo {
+		    	display: none;
+		    }
+		    #little-logo {
+				display: block;
+				width: 100%;
+				background: #f4f4f4;
+				text-align: center;
+				padding-top:5px;
+				padding-bottom: 5px; 
+			}
+		    .practice {
+		        float: left;
+		    }
+		}
+    </style>
+</head>
+<body>
+	<div id="little-logo"><span style="color:#f26c4f;font-size:15px;">Sev酱</span><span style="color:#b3c883;font-size:15px;">の实验室|</span><span style="color:#919191;font-size:12px;">日行一折腾</span></div>
+
+    <div id="content">
+    	<div id="content1"></div>
+        <div id="content2"></div>
+	</div>
+	<div id="logo">
+		<img src="img/logo.png">
+	</div>
+	<script type="text/javascript">
+	var large = {
+		'一颗圣诞树':[1,'xmastree/index.html','xmastree.jpg','圣诞快乐w'],
+		'jquery-viewpager.js':[1,'viewpager/index.html','.jpg','一个简单的jquery轮播插件'],
+		'todoList':[1,'todo.html','.jpg','轻量todoList离线应用'],
+		'日轨':[1,'http://2.sevplay.sinaapp.com/','.jpg','记录日常规律性活动状态的轻量应用'],
+		'LightDOC':[1,'doc/index.html','.jpg','轻量文档应用'],
+		'图片分享社区':[0,'imageGallery.html','.jpg','先坑着_(:з」∠)_'],
+		'UJN学生证证件照片墙生成器':[1,'UJNphotosWall.php','ujnphotos.jpg','诶嘿嘿嘿嘿'],
+		'简单的博客程序':[0,'http://sevenskey.sinaapp.com/','blog.jpg','自己用，目前还很丑（躺'],
+	}
+	var little = [
+		'示波器demo','webAudioAPI/index.html',
+		'书享前端（部分）','bookcrossing/index.html',
+		'hqc203迎新页第二版demo','nnhqc203/index.html',
+		'路灯工作情况监控前端','streetLightMonitoring/index.html',
+		'新生信息查询系统前端','freshmanTool/index.html',
+		'hqc203迎新页demo','hqc203/index.html',
+		'线上组队网站首页','onlineTeam/index.html',
+		'第二个网页','homepage/index.html',
+		'跳动的字母君','alphabet/index.html',
+		'计算器','calculator/calculator.html',
+		'第一个网页','profile/index.html'
+	]
+	var content1 = document.getElementById('content1');
+	var content2 = document.getElementById('content2');
+	for(var item1 in large){
+		console.log(large[item1][1]);
+		if(large[item1][0] == 1){
+			content1.innerHTML += '<a href="'+large[item1][1]+'" target="_blank" class="item able"><div class="icon" style="background:url(./img/'+large[item1][2]+')"></div><div class="text"><p class="title">'+item1+'</p><p>'+large[item1][3]+'</p></div></a>';
+		} else {
+			content1.innerHTML += '<a target="_blank" class="item disable"><div class="icon" style="background:url(./img/'+large[item1][2]+')"></div><div class="text"><p class="title">'+item1+'</p><p>'+large[item1][3]+'</p></div></a>';
+		}
+		
+	}
+	for(var i=0; i<little.length; i+=2){
+		content2.innerHTML += '<a href="'+little[i+1]+'" target="_blank" class="practice"><p>'+little[i]+'</p></a>'
+	}
+	</script>
+</body>
+</html>

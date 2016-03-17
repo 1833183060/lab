@@ -1,0 +1,98 @@
+body, html{
+	width: 100%;
+	height: 100%;
+	margin:0;
+	font-family:"微软雅黑";
+	font-size:14px;
+}
+a {
+	text-decoration: none;
+}
+#l-map {
+	width:100%; 
+	height:100%;
+	overflow: hidden;
+}
+#sidebar {
+	position: fixed;
+	right: 0;
+	width: 15%; height: 100%;
+	opacity: 0.9;
+	background: #111;
+	z-index: 100;
+	color: #fff;
+	box-shadow: 0 0 8px #000;
+	overflow: hidden;
+	display: none;
+}
+#sidebar a {
+	color: #fff;
+}
+.btn {
+	display: inline-block;
+	color: #fff;
+	margin: 20px;
+	opacity: 0.8;
+	border: 1px solid #bbb;
+	padding: 5px;
+	border-radius: 6px;
+}
+.btn:hover {
+	opacity: 1;
+}
+.top-btn {
+	background: #fff;
+	color: #333;
+	padding: 9px;
+	box-shadow: 0 0 6px #aaa;
+	font-size: 16px;
+	float: right;
+	margin-left: 0;
+	margin-bottom: 0;
+	border-color: #ccc;
+}
+#tool {
+	position: fixed;
+	right: 0;
+	width: 37%;
+	overflow: hidden;
+	z-index: 100;
+	padding-bottom: 10px;
+}
+#sidebar-content {
+	opacity: 0.8;
+	margin: 20px;
+	height: 70%;
+}
+#notice {
+	margin-top: 10px;
+	overflow-y: scroll;
+	height: 90%;
+	margin-right: -8px;
+}
+#notice p {
+	margin-top: 0;
+}
+
+@media screen and (max-width: 1024px){
+	#sidebar {
+		width: 20%;
+	}
+}
+@media screen and (max-width: 800px){
+	#sidebar {
+		width: 25%;
+	}
+}
+@media screen and (max-width: 550px){
+	#sidebar {
+		width: 32%;
+	}
+}
+@media screen and (max-width: 450px){
+	#sidebar {
+		width: 45%;
+	}
+}
+
+

@@ -1,0 +1,122 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>城市-书写你的城市，发现最真实的城市</title>
+
+<link rel="stylesheet" type="text/css" href="css/HomeStyle.css" />
+
+
+<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript"> 
+$(document).ready(function(){
+$("#sliddown").click(function(){
+	$("#median").slideToggle("slow");
+	});
+$("#sliddown").click(function(){
+	$("html,body").animate({
+		"scrollTop" : "655px"},"slow")
+	});
+});
+
+$(document).ready(function(){
+$( window ).scroll(function() {
+  $( "#text1" ).fadeIn( 2000 );
+  $( "#text2" ).fadeIn( 2000 );
+  $( "#img1-1" ).fadeIn( 1000 ).animate({left:'0px'});
+  $( "#img1-2" ).fadeIn( 1000 ).animate({top:'0px'});
+  $( "#img2-1" ).fadeIn( 1000 ).animate({left:'0px',top:'0px'});
+  $( "#img2-2" ).fadeIn( 1000 ).animate({left:'0px',top:'0px'});
+  $( "#img2-3" ).fadeIn( 1000 ).animate({left:'0px',top:'0px'});
+  $( "#img2-4" ).fadeIn( 1000 ).animate({left:'0px',top:'0px'});
+  $( "#img2-5" ).fadeIn( 1000 ).animate({left:'0px',top:'0px'});
+  $( "#img2-6" ).fadeIn( 1000 ).animate({left:'0px',top:'0px'});
+  $( "#img2-7" ).fadeIn( 1000 ).animate({left:'0px',top:'0px'});
+});
+});
+
+</script>
+
+
+</head>
+<body>
+
+	<div id="black"><div>
+	<div id="top">
+		
+		<div id="logo"></div>
+
+		<div id="login">
+			<div id="username"><input class="log-in" type="text"></input></div>
+			<div id="password"><input class="log-in" type="text"></input></div>
+			<input id="login-button" type="button"></input>
+		</div>
+
+		<div id="sliddown"></div>
+	
+	</div>
+
+	<div id="transition"></div>
+
+
+	<div id="median">
+		<div id="intro1-bg">
+			<div id="intro1">
+				<div id="text1" class="img"><img src="img/home/intro1.png"/></div>
+				<div id="img1">
+					<div id="img1-1" class="img"></div>
+					<div id="img1-2" class="img"></div>
+				</div>
+		</div></div>
+		
+		<div id="intro2-bg">
+			<div id="intro2">
+				<div id="text2" class="img"><img src="img/home/intro2.png"/></div>
+				<div id="img2">
+					<div id="img2-7" class="img"></div>
+					<div id="img2-6" class="img"></div>
+					<div id="img2-5" class="img"></div>
+					<div id="img2-4" class="img"></div>
+					<div id="img2-3" class="img"></div>
+					<div id="img2-2" class="img"></div>
+					<div id="img2-1" class="img"></div>
+				</div>
+		</div></div>
+
+		<div id="intro3-bg">
+			<div id="intro3">
+				<div id="text3"><img src="img/home/intro3.png"/></div>
+				<div id="img3">
+					<div id="img3-6"></div>
+					<div id="img3-5"></div>
+					<div id="img3-4"></div>
+					<div id="img3-3"></div>
+					<div id="img3-2"></div>
+					<div id="img3-1"></div>
+				</div>
+		</div></div>
+		
+	</div>
+
+	<div id="bottom">
+		<div id="start">
+			<div id="start-img">
+				<a href="#"><img src="img/home/start.png"/></a>
+			</div>
+		</div>
+
+		<div id="others-bg">
+			<div id="others">
+				<div id="link">
+					<ul>
+						<li><a href="#"><img src="img/home/about.png"></a></li>
+						<li><a href="#"><img src="img/home/help.png"></a></li>
+						<li><a href="#"><img src="img/home/contact.png"></a></li>
+						<li><a href="#"><img src="img/home/duty.png"></a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</body>

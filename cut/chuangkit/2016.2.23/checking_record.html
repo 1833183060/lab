@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>审核记录</title>
+	<link rel="stylesheet" href="./css/base.css" />
+	<link rel="stylesheet" href="./css/header_footer.css" />
+	<link rel="stylesheet" href="./css/vip_record.css" />
+	<link rel="stylesheet" href="./css/checking_record.css" />
+	<link rel="stylesheet" href="./js/components/jquery.datetimepicker/datetimepicker.css" />
+</head>
+<body class="vip_record checking_record">
+	<header>
+		<div class="header_container">
+			<div class="logo">
+				<img src="" />
+			</div>
+			<nav class="main_nav">
+				<a href="#">开启设计</a>
+				<a href="#">模板中心</a>
+				<a href="#">设计管理</a>
+				<a href="#">设计技巧</a>
+				<a href="#">使用教程</a>
+			</nav>
+			<div class="member_area">
+				<span class="username">用户名</span>
+				<img class="userimg" src="../../img/bg.jpg" />
+			</div>	
+		</div>
+	</header>
+
+	<div class="content">
+		<div class="little_header">
+			<h1>工作平台</h1>
+			<p>Working platform</p>
+		</div>
+
+		<div class="main_content">
+			<nav class="main_nav">
+				<a class="active" href="checking_record.html">审核记录</a>
+				<a href="checking_sta.html">审核统计</a>
+			</nav>
+
+			<div class="lower_level_content">
+				<div class="record_filter">
+					<form class="record_filter_form">
+						<div class="form_group">
+							<label>选择时间范围：</label>
+							<input class="7day" type="radio" name="time_range" value="7" checked="checked" />
+							<input class="15day" type="radio" name="time_range" value="15" />
+							<input class="30day" type="radio" name="time_range" value="30" />
+ 						</div>
+ 						<div class="form_group">
+ 							<label>状态删选：</label>
+ 							<select>
+ 								<option value="0">全部</option>
+ 								<option value="1">待审核</option>
+ 								<option value="2">通过</option>
+								<option value="3">未通过</option>
+ 							</select>
+ 						</div>
+ 						<div class="form_group">
+ 							<label>输入时间范围：</label>
+ 							<input id="starttime" type="text" placeholder="开始时间" />
+ 							至
+ 							<input id="finishtime" type="text" placeholder="结束时间" />
+ 						</div>
+ 						<input type="submit" class="filter_search_btn" value="查询">
+					</form>
+				</div>
+				<table class="vip_record_table">
+					<thead>
+						<tr>
+							<th>封面</th>
+							<th>标题</th>
+							<th>提交时间</th>
+							<th>状态</th>
+							<th>审核说明</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td><img class="cover" src="#" /></td>
+							<td>这是一个标题</td>
+							<td>2016-4-31</td>
+							<td><span class="untreated">待审核</span></td>
+							<td>这是一条审核说明。</td>
+						</tr>
+						<tr>
+							<td><img class="cover" src="#" /></td>
+							<td>这是另一个标题</td>
+							<td>2016-4-31</td>
+							<td><span class="passed">通过</span></td>
+							<td>这是另一条审核说明。</td>
+						</tr>
+						<tr>
+							<td><img class="cover" src="#" /></td>
+							<td>还有第三个标题</td>
+							<td>2016-4-31</td>
+							<td><span class="failed">未通过</span></td>
+							<td>还有第三条审核说明。还有第三条审核说明。还有第三条审核说明。还有第三条审核说明。</td>
+						</tr>
+					</tbody>
+				</table>
+				<div class="page_turning">
+					<a href="#">上一页</a>
+					<span id="present_page">1</span>
+					<a href="#" class="disabled">下一页</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<a class="invite_btn" href="#">邀请并分享</a>
+	<footer>
+		<nav>
+			<a href="#">服务条款</a>
+			<a href="#">隐私协议</a>
+			<a href="#">免责声明</a>
+			<a href="#">使用条款</a>
+			<a href="#">关于我们</a>
+			<a href="#">加入我们</a>
+			<a href="#">联系我们</a>
+		</nav>
+		<p>chuangkit.com(C)2013-2014 京ICP1231232号</p>
+	</footer>
+
+	<script src="./js/components/require.js"></script>
+
+	<script>
+		require.config({
+
+			baseUrl: "./js/components",
+			paths: {
+
+				"jquery": "jquery.2.1.4",
+				'datetimepicker': 'jquery.datetimepicker/jquery.datetimepicker'
+
+			}
+
+		});
+
+		require(['jquery'], function ($){
+
+			require(['datetimepicker'], function (){
+
+				;(function(){
+
+					$('#starttime').datetimepicker();
+					$('#finishtime').datetimepicker();
+				
+				})();
+
+			});
+
+		});
+	</script>
+
+
+
+</body>

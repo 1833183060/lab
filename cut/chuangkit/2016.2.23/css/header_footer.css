@@ -1,0 +1,58 @@
+body > header {
+	background: #1baeba;
+	width:100%; min-width: 1200px; height: 60px;
+}
+body > header .header_container {
+	width: 1200px;
+	margin: 0 auto;
+}
+body > header .logo {
+	float: left;
+	width: 146px; height: 60px;
+}
+body > header .main_nav {
+	margin-left: 120px;
+	float: left;
+}
+body > header .main_nav a {
+	display: inline-block;
+	font-size: 16px;
+	color: #fff;
+	height: 60px;
+	line-height: 60px;
+	margin-right: 26px;
+}
+body > header .member_area {
+	float: right;
+	padding: 10px 0;
+}
+body > header .member_area .username {
+	display: inline-block;
+	font-size: 14px;
+	color: #fff;
+	float: left;
+	margin-top: 10px;
+	margin-right: 15px;
+}
+body > header .member_area .userimg {
+	width: 40px; height: 40px;
+	border-radius: 40px;
+}
+
+
+body > footer {
+	background: #444;
+	width: 100%;
+	text-align: center;
+	padding: 20px 0;
+}
+body > footer nav a {
+	font-size: 14px;
+	color: #aaa;
+	margin: 0 10px;
+}
+body > footer p {
+	font-size: 14px;
+	color: #aaa;
+	margin-top: 10px;
+}

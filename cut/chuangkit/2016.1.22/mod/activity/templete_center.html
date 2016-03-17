@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>Templete Center</title>
+	<link rel="stylesheet" type="text/css" href="../../css/base.css" />
+	<link rel="stylesheet" type="text/css" href="css/header_footer.css" />
+	<link rel="stylesheet" type="text/css" href="css/active_page.css" />
+	<link rel="stylesheet" type="text/css" href="css/templete_center.css" />
+	<link rel="stylesheet" type="text/css" href="../iconfont/2/iconfont.css">
+</head>
+<body class="templete_center">
+	<header>
+		<div class="header_container">
+			<div class="logo">
+				<img src="" />
+			</div>
+			<nav class="main_nav">
+				<a href="#">开启设计</a>
+				<a href="#">模板中心</a>
+				<a href="#">设计管理</a>
+				<a href="#">设计技巧</a>
+				<a href="#">使用教程</a>
+			</nav>
+			<div class="member_area">
+				<span class="username">用户名</span>
+				<img class="userimg" src="../../img/bg.jpg" />
+			</div>	
+		</div>
+	</header>
+
+	<div class="content">
+		<div class="banner_group">
+			<div class="large_banner">
+				<img src="../../img/banner.png" />
+			</div>
+			<div class="small_banner">
+				<img src="" />
+				<img src="" />
+				<img src="" />
+				<img src="" />
+				<a href="#">查看所有模板专题</a>
+			</div>
+		</div>
+
+		<div class="work_filter">
+			<div id="first_class" class="first_class">
+				<p>模板分类：</p>
+				<a class="active" href="#">全部</a>
+				<a href="#">工作生活</a>
+				<a href="#">社交媒体</a>
+			</div>
+			<div id="secondary_class" class="secondary_class">
+				<p></p>
+				<a href="#">全部</a>
+				<a href="#">微博封面</a>
+				<a href="#">名片</a>
+			</div>
+			<div id="tag" class="tag">
+				<p>热门标签：</p>
+				<a href="#">无</a>
+				<a class="active" href="#">母亲节</a>
+				<a href="#">简约</a>
+			</div>
+			<div id="sort" class="sort">
+				<p>排序：</p>
+				<a class="active" href="#">最新上传</a>
+				<a href="#">最多评论</a>
+				<a href="#">最多点赞</a>
+			</div>
+		</div>
+
+		<div class="search_templete">
+			<input type="text" placeholder="输入搜索关键字" />
+			<input type="button" value="搜索" />
+			<i class="iconfont icon-eye"></i>
+		</div>
+
+		<div class="search_notice">
+			<p class="found_it">以下为关键词....搜索结果：</p>
+			<p class="not_found">抱歉...暂时...</p>
+		</div>
+
+		<div class="works templetes">
+
+			<div class="work_item templete_item">
+				<div id="options" class="options">
+					<i id="collect" class="iconfont icon-31guanzhu1xuanzhong collect_btn"></i>
+					<a href="#" class="use_btn">使用</a>
+					<div id="collect_notice" class="collect_notice">
+						<p>已收藏至“<span>设计管理-我的收藏</span>”页面！</p>
+						<i id="square_check" class="iconfont icon-squarecheckfill"></i>
+						<span>下次不再提醒</span>
+						<a id="confirm" class="confirm" href="#" onclick="return false">确定</a>
+					</div>
+				</div>
+				<div class="templete_preview">
+					<img src="../../img/img1.jpg" />
+					<a id="click_shade" href="#">
+						<p><span>点击查看大图</span></p>
+					</a>
+				</div>
+				<div class="work_info templete_info">
+					<h1 class="workname"><a href="#">万圣节狂欢趴</a></h1>
+					<p class="username brief_info">微信朋友圈封面</p>
+					<div class="templete_heat">
+						<i class="iconfont icon-eye"></i><span id="watch">99999</span>
+					</div>
+				</div>
+			</div>
+
+			<div class="work_item templete_item">
+				<div id="options" class="options">
+					<i id="collect" class="iconfont icon-31guanzhu1xuanzhong collect_btn"></i>
+					<a href="#" class="use_btn">使用</a>
+					<div id="collect_notice" class="collect_notice">
+						<p>已收藏至“<span>设计管理-我的收藏</span>”页面！</p>
+						<i id="square_check" class="iconfont icon-squarecheckfill"></i>
+						<span>下次不再提醒</span>
+						<a id="confirm" class="confirm" href="#" onclick="return false">确定</a>
+					</div>
+				</div>
+				<div class="templete_preview">
+					<img src="../../img/banner.png" />
+					<a id="click_shade" href="#">
+						<p><span>点击查看大图</span></p>
+					</a>
+				</div>
+				<div class="work_info templete_info">
+					<h1 class="workname"><a href="#">万圣节狂欢趴</a></h1>
+					<p class="username brief_info">微信朋友圈封面</p>
+					<div class="templete_heat">
+						<i class="iconfont icon-eye"></i><span id="watch">99999</span>
+					</div>
+				</div>
+			</div>
+
+			
+		</div>
+
+		<ul class="page_turning">
+			<li>上一页</li>
+			<li class="active">1</li>
+			<li>2</li>
+			<li>下一页</li>
+		</ul>
+	</div>
+
+
+	<script src="../../components/require.js" data-main="js/templete_center.js"></script>
+	
+</body>

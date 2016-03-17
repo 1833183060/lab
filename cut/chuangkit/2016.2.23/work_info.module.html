@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>work_info.module</title>
+	<link rel="stylesheet" href="./css/base.css" />
+	<link rel="stylesheet" href="./css/work_info.module.css" />
+
+	<link rel="stylesheet" href="./iconfont/iconfont.css" />
+</head>
+<body>
+
+	<div class="slim_box">
+		<div class="slim_box_header">
+			<button type="button" class="go_back"><</button>
+			<button type="button" class="close">x</button>
+		</div>
+		<form class="work_info_form">
+			<div class="form_group">
+				<label>标题：</label>
+				<input type="text" class="title" />
+			</div>
+			<div class="form_group">
+				<label>关键词：</label>
+				<input id="keywords" type="text" class="keywords" />
+				<button id="add_a_keywords" type="button" class="add_a_keywords">添加</button>
+			</div>
+			<div id="added_keywords_area" class="added_keywords_area">
+
+				<!-- key words formwork. It could be different from who created by js. -->
+				<div class="keywords_item">
+					<button type="button" class="keywords_label">喵</button>
+					<button id="delete_keyword" type="button" class="close">x</button>
+				</div>
+				
+			</div>
+			<div class="form_group">
+				<label>专题：</label>
+				<select class="subject_select">
+					<option>1</option>
+					<option>2</option>
+					<option>3</option>
+				</select>
+			</div>
+			<div class="form_group">
+				<label>标签：</label>
+				<button id="label_select_btn" type="button" class="label_select_btn">可多选</button> <!-- this is a strange design-->
+				<div id="checkbox_list" class="checkbox_list">
+					<div class="checkbox_item">
+						<input value="0" type="checkbox" />
+						<i id="square_check" class="iconfont icon-square square_check">ddd</i>
+					</div>
+					<div class="checkbox_item">
+						<input value="1" type="checkbox" />						
+						<i id="square_check" class="iconfont icon-square square_check">ddd</i>
+					</div>
+					<div class="checkbox_item">
+						<input value="2" type="checkbox" />						
+						<i id="square_check" class="iconfont icon-square square_check">ddd</i>
+					</div>
+					<div class="checkbox_item">
+						<input value="3" type="checkbox" />						
+						<i id="square_check" class="iconfont icon-square square_check">ddd</i>
+					</div>
+					<div class="checkbox_item">
+						<input value="4" type="checkbox" />						
+						<i id="square_check" class="iconfont icon-square square_check">ddd</i>
+					</div>
+					<div class="checkbox_item">
+						<input value="5" type="checkbox" />						
+						<i id="square_check" class="iconfont icon-square square_check">ddd</i>
+					</div>
+				</div>
+			</div>
+			<div class="form_group submit_area">
+				<input id="submit_btn" type="submit" class="submit_btn" value="提交审核" />				
+			</div>
+		</form>
+	</div>
+
+
+	<script src="./js/components/require.js" data-main="js/work_info.module.js"></script>
+	
+</body>

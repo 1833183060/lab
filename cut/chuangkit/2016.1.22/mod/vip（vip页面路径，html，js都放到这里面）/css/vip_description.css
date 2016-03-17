@@ -1,0 +1,342 @@
+.vip_description {
+	background: #f4f4f4;
+}
+
+.content {
+	width: 1200px;
+	margin: 0 auto;
+	margin-top: 20px;
+	margin-bottom: 30px;
+}
+.content_head {
+	margin-bottom: 30px;
+}
+.vip_privilege, .vip_common {
+	width: 100%;
+	background: #fff;
+}
+.vip_common {
+	margin-top: 20px;
+	text-align: center;
+	padding: 36px 40px 70px 40px;
+}
+
+.vip_privilege {
+	text-align: center;
+	padding-bottom: 22px;
+}
+.vip_privilege_item {
+	width: 90px;
+	display: inline-block;
+	margin: 0 45px;
+}
+.vip_privilege_item img {
+	margin-bottom: 12px;
+}
+.vip_privilege_item p {
+	font-size: 14px;
+	color: #555;
+}
+
+.vip_common_title {
+	font-size: 24px;
+	color: #1baeba;
+	margin-bottom: 60px;
+}
+.vip_comparison_head {
+	overflow: hidden;
+	position: relative;
+}
+.join_vip_btn {
+	float: right;
+	width: 130px;
+	padding: 9px 0;
+	font-size: 18px;
+	color: #fff;
+	background: #f32c2c;
+	border-radius: 4px;
+	position: absolute;
+	top: 0; right: 22px;
+}
+.vip_comparison_content,
+.vip_comparison_content tr,
+.vip_comparison_content td {
+	border: 3px solid #fff ;
+}
+.vip_comparison_content {
+	width: 100%;
+	border: 1;
+}
+.vip_comparison_content th {
+	text-align: center;
+	font-size: 18px;
+	color: #333;
+}
+.vip_comparison_content tr {
+	height: 47px;
+}
+.vip_comparison_content td {
+	background: #f4f4f4;
+	width: 400px;
+	font-size: 14px;
+	color: #555;
+}
+.vip_comparison_content tr td:last-child {
+	background: #e2f3ff;
+}
+.vip_comparison_content tr td:first-child {
+	width: 317px;
+}
+.vip_comparison_content .table_yellow {
+	font-size: 18px;
+	color: #f59000;
+}
+.vip_comparison_content .table_red {
+	font-size: 18px;
+	color: #f32c2c;
+}
+.by_sponsoring {
+	margin-bottom: 80px;
+}
+.sponsoring_area {
+	overflow: hidden;
+	display: inline-block;
+}
+.get_vip_content h2 {
+	text-align: left;
+	font-size: 18px;
+	color: #333;
+	margin-bottom: 22px;
+}
+.sponsoring_desc {
+	background: #f4f4f4;
+	float: left;
+	width: 344px; height: 216px;
+	margin: 0 42px;
+	padding: 32px 0;
+}
+.sponsoring_desc:first-child,
+.sponsoring_desc:last-child {
+	margin: 0;
+}
+.sponsoring_desc:hover {
+	background: #e2f3ff;
+}
+.sponsoring_desc p {
+	font-size: 18px;
+	color: #444;
+	margin: 5px 0;
+}
+.sponsoring_desc p span {
+	color: #ff0f0f;
+}
+.sponsoring_desc a {
+	padding: 10px 80px;
+	margin-top: 17px;
+}
+.vip_btn {
+	display: inline-block;
+	color: #fff;
+	font-size: 18px;
+	background: #00aebb;
+	border: none;
+	cursor: pointer;
+}
+.vip_btn:hover {
+	background: #00cfde;
+}
+.sponsoring_desc a:hover {
+	opacity: 1;
+}
+.sponsoring_desc .sponsoring_comments {
+	font-size: 16px;
+	color: #b3b3b3;
+}
+.free_area {
+	overflow: hidden;
+	display: inline-block;
+}
+.free_desc {
+	float: left;
+	display: inline-block;
+	margin: 0 22px;
+}
+.free_desc:last-child {
+	margin-left: 22px;
+	margin-right: 0;
+}
+.free_desc:first-child {
+	margin-left: 0;
+	margin-right: 22px;
+}
+.free_desc h2 {
+	text-align: center;
+	margin-bottom: 18px;
+}
+.free_desc p {
+	font-size: 14px;
+	color: #aaa;
+}
+.free_desc a {
+	margin-top: 18px;
+	padding: 10px 28px;
+}
+.free_desc_icon {
+	width: 140px; height: 106px;
+	margin: 0 auto;
+}
+
+.vip_faq_content {
+	width: 96%;
+	margin: 0 auto;
+}
+.faq_part {
+	margin-bottom: 46px;
+}
+.faq_part p {
+	font-size: 18px;
+	color: #333;
+	text-align: left;
+	margin: 10px 0;
+}
+.faq_part a {
+	font-size: 18px;
+	color: #14a3ed;
+	text-decoration: underline;
+}
+
+
+
+/******其它组件******/
+
+.vip_message_box {
+	background: #fff;
+	border-radius: 10px;
+	padding: 40px;
+	width: 660px;
+	margin: 10px auto;
+}
+.vip_message_close {
+	font-size: 50px;
+	color: #bbb;
+	float: right;
+	line-height: 70px;
+	margin-top: -40px;
+	margin-right: -20px;
+	font-weight: 100;
+	cursor: pointer;
+}
+
+/*赞助表单*/
+.vip_message_box h1 {
+	font-size: 18px;
+	font-weight: bold;
+	margin-top: 28px;
+}
+.vip_message_box p {
+	font-size: 16px;
+	color: #444;
+}
+.vip_pay_user {
+	margin: 20px 0;
+}
+.vip_pay_form label {
+	display: block;
+	margin-bottom: 20px;
+	color: #444;
+}
+.vip_radio {
+	display: inline-block;
+	margin-right: 40px;
+	position: relative;
+	overflow: hidden;
+	cursor: pointer;
+}
+.vip_radio:last-child {
+	margin-right: 0;
+}
+.vip_radio p {
+	display: inline-block;
+}
+.vip_radio input:checked + div + p {
+	color: #00aebb;
+}
+.vip_radio input:checked + div {
+	width: 17px; height: 17px;
+	border-radius: 17px;
+	border: 6px solid #14a3ed;
+}
+.vip_radio input {
+	width: 100%; height: 100%;
+	position: absolute;
+	opacity: 0;
+	left: 0;
+	cursor: pointer;
+}
+.vip_radio .fake_radio {
+	width: 17px; height: 17px;
+	border-radius: 17px;
+	border: 1px solid #ccc;
+	float: left;
+	margin-right: 10px;
+}
+.vip_pay_money .vip_radio .fake_radio {
+	margin-top: 10px;
+}
+.vip_pay_way .vip_radio .fake_radio {
+	margin-top: 4px;
+}
+.vip_pay_money,
+.vip_pay_way {
+	margin-bottom: 24px;
+}
+.vip_pay_form input[type=submit] {
+	padding: 10px 55px;
+	margin-top: 15	px;
+}
+
+/*赞助成功提示*/
+.vip_table_box {
+	width: 100%; height: 300px;
+	display: table;
+}
+.vip_table_cell {
+	display: table-cell;
+	width: 100%;
+	vertical-align: middle;
+	text-align: center;
+}
+.vip_alert h1 {
+	color: #00aebb;
+	font-size: 18px;
+	margin-bottom: 10px;
+}
+.vip_alert h1 + p {
+	font-size: 18px;
+	margin-bottom: 30px;
+}
+.vip_alert h1 + p + p {
+	font-size: 14px;
+}
+.vip_expDate {
+	color: #f32c2c;
+}
+
+/*扫码赞助*/
+.change_pay_way {
+	color: #555;
+}
+.change_pay_way:hover {
+	color: #00aebb;
+}
+.vip_pay_tdc_img {
+	width: 140px; height: 140px;
+	margin-bottom: 21px;
+}
+.vip_pay_tdc_img + p {
+	margin-bottom: 10px;
+}
+.vip_pay_tdc_img + p span {
+	font-size: 18px;
+	color: #f32c2c;
+}
