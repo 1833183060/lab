@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Funny</title>
+
+	<style type="text/css">
+	.container {
+		position: absolute; left: 0; top: 0; right: 0; bottom: 0;
+		margin: auto;
+		height: 500px;
+	}
+	h1 {
+		text-align: center;
+		margin-top: 30px;
+	}
+	.face {
+		width: 400px; height: 400px;
+		background: #FEDF85;
+		border-radius: 50%;
+		margin: 0 auto;
+		box-shadow: inset -10px -10px 60px 0px #F5AD59;
+	}
+	.eyebrow_area, .eye_area {
+		overflow: hidden;
+	}
+	.eyebrow {
+		width: 80px; 
+		height: 80px; 
+		border-radius: 50%; 
+		display: inline-block;
+		margin-top: 20px;
+	}
+	.eyebrow_l {
+		float: left;
+		box-shadow: 4px -14px 0 0 #44403D; 
+		margin-left: 50px;
+	}
+	.eyebrow_r {
+		float: right;
+		box-shadow: -4px -14px  0 0 #44403D; 
+		margin-right: 50px;
+	}
+	.eye_area {
+		position: relative;
+		height: 90px;
+		top: -10px;
+	}
+	.eye_r {
+		position: absolute;
+		right: 25px;
+	}
+	.eye_l {
+		position: absolute;
+		left: 25px;
+	}
+	
+	.eye_circle_big {
+		width: 150px; height: 150px;
+		background: #fff;
+		border-radius: 50%;
+		position: relative;
+	}
+	.eye_circle_big:after {
+		content: "";
+		width: 80px; height: 80px;
+		background: #FEDF85;
+		border-radius: 50%;
+		position: absolute;
+		top: 50px;
+		right: 0; left: 0;
+		margin: auto;
+
+		z-index: 1;
+	}
+	.eye_circle_big:before {
+		content: "";
+		width: 150px; height: 100px;
+		background: #FEDF85;
+		border-radius:  0 0 50% 50%;
+		position: absolute;
+		top: 50%;
+	}
+	.eye_circle_small {
+		width: 40px; height: 40px;
+		background: inherit;
+		border-radius: 50%;
+		position: absolute;
+		top: 48px;
+		z-index: 3;
+	}
+	.eye_circle1 {
+		left: 0px;
+	}
+	.eye_circle2 {
+		right: 0px;
+	}
+	.eyeball {
+		width: 45px; height: 45px;
+		background: #773213;
+		border-radius: 50%;
+		position: absolute;
+		top: 25px; left: 8px;
+		z-index: 5;
+	}
+	.cheek_area {
+		position: relative;
+		z-index: 6;
+		top: -15px;
+	}
+	.cheek_color {
+		content: "";
+		width: 120px; height: 30px;
+		background: #FDB382;
+		border-radius: 100px / 20px;
+		position: absolute;
+	}
+	.cheek_l {
+		left: 16px;
+	}
+	.cheek_r {
+		right: 16px;
+	}
+	.mouse {
+		width: 300px; height: 300px;
+		border-radius: 50%;
+		box-shadow: 0px 18px 0 0 #773409;
+		margin: 0 auto;
+		margin-top: -140px;
+	}
+	</style>
+</head>
+<body>
+<div class="container">
+	<div class="face">
+		<div class="eyebrow_area">
+			<div class="eyebrow eyebrow_l"></div>
+			<div class="eyebrow eyebrow_r"></div>
+		</div>
+		<div class="eye_area">
+			<div class="eye eye_l">
+				<div class="eye_circle_big">
+					<div class="eye_circle1 eye_circle_small"></div>
+					<div class="eye_circle2 eye_circle_small"></div>
+					<div class="eyeball"></div>
+				</div>
+			</div>
+			<div class="eye eye_r">
+				<div class="eye_circle_big">
+					<div class="eye_circle1 eye_circle_small"></div>
+					<div class="eye_circle2 eye_circle_small"></div>
+					<div class="eyeball"></div>
+				</div>
+			</div>
+		</div>
+		<div class="cheek_area">
+			<div class="cheek_color cheek_l"></div>
+			<div class="cheek_color cheek_r"></div>
+		</div>
+		<div class="mouse"></div>
+	</div>
+	<h1>滑稽 - CSS高清重置</h1>
+</div>
+	
+</body>
+</html>
