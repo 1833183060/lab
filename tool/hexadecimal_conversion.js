@@ -1,5 +1,13 @@
+/*
+十进制转任意进制数，写数电作业专用kira
+2016.3.16
+*/
 
 function hc(num10, scale, sf) {
+	if(num10 < 0)
+		var f = true;
+
+	num10 = Math.abs(num10);
 
 	var z = Math.floor(num10),
 		x = num10 - z,
@@ -20,6 +28,9 @@ function hc(num10, scale, sf) {
 		sf_ -= 1;
 	}
 
+	if(f)
+		z2 = '-' + z2;
+
 	console.log(z2+x2+'<'+scale+'>');
 }
 
@@ -35,4 +46,4 @@ function numToChar(num) {
 	}
 }
 
-hc(174.06,16,4);
+hc(-174.06,16,4);
