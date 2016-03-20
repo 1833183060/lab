@@ -3,7 +3,7 @@
 2016.3.16
 */
 
-function hc(num10, scale, sf) {
+function hc(num10, scale, sf) { //十进制数，目标进制，有效小数位数
 	if(num10 < 0)
 		var f = true;
 
@@ -46,4 +46,3 @@ function numToChar(num) {
 	}
 }
 
-hc(-174.06,16,4);
