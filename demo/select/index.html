@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Select DEMO</title>
+	<style type="text/css">
+	body {
+		background: #ddd;
+	}
+	.styled-select select {
+		background: transparent;
+		width: 240px;
+		padding: 5px;
+		font-size: 16px;
+		line-height: 1;
+		border: 0;
+		border-radius: 0;
+		height: 34px;
+		color: #bbb;
+		-webkit-appearance: none;
+	}
+	.styled-select select option {
+		background: #ddd;
+		color: #666;
+	}
+	.styled-select {
+		width: 240px;
+		height: 34px;
+		overflow: hidden;
+		background: url(select_arrow.png) no-repeat 95% #fff;
+		border: 1px solid #ccc;
+	}
+	.styled-select select:focus {
+		border: 1px solid #BF4F48;
+		outline: none;
+	}
+
+
+	.simulate_select {
+		margin-top: 30px;
+		width: 240px; height: 34px;
+		background: url(select_arrow.png) no-repeat 95% #fff;
+		position: relative;
+	}
+	.select_btn_r {
+		width: 100%; height: 100%;
+		opacity: 0;
+		position: absolute;
+		top: 0; left: 0;
+	}
+	.select_menu {
+		display: none;
+	}
+	.select_btn_r:checked ~ .select_menu {
+		display: block;
+	}
+	.select_btn {
+		width: 100%; height: 100%;
+	}
+	.select_btn_r:checked + .select_btn {
+		border: 1px solid #BF4F48;
+	}
+	.select_menu {
+		padding-left: 0;
+		margin: 0;
+		width: 100%;
+		background: #eee;
+		border: 1px solid #BF4F48;
+	}
+	.select_menu li {
+		list-style-type: none;
+		height: 30px;
+		color: #666;
+	}
+	.select_menu li:hover {
+		background: #BF4F48;
+		color: #fff;
+	}
+	.select_menu_r {
+		width: 100%;
+	}
+	</style>
+</head>
+<body>
+	<div class="styled-select">
+		<select>
+			<option>Here is the first option</option>
+			<option>The second option</option>
+		</select>	
+	</div>
+
+	<div class="simulate_select">
+		<input type="checkbox" class="select_btn_r">
+		<div class="select_btn"></div>
+		<ul class="select_menu">
+			<li>
+				1
+			</li>
+			<li>
+				2
+			</li>
+			<li>
+				3
+			</li>
+			<li>
+				4
+			</li>
+		</ul>
+	</div>
+</body>
+</html>
