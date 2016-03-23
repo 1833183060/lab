@@ -25,7 +25,7 @@ header {
 	height: @header_h;
 	opacity: .9;
 	overflow: hidden;
-	background: #464646;
+	background: rgba(162, 0, 0, 1);
 
 	a {
 		color: #fff;
@@ -53,6 +53,9 @@ header {
 		color: #eee;
 		line-height: @header_h;
 		margin: 0 8px;
+	}
+	li:hover {
+		//background: rgba(162, 0, 0, 1);
 	}
 }
 
@@ -163,6 +166,9 @@ header {
 
 .notice_area {
 	height: 415px;
+	a {
+		color: #fff;
+	}
 	
 	ul {
 		list-style-type: none;
@@ -287,11 +293,11 @@ header {
 	overflow: hidden;
 	margin-top: 70px;
 	text-align:center;
-	margin-bottom: 60px;
+	margin-bottom: 20px;
 
 	.hqc_news {
 		float: left;
-		width: 35%;
+		width: 48%;
 		text-align: left;
 
 		.title {
@@ -357,7 +363,7 @@ header {
 	}
 	.hqc_message {
 		float: right;
-		width: 35%;
+		width: 48%;
 		text-align: left;
 
 		.title {
@@ -421,43 +427,40 @@ header {
 			}
 		}
 	}
+	.guestbook {
+		margin-top: 25px;
+		height: 300px;
+		overflow: hidden;
 
-	.hqc_img {
-		//float: left;
-		display: inline-block;
+		.title {
+			background: #E3E118;
+		}
+		.message {
+			li {
+			border-right-color: #E3E118;
+			}
+		}
+	}
+}
+
+.hqc_img {
+	//float: left;
+	display: inline-block;
+	width: 100%;
+	list-style-type: none;
+	margin: 20px 20px;
+	padding: 0;
+
+	li {
 		width: 20%;
-		list-style-type: none;
-		margin: 0 20px;
-		padding: 0;
+		margin: 0 10px;
+		margin-bottom: 15px;
+		float: left;
+		text-align: center;
 
-		li {
+		img {
 			width: 100%;
-			position: relative;
-			margin-bottom: 15px;
-
-			img {
-				width: 100%;
-			}
-			.img_title {
-				background: #B90000;
-				width: 100%;
-				position: absolute;
-				top: 0;
-				color: #fff;
-				padding: 4px;
-				box-sizing: border-box;
-
-				&:before {
-					content: "";
-					width: 0; height: 0;
-					border-left: 10px solid transparent;
-					border-right: 10px solid transparent;
-					border-top: 10px solid #B90000;
-					position: absolute;
-					bottom: -8px;
-					left: 20px;
-				}
-			}
+			box-shadow: 3px 3px 3px #aaa;
 		}
 	}
 }
@@ -494,6 +497,7 @@ header {
 }
 
 footer {
+	width: 100%; min-width: @default_w;
 	background: #464646;
 	text-align: center;
 	color: #fff;
