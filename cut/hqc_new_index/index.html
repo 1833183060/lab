@@ -232,45 +232,67 @@
 					<h1>处长信箱</h1>
 					<a href="" class="view_more">我要留言</a>
 				</div>
-				<ul id="message" class="message">
-					<li>
-						<span class="news_time">2016/3/14</span>
-						<h1>这是一个标题</h1>
-						<p>这是一条留言</p>
-					</li>
-					<li>
-						<span class="news_time">2016/3/14</span>
-						<h1>这是一个标题</h1>
-						<p>这是一条留言</p>
-					</li>
-					<li>
-						<span class="news_time">2016/3/14</span>
-						<h1>这是一个标题...</h1>
-						<p>这是一条留言</p>
-					</li>
-					<li>
-						<span class="news_time">2016/3/14</span>
-						<h1>这是一个标题</h1>
-						<p>这是一条留言</p>
-					</li>
-				</ul>
+				<div class="message_area">
+					<ul id="message" class="message">
+						<li>
+							<span class="news_time">2016/3/14</span>
+							<h1>这是一个标题</h1>
+							<p>这是一条留言</p>
+						</li>
+						<li>
+							<span class="news_time">2016/3/14</span>
+							<h1>这是一个标题</h1>
+							<p>这是一条留言</p>
+						</li>
+						<li>
+							<span class="news_time">2016/3/14</span>
+							<h1>这是一个标题...</h1>
+							<p>这是一条留言</p>
+						</li>
+						<li>
+							<span class="news_time">2016/3/14</span>
+							<h1>这是一个标题</h1>
+							<p>这是一条留言</p>
+						</li>
+					</ul>
+				</div>
 			</div>
 		</div>
-
-		<ul class="hqc_img">
-			<li>
-				<img src="./img/1.jpg">
-				排球赛
-			</li>
-			<li>
-				<img src="./img/2.jpg">
-				中南财经政法大学来访
-			</li>
-			<li>
-				<img src="./img/3.jpg">
-				六一儿童节
-			</li>
-		</ul>
+		
+		<div class="hqc_img_area">
+		<h1>图说后勤</h1>
+			<ul id="hqc_img" class="hqc_img">
+				<li>
+					<img src="./img/1.jpg">
+					排球赛
+				</li>
+				<li>
+					<img src="./img/2.jpg">
+					中南财经政法大学来访
+				</li>
+				<li>
+					<img src="./img/3.jpg">
+					六一儿童节
+				</li>
+				<li>
+					<img src="./img/bg.jpg">
+					中南财经政法大学来访
+				</li>
+				<li>
+					<img src="./img/4.jpg">
+					六一儿童节
+				</li>
+				<li>
+					<img src="./img/logo.png">
+					中南财经政法大学来访
+				</li>
+				<li>
+					<img src="./img/11j.png">
+					六一儿童节
+				</li>
+			</ul>	
+		</div>
+		
 	</div> <!-- container -->
 
 	<footer>
@@ -282,7 +304,7 @@
 	</footer>
 
 	<script src="./js/less.js"></script>
-	<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+	<script src="./js/jquery-2.1.1.min.js"></script>
 	<script src="./js/jquery.viewpager.js"></script>
 	<script>
 		$(function(){ 
@@ -308,11 +330,26 @@
 				$(this).find('a').text(shortToLong[$(this).index()][0]);
 			}
 		);
-		$('body').click(function() {
-			$('#message').animate({
-			height: 20
-		}, 1000);
-		})
+
+
+		function roll(time) {
+			var style = {
+				right: '+='+(parseInt($('#hqc_img li').width())+parseInt($('#hqc_img li').css('margin-left'))+parseInt($('#hqc_img li').css('margin-right')))
+			}
+			
+			setTimeout(function() {
+				if($('#hqc_img li').width())
+					$('#hqc_img li').eq(0).clone().appendTo('#hqc_img');
+
+				$('#hqc_img').animate(style, 500, function() {
+					$('#hqc_img li').eq(0).remove();
+					$(this).css('right', '0');
+				});
+
+				roll(time);
+			}, time);
+		}
+		roll(3000);
 		
 	</script>
 </body>
