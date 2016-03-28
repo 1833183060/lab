@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8">
+	<title>Xiangsu Index</title>
+
+	<style>
+	body {
+		background: #ccc;
+	}
+	.loading_large {
+		width: 400px; height: 400px;
+		background: #fff;
+		overflow: hidden;
+	}
+	.loading_unit {
+		//position: relative;
+		//top: 30%;
+		width: 400px; height: 400px;
+		background: #fff;
+		animation: loading_large 4s linear infinite;
+	}
+	@keyframes loading_large {
+		0% {
+			width: 400px; height: 400px;
+			box-shadow: -400px 0 0 , 0 -400px 0 #aaa, 0 400px 0 #aaa; 
+		}
+		100%{
+			box-shadow: -100px 0 0 #aaa, 0, -100 0 #aaa, 0 100px 0 #aaa;
+			width: 100px; height: 100px;
+			transform: translateX(400px);
+		}
+	}
+	</style>
+</head>
+<body>
+	<div class="loading">
+		<div class="loading_large">
+			<div class="loading_unit"></div>
+		</div>
+	</div>
+
+	<!-- <script src="./js/less.js"></script> -->
+</body>
+</html>
