@@ -1,0 +1,253 @@
+html, body {
+	height: 100%;
+	width: 100%; max-width: 1920px; min-width: 1024px;
+	margin: 0 auto;
+	font-family: "微软雅黑 Light";
+}
+html {
+	font-size: 10px;
+}
+body {
+	padding: 0;
+}
+
+.container {
+	height: 100%;
+	box-sizing: border-box;
+	background: url(../img/bg.jpg) no-repeat;
+	background-size: 100%; 
+	border: 7px solid #4A4A4A;
+	border-bottom: none;
+	position: relative;
+}
+
+header {
+	color: #fff;
+	margin: 25px;
+	margin-bottom: 0;
+	overflow: hidden;
+	font-size: 1.4rem;
+}
+header .logo_area {
+	float: left;
+	position: relative;
+	z-index: 4;
+}
+header .logo {
+	width: 55px; height: 55px;
+	background: #fff;
+	margin-bottom: 6px;
+}
+header .other {
+	border: 2px solid #fff;
+	color: #fff;
+	float: right;
+	padding: 10px;
+	text-align: center;
+}
+
+.title_area {
+	width: 18rem; height: 18rem; 
+	background: #fff;
+	margin-left: 25%;
+	padding: 20px;
+	position: relative;
+	margin-top: 2%;
+}
+.title_area:before {
+	content: "";
+	display: block;
+	width: 2rem; height: 2rem;
+	background: #424242;
+}
+.title_area hgroup {
+	position: absolute;
+	bottom: 0;
+	margin-bottom: 10px;
+}
+.title_area h1, .title_area h2, .title_area h3 {
+	margin: 6px 0;
+	color: #464646;
+} 
+.title_area h1 {
+	font-size: 3rem;
+}
+.title_area h2 {
+	border-bottom: 2px solid #464646;
+	font-size: 2.3rem;
+}
+.title_area h3 {
+	font-size: 1.3rem;
+}
+.title_area h3:before {
+	content: "";
+	display: block;
+	width: 0; height: 0;
+	border-left: 4px solid #464646;
+	border-bottom: 3px solid transparent;
+	border-top: 3px solid transparent;
+	float: left;
+	margin-right: 4px;
+	margin-top: 5px;
+}
+.title_area h3:after {
+	content: "";
+	display: block;
+	width: 0; height: 0;
+	border-left: 4px solid #464646;
+	border-bottom: 3px solid transparent;
+	border-top: 3px solid transparent;
+	float: left;
+	margin-top: 5px;
+	margin-right: 4px;
+}
+
+footer {
+	position: absolute;
+	bottom: 0px;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	overflow: hidden;
+	text-align: right;
+}
+footer .login_register {
+	background: #fff;	
+	display: inline-block;
+	position: relative;
+	overflow: hidden;
+	margin-bottom: -2px;
+	text-align: center;
+}
+footer .another_bg {
+	background: #4A4A4A;
+	width: 0; height: 100%;
+	position: absolute;
+	top: 0; right: 0;
+	z-index: 1;
+	transition: width .4s ease-in-out;
+}
+footer .login_register:hover .another_bg {
+	left: 0;
+	width: 100%;
+}
+footer .underline {
+	display: inline-block;
+	background: #777;
+	height: 1px; width: 0px;
+	transition: width .4s ease-in-out;
+}
+footer .login_register a:hover .underline{
+	width: 3.5rem;
+}
+footer .login_register a {
+	display: inline-block;
+	padding: 35px;
+	padding-bottom: 28px;
+	color: #777;
+	text-decoration: none;
+	font-size: 1.3rem;
+	position: relative;
+	z-index: 2;
+}
+footer .login_register .bigger {
+	font-size: 1.8rem;
+}
+footer .footer_bottom {
+	width: 100%; height: 4rem;
+	background: rgba(255,255,255,.8);
+	box-sizing: border-box;
+}
+.login_area_container {
+	width: 100%; height: 600px;
+	background: #4A4A4A;
+	position: absolute;
+	top: 0; left: 0;
+	box-sizing: border-box;
+	z-index: 3;
+	transform: translateY(-320px);
+	display: none;
+	//border-bottom: 0px solid #4A4A4A;
+}
+.login_area {
+	width: 100%;
+	padding: 20px;
+	position: absolute;
+	top: 0; left: 0;
+	box-sizing: border-box;
+	z-index: 5;
+	display: none;
+}
+.login_bg_showing {
+	animation: loginBgShow .4s ease-in backwards;
+}
+.login_area_showing {
+	animation: loginAreaShow .4s ease-in backwards;
+}
+@keyframes loginBgShow {
+	0% {
+		border-bottom-right-radius: 60%;
+		border-bottom-left-radius: 60%;
+		display: block;	
+		transform: translateY(-600px);
+	}
+	60% {
+		transform: translateY(-300px);
+	}
+	100% {
+		transform: translateY(-320px);
+		border-radius: 0;
+	}
+}
+@keyframes loginAreaShow {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+.index_text_inp {
+	border: 1px solid #9B9B9B;
+	width: 30rem;
+	padding: 14px;
+	color: #9B9B9B;
+	margin: 8px 0;
+	font-size: 14px;
+	background: transparent;
+}
+.index_text_inp:focus {
+	outline: none;
+}
+.auth_code_area .index_text_inp {
+	float: left;
+	width: 18rem;
+}
+.auth_code {
+	float: left;
+	display: inline-block;
+	height: 45px;
+	background: #9B9B9B;
+	width: 12rem; 	
+	margin-top: 8px;
+}
+.login_area_form {
+	overflow: hidden;
+	margin-left: 12%;
+}
+.login_area_form .caption {
+	float: left;
+	color: #fff;
+}
+.login_area_form .caption span, .login_area_form .caption a {
+	color: #fff;
+	font-size: 14px;
+}
+.login_area_form .caption h1 {
+	font-size: 4rem;
+}
+.login_area_form .forms {
+	float: left;
+	margin-left: 80px;
+}
