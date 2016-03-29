@@ -24,8 +24,11 @@ header {
 	width: 100%; min-width: @default_w;
 	height: @header_h;
 	opacity: .9;
-	overflow: hidden;
-	background: rgba(162, 0, 0, 1);
+	//overflow: hidden;
+	background: #186082;
+	box-shadow: 0 3px 4px #777;
+	position: relative;
+	z-index: 10;
 
 	a {
 		color: #fff;
@@ -38,6 +41,10 @@ header {
 		}
 	}
 }
+.header_area {
+	background: url(../img/banner.png) 30% 30%;
+	background-size: 100%; 
+}
 .header_area, .container, .decorate {
 	width: @default_w;
 	margin: 0 auto;
@@ -47,16 +54,61 @@ header {
 	float: right;
 	list-style-type: none;
 	margin: 0 10px;
-	transition: all .5s;
+	position: relative;
+	line-height: @header_h;
+
+	&:hover {
+		background: #000;
+	}
+
+	.other_site_btn {
+		display: block;
+		padding: 0 10px;
+
+		&:after {
+			content: "";
+			width: 0; height: 0;
+			display: inline-block;
+			border-top: 4px solid #fff; 
+			border-left: 3px solid transparent;
+			border-right: 3px solid transparent;
+			margin-left: 5px;
+		}
+		&:hover + ul {
+			display: block;
+		}
+	}
+	
+	ul {
+		position: absolute;
+		top: @header_h / 1.2; right: 0;
+		width: 190%;
+		background: #000;
+		padding: 8px 0;
+		margin-top: 0;
+		z-index: 10;
+		display: none;
+		box-shadow: 0 3px 3px #222;
+
+		&:hover {
+			display: block;
+		}
+	}
 
 	li {
-		display: inline-block;
+		//display: inline-block;
 		color: #eee;
-		line-height: @header_h;
 		margin: 0 8px;
+		line-height: 190%;
+		list-style-type: none;
+
+		a {
+			display: inline-block;
+			width: 100%;
+		}
 	}
 	li:hover {
-		//background: rgba(162, 0, 0, 1);
+		background: rgba(162, 0, 0, 1);
 	}
 }
 
@@ -302,7 +354,7 @@ header {
 		text-align: left;
 
 		.title {
-			background: #0dadea;
+			background: #607D8B;
 			color: #fff;
 			padding: 10px;
 			position: relative;
@@ -337,7 +389,7 @@ header {
 			padding: 0;
 
 			li {
-				border-left: 3px solid #0dadea;
+				border-left: 3px solid #607D8B;
 				padding: 10px 12px;
 				margin-bottom: 24px;
 
@@ -368,7 +420,7 @@ header {
 		text-align: left;
 
 		.title {
-			background: #A5CA26;
+			background: #00796B;
 			color: #fff;
 			padding: 10px;
 			position: relative;
@@ -403,7 +455,7 @@ header {
 			padding: 0;
 
 			li {
-				border-right: 3px solid #A5CA26;
+				border-right: 3px solid #00796B;
 				padding: 10px 12px;
 				margin-bottom: 24px;
 
@@ -437,11 +489,11 @@ header {
 			overflow: hidden;
 		}
 		.title {
-			background: #E3E118;
+			background: #795548;
 		}
 		.message {
 			li {
-			border-right-color: #E3E118;
+			border-right-color: #795548;
 			}
 		}
 	}
@@ -451,7 +503,7 @@ header {
 	
 	h1 {
 		//border-bottom: 3px solid rgba(162, 0, 0, .7);
-		background: rgba(162, 0, 0, .7);
+		background: #AE042A;
 		color: #fff;
 		padding: 4px;
 		padding-left: 7px;
@@ -518,7 +570,7 @@ header {
 
 footer {
 	width: 100%; min-width: @default_w;
-	background: #464646;
+	background: #005177;
 	text-align: center;
 	color: #fff;
 	padding: 20px 0;
