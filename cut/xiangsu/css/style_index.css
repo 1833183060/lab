@@ -10,7 +10,9 @@ html {
 body {
 	padding: 0;
 }
-
+a {
+	text-decoration: none;
+}
 .container {
 	height: 100%;
 	box-sizing: border-box;
@@ -32,6 +34,7 @@ header .logo_area {
 	float: left;
 	position: relative;
 	z-index: 4;
+	cursor: pointer;
 }
 header .logo {
 	width: 55px; height: 55px;
@@ -136,7 +139,7 @@ footer .underline {
 	display: inline-block;
 	background: #777;
 	height: 1px; width: 0px;
-	transition: width .4s ease-in-out;
+	transition: width .4s ease-in;
 }
 footer .login_register a:hover .underline{
 	width: 3.5rem;
@@ -158,17 +161,18 @@ footer .footer_bottom {
 	width: 100%; height: 4rem;
 	background: rgba(255,255,255,.8);
 	box-sizing: border-box;
+	position: relative;
+	z-index: 3;
 }
 .login_area_container {
-	width: 100%; height: 600px;
+	width: 100%; height: 900px;
 	background: #4A4A4A;
 	position: absolute;
 	top: 0; left: 0;
 	box-sizing: border-box;
 	z-index: 3;
-	transform: translateY(-320px);
+	transform: translateY(-625px);
 	display: none;
-	//border-bottom: 0px solid #4A4A4A;
 }
 .login_area {
 	width: 100%;
@@ -183,20 +187,20 @@ footer .footer_bottom {
 	animation: loginBgShow .4s ease-in backwards;
 }
 .login_area_showing {
-	animation: loginAreaShow .4s ease-in backwards;
+	animation: loginAreaShow .3s ease-in backwards;
 }
 @keyframes loginBgShow {
 	0% {
 		border-bottom-right-radius: 60%;
 		border-bottom-left-radius: 60%;
 		display: block;	
-		transform: translateY(-600px);
+		transform: translateY(-900px);
 	}
 	60% {
-		transform: translateY(-300px);
+		transform: translateY(-600px);
 	}
 	100% {
-		transform: translateY(-320px);
+		transform: translateY(-625px);
 		border-radius: 0;
 	}
 }
@@ -250,4 +254,88 @@ footer .footer_bottom {
 .login_area_form .forms {
 	float: left;
 	margin-left: 80px;
+}
+
+
+
+.siteinfo {
+	position: absolute;
+	overflow: hidden; 
+	width: 100%; height: 100%;
+	border: 6px solid transparent;
+	box-sizing: border-box;
+	z-index: 3;
+}
+.siteinfo_content {
+	background: #fff;
+	float: left;
+	width: 81%; height: 100%;
+	animation: siteinfo_content_showing .8s ease-in-out backwards;
+}
+.sidebar_container {
+	float: left;
+	height: 98%; width: 19%;
+	background: #464646;
+	animation: sidebar_showing .8s ease-in-out backwards;
+	/*display: none;*/
+}
+.nav_content {
+	margin-top: 180px;
+	padding-left: 20px;
+	animation: nav_showing .8s ease-in backwards;
+}
+.nav_content li {	
+	list-style-type: none;
+	display: inline-block;
+	font-size: 18px;
+	margin-bottom: 10px;
+}
+.nav_content li:first-child {
+	margin-bottom: 50px;
+}
+.nav_content li span {
+	display: block;
+	margin-top: 4px;
+	height: 1px; width: 0px;
+	background: #fff;
+	transition: width .3s ease-in;
+}
+.nav_content li:hover > span{
+	width: 100%;
+}
+.nav_content li a {
+	color: #fff;
+	display: inline-block;
+	margin-bottom: -10px;
+}
+
+@keyframes sidebar_showing {
+	0% {
+		width: 0px;
+	}
+	100% {
+		width: 19%;
+	}
+}
+@keyframes nav_showing {
+	0% {
+		opacity: 0;
+		transform: translateY(-20px);
+	}
+	50% {
+		opacity: 0;
+		transform: translateY(-20px);
+	}
+	100% {
+		opacity: 1;
+		transform: translateY(0px);
+	}
+}
+@keyframes siteinfo_content_showing {
+	0% {
+		width: 0px;
+	}
+	100% {
+		width: 81%;
+	}
 }
