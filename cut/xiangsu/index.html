@@ -28,11 +28,12 @@
 							<input class="index_text_inp" type="text" placeholder="yanzhengma" />
 							<div class="auth_code"></div>
 						</div>
-						<input type="submit" />
+						<input id="submit" type="submit" />
 					</form>
 				</div>
 			</div>
 		</div>
+
 		<div class="siteinfo">
 			<div id="sidebar_container" class="sidebar_container">
 				<ul id="nav_content" class="nav_content">
@@ -97,6 +98,7 @@
 				</div>
 			</div>
 		</div>
+
 		<footer>
 			<div class="login_register">
 				<a id="login_btn" href="" onclick="return false">
@@ -120,8 +122,14 @@
 
 	<script>
 	$('#login_btn').click(function() {
-		$('#login_area_container').show().addClass('login_bg_showing');
+		$('#login_area_container').show().removeClass('login_bg_hiding').addClass('login_bg_showing');
 		$('#login_area').show().addClass('login_area_showing');
+	});
+	$('#login_area_container').click(function() {
+		$('#login_area_container').removeClass('login_bg_showing').addClass('login_bg_hiding');
+		setTimeout(function(){
+			$('#login_area_container').hide();
+		}, 400);
 	})
 	</script>
 </body>

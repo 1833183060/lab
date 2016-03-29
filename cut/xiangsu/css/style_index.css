@@ -189,11 +189,13 @@ footer .footer_bottom {
 .login_area_showing {
 	animation: loginAreaShow .3s ease-in backwards;
 }
+.login_bg_hiding {
+	animation: loginBgHide .4s ease-in backwards;
+}
 @keyframes loginBgShow {
 	0% {
 		border-bottom-right-radius: 60%;
 		border-bottom-left-radius: 60%;
-		display: block;	
 		transform: translateY(-900px);
 	}
 	60% {
@@ -202,6 +204,20 @@ footer .footer_bottom {
 	100% {
 		transform: translateY(-625px);
 		border-radius: 0;
+	}
+}
+@keyframes loginBgHide {
+	0% {
+		transform: translateY(-625px);
+		border-radius: 0;
+	}
+	40% {
+		transform: translateY(-600px);
+	}
+	100% {
+		border-bottom-right-radius: 60%;
+		border-bottom-left-radius: 60%;
+		transform: translateY(-900px);
 	}
 }
 @keyframes loginAreaShow {
@@ -265,6 +281,7 @@ footer .footer_bottom {
 	border: 6px solid transparent;
 	box-sizing: border-box;
 	z-index: 3;
+	display: none;
 }
 .siteinfo_content {
 	background: #fff;
