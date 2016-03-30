@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Ha.</title>
+</head>
+<body>
+	<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Ha.</title>
+	<style type="text/css">
+		html {
+			font-size: 20px;
+		}
+		.unit {
+			margin: 0 auto;
+			margin-top: 2rem;
+
+		}
+		h1 {
+			text-align: center;
+			margin-top: 450px;
+		}
+	</style>
+</head>
+<body>
+	<div id="unit" class="unit"></div>
+
+	<script type="text/javascript">
+		var config = {
+			unit: 'unit', 
+			width: 20,
+			height: 20, 
+			color: '#333', 
+			initialVertical: 0, 
+			dotMatrix: [ 
+				[ [-20, -5], [5, 20] ],
+				[ [-21, -21], [-4, -4], [4, 4], [21, 21] ],
+				[ [-21, -21], [-4, -4], [4, 4], [21, 21] ],
+				[ [-21, -21], [-4, -4], [4, 4], [21, 21] ],
+				[ [-21, -21], [-4, -4], [4, 4], [21, 21], [-3, 3]],
+				[ [-21, -21], [-4, -4], [4, 4], [21, 21] ],
+				[ [-21, -21], [-4, -4], [4, 4], [21, 21] ],
+				[ [-21, -21], [-5, -5], [5, 5], [21, 21] ],
+				[ [-21, -21], [-6, -6], [6, 6], [21, 21] ],
+				[ [-21, -21], [-7, -7], [7, 7], [21, 21] ],
+				[ [-20, -8], [8, 20], [3, 4], [-4, -3] ],
+				[ [3, 4], [-4, -3]],
+				[ []], [[]], [[]],
+				[ [-5, -4]],
+				[ [-6, -4]],
+				[ [-5, -4], [1, 3]],
+				[ [-5, -4], [0, 0], [4, 4], [-9,-9]],
+				[ [-5, -4], [0,0], [-10,-8]],
+				[ [-5, -4], [1,1], [-9,-9]],
+				[ [-5, -4], [2,2]],
+				[ [-5, -4], [3,3]],
+				[ [-5, -4], [4,4], [0,0]],
+				[ [-7, -2], [1,3]],
+			]
+		};
+
+		function Pixel(config) {
+			this.unit = this.fun.getObj(config.unit);
+			this.width = config.width ? config.width : config.height;
+				this.width = typeof this.width == 'string' ? this.width : this.width + 'px';
+			this.height = config.height ? config.height : config.width;
+				this.height = typeof this.height == 'string' ? this.height : this.height + 'px';
+			this.color = config.color;
+			this.initial = config.initialVertical ? config.initialVertical : 0;
+			this.dotMatrix = config.dotMatrix;
+			
+			this.unit.style.display = 'block';
+			this.unit.style.width = this.width;
+			this.unit.style.height = this.height;
+			this.unit.style.background = 'transparent';
+
+			this.draw();
+		}
+
+		Pixel.prototype.draw = function() {
+			var color = this.color,
+				dotMatrix = this.dotMatrix,
+				initial = this.initial,
+				w = parseInt(this.width),
+				h = parseInt(this.height);
+
+			var styleArray = new Array();
+
+			for(var i=0; i<dotMatrix.length; i++) {
+				for(var j=0; j<dotMatrix[i].length; j++) {
+					var pNum = dotMatrix[i][j][1] - dotMatrix[i][j][0] + 1; //每个像素片段的像素数
+					for(var z=0; z<pNum; z++) {
+						styleArray.push(w*(dotMatrix[i][j][0]+z)+'px '+h*initial+ 'px 0 '+color); //解析并储存每个像素点的位置和颜色信息
+					}
+				}
+				initial++;
+			}
+
+			this.unit.style.boxShadow = styleArray.toString();
+		}
+		Pixel.prototype.fun = {
+			getObj: function(a) {
+				return typeof a == 'object' ? a : document.getElementById(a);
+			}
+		}
+
+		var p = new Pixel(config);
+	</script>
+</body>
+</html>
+
+</body>
+</html>
