@@ -1,7 +1,20 @@
 @default_font: Microsoft YaHei;
 @default_color: #444;
 @default_w: 980px;
-@header_h: 65px;
+@header_h: 100px;
+@base_color: #464646;
+
+@blue: #607D8B;
+@blue_dark: #29343A;
+
+@green: #00796B;
+@green_dark: #003E37;
+
+@brown: #795548;
+@brown_dark: #402D26;
+
+@red: #AE042A;
+@red_dark: #500012;
 
 body {
 	margin: 0;
@@ -24,9 +37,7 @@ header {
 	width: 100%; min-width: @default_w;
 	height: @header_h;
 	opacity: .9;
-	//overflow: hidden;
-	background: #186082;
-	box-shadow: 0 3px 4px #777;
+
 	position: relative;
 	z-index: 10;
 
@@ -37,15 +48,20 @@ header {
 		display: inline-block;
 		height: 100%;
 		img {
-			height: 100%;
+			height: 90%;
 		}
 	}
 }
 .header_area {
-	background: url(../img/banner.png) 30% 30%;
+	background: url(../img/banner.png) 30% 20%;
 	background-size: 100%; 
+/* 	box-shadow: 0 3px 4px #777; */
 }
-.header_area, .container, .decorate {
+.header_bg{
+	z-index: -1;
+/* 	background-color: #186082; */
+}
+.header_area, .container, .decorate ,.header_bg {
 	width: @default_w;
 	margin: 0 auto;
 	height: 100%;
@@ -64,6 +80,13 @@ header {
 	.other_site_btn {
 		display: block;
 		padding: 0 10px;
+		color: #ac9c69;
+		font-weight: bold;
+		text-shadow: 1px 1px 10px #555;
+		font-size: 16px;
+		background: #fff;
+		padding: 10px;
+		border-radius: 50%;
 
 		&:after {
 			content: "";
@@ -113,7 +136,7 @@ header {
 }
 
 .container nav {
-	margin: 20px 0;
+	margin: 0px 0 15px 0;
 	text-align: center;
 	overflow: hidden;
 
@@ -266,8 +289,8 @@ header {
 			&:before {
 				content:"";
 				width: 0; height: 0;
-				border-top: 5px solid #173945;
-				border-right: 5px solid #173945;
+				border-top: 5px solid #324148;
+				border-right: 5px solid #324148;
 				border-bottom: 5px solid transparent;
 				border-left: 5px solid transparent;
 				position: absolute;
@@ -315,6 +338,7 @@ header {
 		width: 50%;
 		float: left;
 		margin-bottom: 7px;
+		height: 48%;
 	}
 }
 
@@ -373,8 +397,8 @@ header {
 			&:before {
 				content:"";
 				width: 0; height: 0;
-				border-top: 6px solid #045B7C;
-				border-right: 6px solid #045B7C;
+				border-top: 6px solid @blue_dark;
+				border-right: 6px solid @blue_dark;
 				border-bottom: 6px solid transparent;
 				border-left: 6px solid transparent;
 				position: absolute;
@@ -392,6 +416,7 @@ header {
 				border-left: 3px solid #607D8B;
 				padding: 10px 12px;
 				margin-bottom: 24px;
+				list-style-type: none;
 
 				a {
 					display: block;
@@ -439,8 +464,8 @@ header {
 			&:before {
 				content:"";
 				width: 0; height: 0;
-				border-top: 6px solid #607A06;
-				border-left: 6px solid #607A06;
+				border-top: 6px solid @green_dark;
+				border-left: 6px solid @green_dark;
 				border-bottom: 6px solid transparent;
 				border-right: 6px solid transparent;
 				position: absolute;
@@ -449,7 +474,6 @@ header {
 		}
 
 		.message {
-			list-style-type: none;
 			margin-right: 10px;
 			margin-top: 30px;
 			padding: 0;
@@ -458,6 +482,7 @@ header {
 				border-right: 3px solid #00796B;
 				padding: 10px 12px;
 				margin-bottom: 24px;
+				list-style-type: none;
 
 				a {
 					display: block;
@@ -481,7 +506,6 @@ header {
 		}
 	}
 	.guestbook {
-		margin-top: 25px;
 		height: 300px;
 		overflow: hidden;
 
@@ -489,32 +513,62 @@ header {
 			overflow: hidden;
 		}
 		.title {
-			background: #795548;
+			background: @brown;
+			&:before {
+			    border-top: 6px solid @brown_dark;
+			    border-left: 6px solid @brown_dark;
+			}
 		}
 		.message {
 			li {
 			border-right-color: #795548;
+			list-style-type: none;
+
 			}
 		}
 	}
 }
+
 .hqc_img_area {
 	overflow: hidden;
-	
-	h1 {
-		//border-bottom: 3px solid rgba(162, 0, 0, .7);
-		background: #AE042A;
-		color: #fff;
-		padding: 4px;
-		padding-left: 7px;
-		font-size: 21px;
-	}
+
+		.title {
+			background: @red;
+			color: #fff;
+			padding: 10px;
+			position: relative;
+
+			h1 {
+				display: inline-block;
+				margin: 0;
+				font-size: 19px;
+			}
+
+			&:before {
+				content:"";
+				width: 0; height: 0;
+			    border-top: 6px solid @red_dark;
+			    border-right: 6px solid @red_dark;
+				border-bottom: 6px solid transparent;
+				border-left: 6px solid transparent;
+				position: absolute;
+				bottom: -12px; left: 0;
+			}
+		}
+/* 	h1 {
+	//border-bottom: 3px solid rgba(162, 0, 0, .7);
+	background: rgba(162, 0, 0, .7);
+	color: #fff;
+	padding: 4px;
+	padding-left: 7px;
+	font-size: 21px;
+} */
 	.hqc_img {
 		//float: left;
 		display: inline-block;
 		//width: 100%;
 		list-style-type: none;
-		margin: 20px 0px;
+		margin: 30px 0px 20px;
 		padding: 0;
 		position: relative;
 		height: 150px;
@@ -527,6 +581,7 @@ header {
 			margin-bottom: 15px;
 			float: left;
 			text-align: center;
+			list-style-type: none;	
 
 			img {
 				width: 100%;
@@ -536,6 +591,8 @@ header {
 	}
 
 }
+
+
 
 .decorate {
 	padding-top: 120px;
@@ -570,7 +627,7 @@ header {
 
 footer {
 	width: 100%; min-width: @default_w;
-	background: #005177;
+	background: @base_color;
 	text-align: center;
 	color: #fff;
 	padding: 20px 0;
