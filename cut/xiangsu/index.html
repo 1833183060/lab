@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
 	<meta charset="UTF-8">
@@ -10,55 +9,149 @@
 <body>
 	<div class="container">
 
-		<div id="login_area" class="login_area">
+		<div id="site_show_area" class="site_show_area">
+			<div class="leftbar">
+				<div id="close_site_show" class="close"><span>X</span></div>
+				<div class="words">
+					<h1>凡心所向</h1>
+					<h1>素履所往</h1>
+				</div>
+			</div>	
+			<div class="right_content">
+				<div class="video"> 
+					<div id="video_layer" class="layer"></div>
+					<a id="play_btn" class="play_btn" href="#"></a>
+					<video id="the_video" src="./others/1.mp4" height="100%"></video>
+				</div>
+				<div class="other_content">
+					<div class="title">
+						<h1>向素</h1>
+						<h2>设计师的<br>个人网站</h2>
+					</div>
+					<div class="info">
+						<div class="info_content">
+							<p>作品集</p>
+							<p>作品集</p>
+							<p>作品集</p>
+						</div>
+						<div class="info_content">
+							<p>个人简历</p>
+							<p>个人简历</p>
+							<p>个人简历</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="login_area">
 			<div class="login_area_header">
 				<div class="back"></div>
 				<div class="close">X</div>
 			</div>	
-			<div class="login_area_form">
+			<div id="register_area_form" class="login_area_form">
 				<div class="caption">
-					<h1>Login</h1>
-					<span>or <a href="">register</a></span>
+					<h1>注册向素</h1>
+					<div class="step_hint_area">
+						<div class="step_hint hint1 active">
+							<div class="hint_words">注册账户</div>
+						</div>
+						<div class="step_hint hint2">
+							<div class="hint_words">设置用户名</div>
+						</div>
+					</div>
+					<span class="form_switch_area">或 <a id="login_switch" class="form_switch_link" href="">登录</a></span>
 				</div>
 				<div class="forms">
-					<form>
-						<input class="index_text_inp" type="text" placeholder="email" /><br>
-						<input class="index_text_inp" type="password" placeholder="password" /><br>
+					<form id="register1">
+						<input class="index_text_inp" type="text" placeholder="请输入有效的邮箱" /><br>
+						<input class="index_text_inp" type="password" placeholder="密码（6-18位数字或字符）" /><br>
 						<div class="auth_code_area">
-							<input class="index_text_inp" type="text" placeholder="yanzhengma" />
+							<input class="index_text_inp" type="text" placeholder="输入验证码" />
 							<div class="auth_code"></div>
 						</div>
-						<input id="submit" type="submit" />
+						<div class="submit_btn_area">
+							<!-- <div class="submit_btn_arrow">-----</div> -->
+							<input class="submit_btn" id="submit" type="button" />
+						</div>
+					</form>
+					<form id="register2" class="register_form2">
+						<input class="index_text_inp" type="text" placeholder="请设置用户名" /><br>
+						<div class="submit_btn_area">
+							<!-- <div class="submit_btn_arrow">-----</div> -->
+							<input class="submit_btn" id="submit" type="button" />
+						</div>
+					</form>
+				</div>
+			</div>
+
+			<div id="login_area_form" class="login_area_form">
+				<div class="caption">
+					<h1>登录向素</h1>
+					<span class="form_switch_area">或 <a id="register_switch" class="form_switch_link" href="">注册</a></span>
+				</div>
+				<div class="forms">
+					<form id="login">
+						<input class="index_text_inp" type="text" placeholder="注册邮箱" /><br>
+						<input class="index_text_inp" type="password" placeholder="密码" /><br>
+						<a class="forget_pwd_link" href="#">忘记密码</a>
+						<div class="submit_btn_area">
+							<!-- <div class="submit_btn_arrow">-----</div> -->
+							<input class="submit_btn" id="submit" type="button" />
+						</div>
 					</form>
 				</div>
 			</div>
 		</div>
 
-		<div class="siteinfo">
+		<div id="siteinfo" class="siteinfo">
 			<div id="sidebar_container" class="sidebar_container">
 				<ul id="nav_content" class="nav_content">
 					<li>
-						<a href="">index</a>
+						<a data-index="0" href="">首页</a>
 						<span></span>
 					</li><br>
 					<li>
-						<a href="">about</a>
+						<a data-index="1" href="">关于向素</a>
 						<span></span>
 					</li><br>
 					<li>
-						<a href="">contact</a>
+						<a data-index="2" href="">联系我们</a>
 						<span></span>
 					</li><br>
 					<li>
-						<a href="">feedback</a>
+						<a data-index="3" href="">意见反馈</a>
 						<span></span>
 					</li><br>
 				</ul>
 			</div>
-			<div class="siteinfo_content">
-				<div class="siteinfo_words">
-					<p>fskldfdslkfsldkf</p>
-					<p>dkfjlskjtweoii</p>
+			<div id="siteinfo_content" class="siteinfo_content">
+				<div data-index="1" class="siteinfo_words">
+					<p>凡心所向，素履所往。</p>
+					<p>把自己最擅长的，展现给需要看到的人</p>
+					<p>&nbsp;</p>
+					<p>设计着：胡兵兵</p>
+					<p>中央美术学院设计学院·数码媒体工作室</p>
+					<p>Tel: 186 1385 9561</p>
+					<p>Mail: bingo@snsu.me</p>
+					<p>地址：北京市朝阳区花家地南街8号</p>
+				</div>
+				<div data-index="2" class="siteinfo_words">
+					<p>联系人：胡兵兵</p>
+					<p>地址：中央美术学院设计学院·数码媒体工作室</p>
+					<p>电话：186 1385 9561</p>
+					<p>邮箱：bingo@snsu.me</p>
+				</div>
+				<div data-index="3" class="siteinfo_words">
+					<form class="feedback">
+						<input class="index_text_inp" type="text" value="收件人：server@snsu.me" /><br>
+						<input class="index_text_inp" type="text" placeholder="您的联系方式（邮箱）" /><br>
+						<textarea class="index_text_inp" placeholder="请输入您要反馈的内容"></textarea>
+						<div class="submit_btn_area">
+							<!-- <div class="submit_btn_arrow">-----</div> -->
+							<input class="submit_btn" id="submit" type="button" />
+						</div>
+					</form>
 				</div>
 			</div>
 		</div>	
@@ -68,7 +161,10 @@
 			<div id="login_area_container" class="login_area_container"></div>
 
 			<div id="logo_area" class="logo_area">
-				<div class="logo"></div>
+				<div class="logo">
+					<img id="logo_w" class="logo_w" src="./img/logo_w.png">
+					<img id="logo_b" class="logo_b" src="./img/logo_b.png">
+				</div>
 				<div class="logo_info">
 					向素<br>snsu.me
 				</div>
@@ -85,7 +181,7 @@
 					<h2>中央美院毕业设计</h2>				
 				</hgroup>
 			</div>
-			<div class="work_info">
+			<!-- <div class="work_info">
 				<div class="service_obj">
 					<h1></h1>
 					<p></p>
@@ -96,7 +192,7 @@
 					<p></p>
 					<p></p>
 				</div>
-			</div>
+			</div> -->
 		</div>
 
 		<footer>
@@ -119,18 +215,6 @@
 
 	<script src="./js/jquery-2.1.1.min.js"></script>
 	<!-- <script src="./js/less.js"></script> -->
-
-	<script>
-	$('#login_btn').click(function() {
-		$('#login_area_container').show().removeClass('login_bg_hiding').addClass('login_bg_showing');
-		$('#login_area').show().addClass('login_area_showing');
-	});
-	$('#login_area_container').click(function() {
-		$('#login_area_container').removeClass('login_bg_showing').addClass('login_bg_hiding');
-		setTimeout(function(){
-			$('#login_area_container').hide();
-		}, 400);
-	})
-	</script>
+	<script src="./js/page_contorl.js"></script>
 </body>
 </html>
