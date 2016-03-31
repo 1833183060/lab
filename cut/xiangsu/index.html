@@ -1,13 +1,14 @@
 <html lang="zh-CN">
 <head>
 	<meta charset="UTF-8">
-	<title>Xiangsu Index</title>
-	
+	<title>首页 - 向素</title>
+	<link rel="icon" type="image/x-icon" href="./img/favicon.ico">
+
 	<link rel="stylesheet" type="text/css" href="./css/style_index.css" />
 
 </head>
 <body>
-	<div class="container">
+	<div id="container" class="container">
 
 		<div id="site_show_area" class="site_show_area">
 			<div class="leftbar">
@@ -47,7 +48,9 @@
 		<div class="login_area">
 			<div class="login_area_header">
 				<div class="back"></div>
-				<div class="close">X</div>
+				<div class="close">
+					<img src="./img/close.png">
+				</div>
 			</div>	
 			<div id="register_area_form" class="login_area_form">
 				<div class="caption">
@@ -106,6 +109,9 @@
 
 		<div id="siteinfo" class="siteinfo">
 			<div id="sidebar_container" class="sidebar_container">
+				<div id="siteinfo_close" class="close">
+					<img src="./img/close.png">
+				</div>
 				<ul id="nav_content" class="nav_content">
 					<li>
 						<a data-index="0" href="">首页</a>
@@ -124,13 +130,16 @@
 						<span></span>
 					</li><br>
 				</ul>
+				<div class="site_record">
+					<p>@2016 SNSU B29382jsk</p>
+				</div>
 			</div>
 			<div id="siteinfo_content" class="siteinfo_content">
 				<div data-index="1" class="siteinfo_words">
 					<p>凡心所向，素履所往。</p>
 					<p>把自己最擅长的，展现给需要看到的人</p>
 					<p>&nbsp;</p>
-					<p>设计着：胡兵兵</p>
+					<p>设计者：胡兵兵</p>
 					<p>中央美术学院设计学院·数码媒体工作室</p>
 					<p>Tel: 186 1385 9561</p>
 					<p>Mail: bingo@snsu.me</p>
@@ -169,9 +178,9 @@
 					向素<br>snsu.me
 				</div>
 			</div>
-			<div class="other">
+			<a href="http://www.changkit.com" target="_blank"><div class="other">
 				技术支持<br>创客贴	
-			</div>
+			</div></a>
 		</header>
 		<div class="main">
 			<div id="title_area" class="title_area">
@@ -180,6 +189,7 @@
 					<h1>毕业展</h1>
 					<h2>中央美院毕业设计</h2>				
 				</hgroup>
+				<div id="title_another_bg" class="another_bg"></div>
 			</div>
 			<!-- <div class="work_info">
 				<div class="service_obj">
@@ -209,7 +219,7 @@
 				</a>
 				<div class="another_bg"></div>
 			</div>
-			<div class="footer_bottom"></div>
+			<div id="footer_bottom" class="footer_bottom"></div>
 		</footer>
 	</div>	
 

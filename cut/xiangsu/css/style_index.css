@@ -11,6 +11,9 @@ body {
 	padding: 0;
 	overflow: hidden;
 }
+input, button {
+	font-family: "微软雅黑 Light";
+}
 a {
 	text-decoration: none;
 }
@@ -18,7 +21,7 @@ a {
 	height: 100%;
 	box-sizing: border-box;
 	background: url(../img/bg.jpg) no-repeat;
-	background-size: 100%; 
+	background-size: 100% 100%; 
 	border: 7px solid #4A4A4A;
 	border-bottom: none;
 	position: relative;
@@ -74,11 +77,14 @@ header .other {
 	display: block;
 	width: 2rem; height: 2rem;
 	background: #424242;
+	position: relative;
+	z-index: 2;
 }
 .title_area hgroup {
 	position: absolute;
 	bottom: 0;
 	margin-bottom: 10px;
+	z-index: 2;
 }
 .title_area h1, .title_area h2, .title_area h3 {
 	margin: 6px 0;
@@ -115,6 +121,15 @@ header .other {
 	float: left;
 	margin-top: 5px;
 	margin-right: 4px;
+}
+.title_area .another_bg {
+	width: 0; height: 100%;
+	background: #333;
+	box-sizing: border-box;
+	border: 9px solid #fff;
+	position: absolute;
+	top: 0; left: 0;
+	z-index: 0;
 }
 
 /**** footer ****/
@@ -153,9 +168,11 @@ footer .underline {
 	background: #777;
 	height: 1px; width: 0px;
 	transition: width .4s ease-in;
+	margin-top: 4px;
 }
 footer .login_register a:hover .underline{
 	width: 3.5rem;
+	background: #eee;
 }
 footer .login_register a {
 	display: inline-block;
@@ -166,6 +183,10 @@ footer .login_register a {
 	font-size: 1.3rem;
 	position: relative;
 	z-index: 2;
+	transition: color .4s;
+}
+footer .login_register a:hover {
+	color: #fff;
 }
 footer .login_register .bigger {
 	font-size: 1.8rem;
@@ -251,11 +272,12 @@ footer .footer_bottom {
 	float: right;
 }
 .submit_btn_area:before {
-	content: "----->";
+	content: "";
 	color: #9B9B9B;
 	position: absolute;
-	font-size: 25px;
-	margin-left: 14px;
+	width: 100%;
+	height: 100%;
+	background: url(../img/arrow.png) no-repeat center;
 	pointer-events: none;
 }
 .login_area_header {
@@ -329,17 +351,25 @@ footer .footer_bottom {
 	z-index: 3;
 	display: none;
 }
+.siteinfo .close {
+	float: right;
+	margin: 20px;
+	cursor: pointer;
+}
 .siteinfo_content {
 	background: #fff;
 	float: left;
 	width: 81%; height: 100%;
 	display: none;
+	box-sizing: border-box;
 }
 .sidebar_container {
 	float: left;
-	height: 98%; width: 19%;
+	height: 100%; width: 19%;
 	background: #464646;
 	display: none;
+	position: relative;
+	overflow: hidden;
 }
 .nav_content {
 	margin-top: 180px;
@@ -349,7 +379,8 @@ footer .footer_bottom {
 	list-style-type: none;
 	display: inline-block;
 	font-size: 18px;
-	margin-bottom: 10px;
+	margin-bottom: 18px;
+	font-weight: bold;
 }
 .nav_content li:first-child {
 	margin-bottom: 50px;
@@ -386,6 +417,13 @@ footer .footer_bottom {
 }
 .feedback textarea {
 	height: 150px;
+}
+.site_record {
+	position: absolute;
+	bottom: 10px; left: 20px;
+	width: 200px;
+	color: #fff;
+	font-size: 14px;
 }
 
 /**** site show ****/
@@ -500,14 +538,14 @@ footer .footer_bottom {
 .login_bg_showing {
 	animation: loginBgShow .4s backwards;
 }
-.login_area_showing {
-	animation: loginAreaShow .4s ease-in backwards;
+.to_one {
+	animation: toOne .4s ease-in backwards;
 }
 .login_bg_hiding {
 	animation: loginBgHide .4s ease-in backwards;
 }
-.login_area_hiding {
-	animation: loginAreaHide .4s ease-in backwards;
+.to_zero {
+	animation: toZero .4s ease-in backwards;
 }
 .sidebar_container_showing {
 	animation: sidebar_showing .6s ease-in-out backwards;
@@ -522,10 +560,10 @@ footer .footer_bottom {
 	animation: navHide .6s ease-in-out backwards;
 }
 .siteinfo_content_showing {
-	animation: siteinfo_content_showing .6s ease-in-out backwards;
+	animation: siteinfo_content_showing .6s ease-in backwards;
 }
 .siteinfo_content_hiding {
-	animation: siteinfoContentHide .6s ease-in-out backwards;
+	animation: siteinfoContentHide .6s ease-in backwards;
 }
 
 .site_show_showing {
@@ -533,6 +571,15 @@ footer .footer_bottom {
 }
 .site_show_hiding {
 	animation: siteShowHide .6s ease-in-out backwards;
+}
+.close_showing {
+	animation: closeShow .6s backwards;
+}
+.close_hiding {
+	animation: closeHide .6s backwards;
+}
+.title_anotherBg_showing {
+	animation: titleAnotherBgShow .6s backwards;
 }
 
 /**** define animation ****/
@@ -565,7 +612,7 @@ footer .footer_bottom {
 		transform: translateY(-900px);
 	}
 }
-@keyframes loginAreaShow {
+@keyframes toOne {
 	0% {
 		opacity: 0;
 	}
@@ -573,7 +620,7 @@ footer .footer_bottom {
 		opacity: 1;
 	}
 }
-@keyframes loginAreaHide {
+@keyframes toZero {
 	0% {
 		opacity: 1;
 	}
@@ -657,5 +704,37 @@ footer .footer_bottom {
 	}
 	100% {
 		transform: translateY(1000px);
+	}
+}
+
+@keyframes closeShow {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+		transform: rotate(360deg);
+	}
+}
+@keyframes closeHide {
+	0% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 0;
+		transform: rotate(-360deg);
+	}
+}
+
+@keyframes titleAnotherBgShow {
+	100% {
+		width: 100%;
+	}
+}
+
+/**** media query ****/
+@media screen and (min-width: 1920px) {
+	.title_area {
+		margin-top: 5%;
 	}
 }
