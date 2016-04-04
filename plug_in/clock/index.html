@@ -49,22 +49,28 @@
 		height: 100px; width: 10px;
 		background: #fff;
 		transform-origin: 0% 100%;
+		-webkit-transform-origin: 0% 100%;
 
 		animation: rotate_h 43200s linear infinite;
+		-webkit-animation: rotate_h 43200s linear infinite;
 	}
 	.minute {
 		height: 110px; width: 8px;
 		background: #ddd;
 		transform-origin: 0% 100%;
+		-webkit-transform-origin: 0% 100%;
 
 		animation: rotate_m 3600s linear infinite;
+		-webkit-animation: rotate_m 3600s linear infinite;
 	}
 	.second {
 		height: 130px; width: 4px;
 		background: #f00;
 		transform-origin: 0% 100%;
+		-webkit-transform-origin: 0% 100%;
 
 		animation: rotate_s 60s linear infinite;
+		-webkit-animation: rotate_s 60s linear infinite;
 	}
 
 	</style>
@@ -120,7 +126,7 @@
 		document.getElementById('second').style.transform = 'rotate('+second+'deg)';
 
 		function createRotateStyle(a, name) {
-			return '@keyframes '+name+' {0% {transform: rotate('+a+'deg); } 100% {transform: rotate('+(360+a)+'deg); }}';
+			return '@keyframes '+name+' {0% {transform: rotate('+a+'deg); } 100% {transform: rotate('+(360+a)+'deg); }} @-webkit-keyframes '+name+' {0% {transform: rotate('+a+'deg); } 100% {transform: rotate('+(360+a)+'deg); }}';
 		}
 		document.getElementById('rotate_style').innerHTML = createRotateStyle(hour, 'rotate_h') + createRotateStyle(minute, 'rotate_m') + createRotateStyle(second, 'rotate_s');
 	})()
