@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Clock</title>
+
+	<style>
+	.clock_body {
+		margin: 0 auto;
+		width: 300px; height: 300px;
+		border-radius: 50%;
+		background: #000;
+		position: relative;
+	}
+	.clock_num {
+		color: #fff;
+		position: absolute;
+		top: 0; left: 0;
+		width: 100%; height: 100%;
+		font-size: 22px;
+	}
+	.clock_num * {
+		position: absolute;
+		margin: auto; height: 22px;
+		left: 0; top: 0; right: 0; bottom: 0;
+		text-align: center;
+	}
+	.twelve {
+		transform: translate(0px, -130px);
+	}
+	.three {
+		transform: translate(130px, 0px);
+	}
+	.nine {
+		transform: translate(-130px, 0px);
+	}
+	.six {
+		transform: translate(0px, 130px);
+	}
+	.one {
+		transform: translate(68px, -108px);
+	}
+	.two {
+		transform: translate(110px, -65px);
+	}
+	.four {
+		transform: translate(110px, 65px);
+	}
+	.five {
+		transform: translate(68px, 108px);
+	}
+	.seven {
+		transform: translate(-68px, 108px);
+	}
+	.eight {
+		transform: translate(-110px, 65px);
+	}
+	.ten {
+		transform: translate(-100px, -65px);
+	}
+	.eleven {
+		transform: translate(-68px, -108px);
+	}
+
+	.pointer {
+		position: absolute;
+		width: 100%; height: 100%;
+		z-index: 10
+	}
+	.pointer * {
+		position: absolute;
+		margin: auto; 
+		left: 0; top: 0; right: 0; bottom: 0;
+		margin-left: 50%;
+	}
+	.circle {
+		width: 10%; height: 10%;
+		border-radius: 50%;
+		background: #aaa;
+		margin: auto;
+		z-index: 10;
+	}
+	.hour {
+		width: 100px; height: 10px;
+		background: #fff;
+		transform-origin: 0% 100%;
+
+		animation: rotate 43200s linear infinite;
+	}
+	.minute {
+		width: 110px; height: 8px;
+		background: #ddd;
+		transform-origin: 0% 100%;
+
+		animation: rotate 3600s linear infinite;
+	}
+	.second {
+		width: 130px; height: 4px;
+		background: #f00;
+		//margin-left: 40%;
+		transform-origin: 0% 100%;
+
+		animation: rotate 60s linear infinite;
+	}
+
+	@keyframes rotate {
+		0% {
+			transform: rotate(0deg);
+		}
+		100% {
+			transform: rotate(360deg);
+		}
+	}
+	</style>
+</head>
+<body>
+	<div class="clock_body">
+		<div class="pointer">
+			<div class="circle"></div>
+			<div class="hour"></div>
+			<div class="minute"></div>
+			<div class="second"></div>
+		</div>
+		<div class="clock_num">
+			<span class="one">1</span>
+			<span class="two">2</span>
+			<span class="three">3</span>
+			<span class="four">4</span>
+			<span class="five">5</span>
+			<span class="six">6</span>
+			<span class="seven">7</span>
+			<span class="eight">8</span>
+			<span class="nine">9</span>
+			<span class="ten">10</span>
+			<span class="eleven">11</span>
+			<span class="twelve">12</span>
+		</div>
+	</div>
+
+	<script>
+		var time = new Date();
+
+		var hour = time.getHours();
+		console.log(hour)
+	</script>
+</body>
+</html>
