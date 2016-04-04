@@ -119,15 +119,19 @@
 			x = Math.round(Math.sin(angle) * BASE);
 			y = - Math.round(Math.cos(angle) * BASE);
 			num[i].style.transform = 'translate('+x+'px,'+y+'px)';
+			num[i].style.webkitTransform = 'translate('+x+'px,'+y+'px)';
 		}
 
-		document.getElementById('hour').style.transform = 'rotate('+hour+'deg)';
-		document.getElementById('minute').style.transform = 'rotate('+minute+'deg)';
-		document.getElementById('second').style.transform = 'rotate('+second+'deg)';
-
+		function addCurrentTime(config) {
+			for(id in config) {
+				document.getElementById(id).style.transform = 'rotate('+config[id]+'deg)';
+				document.getElementById(id).style.webkitTransform = 'rotate('+config[id]+'deg)';
+			}
+		}
 		function createRotateStyle(a, name) {
 			return '@keyframes '+name+' {0% {transform: rotate('+a+'deg); } 100% {transform: rotate('+(360+a)+'deg); }} @-webkit-keyframes '+name+' {0% {transform: rotate('+a+'deg); } 100% {transform: rotate('+(360+a)+'deg); }}';
 		}
+		addCurrentTime({hour: hour, minute: minute, second: second});
 		document.getElementById('rotate_style').innerHTML = createRotateStyle(hour, 'rotate_h') + createRotateStyle(minute, 'rotate_m') + createRotateStyle(second, 'rotate_s');
 	})()
 	</script>
