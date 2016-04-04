@@ -129,7 +129,7 @@
 			}
 		}
 		function createRotateStyle(a, name) {
-			return '@keyframes '+name+' {0% {transform: rotate('+a+'deg); } 100% {transform: rotate('+(360+a)+'deg); }} @-webkit-keyframes '+name+' {0% {transform: rotate('+a+'deg); } 100% {transform: rotate('+(360+a)+'deg); }}';
+			return '@keyframes '+name+' {0% {transform: rotate('+a+'deg); } 100% {transform: rotate('+(360+a)+'deg); }} @-webkit-keyframes '+name+' {0% {-webkit-transform: rotate('+a+'deg); } 100% {-webkit-transform: rotate('+(360+a)+'deg); }}';
 		}
 		addCurrentTime({hour: hour, minute: minute, second: second});
 		document.getElementById('rotate_style').innerHTML = createRotateStyle(hour, 'rotate_h') + createRotateStyle(minute, 'rotate_m') + createRotateStyle(second, 'rotate_s');
