@@ -73,8 +73,39 @@
 		-webkit-animation: rotate_s 60s linear infinite;
 	}
 
+	@-webkit-keyframes a {
+		0% {
+			-webkit-transform: rotate(0deg);
+		}
+		100% {
+			-webkit-transform: rotate(360deg);
+		}
+	}
+
 	</style>
-	<style id="rotate_style"></style>
+
+	<script>
+
+	;(function() {
+
+		var rotateStyle = document.createElement('style');
+			rotateStyle.setAttribute('id', 'rotate_style');
+			document.getElementsByTagName('head')[0].appendChild(rotateStyle);
+
+		var time = new Date();
+
+		var hour = (time.getHours() > 12 ? time.getHours() - 12 : time.getHours())/12*360 + time.getMinutes()/60*30,
+			minute = time.getMinutes()/60*360,
+			second = time.getSeconds()/60*360;
+
+		function createRotateStyle(a, name) {
+			return '@keyframes '+name+' {0% {transform: rotate('+a+'deg); } 100% {transform: rotate('+(360+a)+'deg); }} @-webkit-keyframes '+name+' {0% {-webkit-transform: rotate('+a+'deg); } 100% {-webkit-transform: rotate('+(360+a)+'deg); }}';
+		}
+		rotateStyle.innerHTML = createRotateStyle(hour, 'rotate_h') + createRotateStyle(minute, 'rotate_m') + createRotateStyle(second, 'rotate_s');
+	})()
+		
+	</script>
+
 	</head>
 <body>
 	<div class="clock_body">
@@ -101,39 +132,21 @@
 	</div>
 
 	<script>
+		;(function() {
+			var clockNum = document.getElementById('clock_num');
 
-	(function() {
+			var num = clockNum.getElementsByTagName('span'),
+				BASE = 127, angle, x, y;
 
-		var time = new Date();
-		var clockNum = document.getElementById('clock_num');
-
-		var hour = (time.getHours() > 12 ? time.getHours() - 12 : time.getHours())/12*360,
-			minute = time.getMinutes()/60*360,
-			second = time.getSeconds()/60*360;
-
-		var num = clockNum.getElementsByTagName('span'),
-			BASE = 127, angle, x, y;
-
-		for(var i=0; i<num.length; i++) {
-			angle = parseInt(num[i].innerHTML)/12 * 2 * Math.PI;
-			x = Math.round(Math.sin(angle) * BASE);
-			y = - Math.round(Math.cos(angle) * BASE);
-			num[i].style.transform = 'translate('+x+'px,'+y+'px)';
-			num[i].style.webkitTransform = 'translate('+x+'px,'+y+'px)';
-		}
-
-		function addCurrentTime(config) {
-			for(id in config) {
-				document.getElementById(id).style.transform = 'rotate('+config[id]+'deg)';
-				document.getElementById(id).style.webkitTransform = 'rotate('+config[id]+'deg)';
+			for(var i=0; i<num.length; i++) {
+				angle = parseInt(num[i].innerHTML)/12 * 2 * Math.PI;
+				x = Math.round(Math.sin(angle) * BASE);
+				y = - Math.round(Math.cos(angle) * BASE);
+				num[i].style.transform = 'translate('+x+'px,'+y+'px)';
+				num[i].style.webkitTransform = 'translate('+x+'px,'+y+'px)';
 			}
-		}
-		function createRotateStyle(a, name) {
-			return '@keyframes '+name+' {0% {transform: rotate('+a+'deg); } 100% {transform: rotate('+(360+a)+'deg); }} @-webkit-keyframes '+name+' {0% {-webkit-transform: rotate('+a+'deg); } 100% {-webkit-transform: rotate('+(360+a)+'deg); }}';
-		}
-		addCurrentTime({hour: hour, minute: minute, second: second});
-		document.getElementById('rotate_style').innerHTML = createRotateStyle(hour, 'rotate_h') + createRotateStyle(minute, 'rotate_m') + createRotateStyle(second, 'rotate_s');
-	})()
+		})()
 	</script>
+
 </body>
 </html>
