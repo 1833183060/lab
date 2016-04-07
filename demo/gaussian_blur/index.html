@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Gaussian Blur</title>
+</head>
+<body>
+	<canvas id="mycanvas"></canvas>
+
+	<script>
+		window.onload = function() {
+			loadImg('1.jpg', launch, 5);
+		}
+
+		function loadImg(src, callback, radius) {
+			var img = new Image();
+				img.src = src;
+				img.onload = function() {
+					callback.call(img, radius);
+				}
+		}
+
+		function launch(radius) {
+
+			var img = this,
+				imgWidth = img.width,
+				imgHeight = img.height;
+
+			var canvas = document.getElementById('mycanvas');
+				canvas.width = imgWidth;
+				canvas.height = imgHeight;
+				canvasCtx = canvas.getContext('2d');
+				canvasCtx.drawImage(img, 0, 0, imgWidth, imgHeight);
+
+			var imgData = canvasCtx.getImageData(0, 0, imgWidth, imgHeight),
+				imgPixel = imgData.data;
+
+			var newImgPixel = [],
+				current,
+				temp = [],
+				temp2 = 0,
+				temp3,
+				newValue = 0,
+				b_row = 0;
+
+			for(var i=0; i<imgPixel.length; i++) {
+
+				for(var a = -radius; a<=radius; a++) {
+					if(imgPixel[i + a*imgWidth*4]) {
+						for(var b = -radius; b<=radius; b++) {
+							current = imgPixel[i + 4*(a*imgWidth + b)];
+							b_row = b*4 + (Math.floor(i/4)%(imgWidth) + 1);
+							//console.log(b_row)
+							if(current && b_row >= 0 && b_row <= imgWidth ) {
+								temp3 = gaussian(b, a, radius).toFixed(6);
+								temp2 += parseFloat(temp3);
+								temp.push(temp3, current);
+								//console.log(current + ' ' + b + ', ' +a + ' ' +(i + 4*(a*imgWidth + b)) + ' ' + temp);
+							}
+						}
+					}
+				}
+				console.log(temp2)
+				for(var c=0; c<temp.length; c += 2) {
+					newValue += (temp[c] * temp[c+1] / temp2);
+				}
+
+				imgPixel[i] = (Math.round(newValue));
+
+				temp = [];
+				newValue = 0;
+				temp2 = 0;
+				temp3 = 0;
+			}
+
+			imgData.data = imgPixel;
+			canvasCtx.putImageData(imgData, 0, 0);
+
+			console.log(imgData.data);
+			console.log(newImgPixel);
+
+		}
+
+		function gaussian(x, y, o) {
+			var x2 = Math.pow(x, 2),
+				y2 = Math.pow(y, 2),
+				o2 = Math.pow(o, 2);
+
+			return Math.exp(-(x2 + y2) / 2 * o2) / (2 * Math.PI * o2);
+		}
+	</script>
+</body>
+</html>
