@@ -181,3 +181,7 @@ $('#play_btn').click(function() {
 	$('#siteinfo').height($('body').height() - $('#footer_bottom').height() - parseInt($('#siteinfo').css('border-top'))*3);
 
 })();
+
+$(window).resize(function() {
+	$('#siteinfo').height($('body').height() - $('#footer_bottom').height() - parseInt($('#siteinfo').css('border-top'))*3);
+});
