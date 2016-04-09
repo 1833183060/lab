@@ -52,26 +52,29 @@
 
 			for(var i=0; i<imgPixel.length; i++) {
 
-				for(var a = -radius; a<=radius; a++) {
-					if(imgPixel[i + a*imgWidth*4]) {
-						for(var b = -radius; b<=radius; b++) {
-							current = imgPixel[i + 4*(a*imgWidth + b)];
-							b_row = b*4 + (Math.floor(i/4)%(imgWidth) + 1);
+				if((i+1) % 4 != 0) {
 
-							if(current && b_row >= 0 && b_row <= imgWidth ) {
-								temp3 = gaussian(b, a, radius).toFixed(6);
-								temp2 += parseFloat(temp3);
-								temp.push(temp3, current);
+					for(var a = -radius; a<=radius; a++) {
+						if(imgPixel[i + a*imgWidth*4]) {
+							for(var b = -radius; b<=radius; b++) {
+								current = imgPixel[i + 4*(a*imgWidth + b)];
+								b_row = b*4 + (Math.floor(i/4)%(imgWidth) + 1);
+
+								if(current && b_row >= 0 && b_row <= imgWidth ) {
+									temp3 = gaussian(b, a, radius).toFixed(6);
+									temp2 += parseFloat(temp3);
+									temp.push(temp3, current);
+								}
 							}
 						}
 					}
+					for(var c=0; c<temp.length; c += 2) {
+						newValue += (temp[c] * temp[c+1] / temp2);
+					}
+
+					imgPixel[i] = (Math.round(newValue));
 				}
 
-				for(var c=0; c<temp.length; c += 2) {
-					newValue += (temp[c] * temp[c+1] / temp2);
-				}
-
-				imgPixel[i] = (Math.round(newValue));
 
 				temp = [];
 				newValue = 0;
@@ -81,9 +84,6 @@
 
 			imgData.data = imgPixel;
 			canvasCtx.putImageData(imgData, 0, 0);
-
-			console.log(imgData.data);
-			console.log(newImgPixel);
 
 		}
 
