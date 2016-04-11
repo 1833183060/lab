@@ -170,6 +170,7 @@ $('#register_btn, #register_switch').click(function() {
 	lrAction.loginBgShow();
 	lrAction.registerFormShow();
 	
+	logoAction.showW();
 	return false;
 });
 $('.login_area_header .close, .submit_btn').click(function() {
@@ -190,3 +191,28 @@ $('.login_area_header .close, .submit_btn').click(function() {
 $(window).resize(function() {
 	$('#siteinfo').height($('body').height() - $('#footer_bottom').height() - parseInt($('#siteinfo').css('border-top'))*3);
 });
+
+(function() {
+	var colorList = [
+		'#ff5100',
+		'#ff9200',
+		'#ffff00',
+		'#5cff00',
+		'#00ffef',
+		'#00d2ff',
+		'#0067ff',
+		'#0021ff',
+		'#8900ff',
+		'#e200ff',
+		'#ff006e',
+		'#ff0000'
+	]
+	var zero = document.getElementById('zero');
+	var moveTimer;
+	$(document).mousemove(function(e){
+		clearTimeout(moveTimer);
+		moveTimer = setTimeout(function() {
+			zero.style.fill = colorList[Math.floor(Math.random()*colorList.length)];
+		}, 500);
+	});
+})()
