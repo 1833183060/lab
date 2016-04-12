@@ -186,11 +186,11 @@ $('.login_area_header .close, .submit_btn').click(function() {
 
 	$('#siteinfo').height($('body').height() - $('#footer_bottom').height() - parseInt($('#siteinfo').css('border-top'))*3);
 
+	$(window).resize(function() {
+		$('#siteinfo').height($('body').height() - $('#footer_bottom').height() - parseInt($('#siteinfo').css('border-top'))*3);
+	});
 })();
 
-$(window).resize(function() {
-	$('#siteinfo').height($('body').height() - $('#footer_bottom').height() - parseInt($('#siteinfo').css('border-top'))*3);
-});
 
 (function() {
 	var colorList = [
@@ -209,10 +209,28 @@ $(window).resize(function() {
 	]
 	var zero = document.getElementById('zero');
 	var moveTimer;
+	var b, c;
+	
+	isStop(300);
 	$(document).mousemove(function(e){
+		b = e.pageX;
+	});	
+
+	function changeColor() {
 		clearTimeout(moveTimer);
 		moveTimer = setTimeout(function() {
 			zero.style.fill = colorList[Math.floor(Math.random()*colorList.length)];
-		}, 500);
-	});
+			changeColor();
+		}, 1000);
+	}
+	
+	function isStop(time) {
+		c = b;
+		setTimeout(function() {
+			if(c == b) {
+				changeColor()
+			}
+			isStop(time);
+		}, time)
+	}
 })()

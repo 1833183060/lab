@@ -205,9 +205,19 @@ header .other {
 	position: absolute;
 	right: 6%; top: 0;
 }
-.main .other_info p {
-	text-decoration: underline;
+.main .other_info img {
+	margin-top: 25px;
+	margin-bottom: 20px;
+	/*border-bottom: 1px solid #444;*/
+	padding-bottom: 4px;
 }
+.main .other_info p {
+	margin-bottom: 13px;
+	border-bottom: 1px solid #444;
+	display: inline-block;
+	font-size: 16px;
+}
+
 /**** footer ****/
 footer {
 	position: absolute;
@@ -546,6 +556,17 @@ footer .other_info .part a {
 }
 .siteinfo_content .about_xiangsu p {
 	margin: 20px 0;
+	line-height: 26px;
+}
+.siteinfo_content .about_xiangsu p:last-child {
+	margin-top: -20px;
+}
+.siteinfo_content .contact_us h2 {
+	margin-top: 30px;
+	margin-bottom: 0;
+}
+.siteinfo_content .contact_us p {
+	line-height: 20px;
 }
 .siteinfo_content .siteinfo_words {
 	width: 500px;
@@ -1117,6 +1138,18 @@ footer .other_info .part a {
 	.sidebar_content {
 		width: 64%;
 	}
+	.main .other_info img {
+		margin-top: 25px;
+		border-bottom: 1px solid #444;
+		padding-bottom: 4px;
+		margin-bottom: 5px;
+	}
+	.main .other_info p {
+		margin: 7px 0;
+		border-bottom: 1px solid #444;
+		display: inline-block;
+		font-size: 16px;
+	}
 }
 @media screen and (max-width: 540px) {
 	.zero_area {
@@ -1140,7 +1173,7 @@ footer .other_info .part a {
 	}
 	.main .other_info {
 		right: 3%;
-		margin-top: 6%;
+		margin-top: 4.6%;
 	}
 	.main_info_area {
 		width: 100%;
