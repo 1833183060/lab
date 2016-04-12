@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Zero</title>
+</head>
+<body>
+	<p>Please move your mouse and you can see the zero's color changed per 1 second.</p>
+	<?xml version="1.0" encoding="utf-8"?>
+	<!-- Generator: Adobe Illustrator 17.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+	<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+	<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+		 width="448.596px" height="649.438px" viewBox="0 0 448.596 649.438" enable-background="new 0 0 448.596 649.438"
+		 xml:space="preserve">
+	<path  id="zero" class="zero" fill-rule="evenodd" clip-rule="evenodd" fill="#FFFF00" d="M332.328,324.719c0,80.955,10.07,220.377-108.03,220.377
+		S116.269,405.674,116.269,324.719c0-80.955-10.071-220.377,108.029-220.377S332.328,243.764,332.328,324.719z M448.596,324.719
+		c0-102.543-10.07-206.885-75.986-268.95C339.652,24.286,292.961,0,224.298,0C155.635,0,108.945,24.286,75.987,55.769
+		C10.071,117.834,0,222.176,0,324.719s10.071,206.885,75.987,268.95c32.958,31.482,79.648,55.769,148.311,55.769
+		c68.663,0,115.354-24.286,148.312-55.769C438.526,531.603,448.596,427.262,448.596,324.719z"/>
+	</svg>	
+
+	<script>
+	;(function() {
+		var colorList = [
+			'#ff5100',
+			'#ff9200',
+			'#ffff00',
+			'#5cff00',
+			'#00ffef',
+			'#00d2ff',
+			'#0067ff',
+			'#0021ff',
+			'#8900ff',
+			'#e200ff',
+			'#ff006e',
+			'#ff0000'
+		]
+		var zero = document.getElementById('zero'),
+			body = document.getElementsByTagName('body')[0];
+		var moveTimer; //储存计时器
+		var b, c; //鼠标坐标X值以及X值的备份
+		
+		isStop(300);
+
+		body.onmousemove = function(event) {
+			var e = event || window.event;
+			b = e.clientX; //获取当前鼠标坐标的X值
+		}
+
+
+		function changeColor() {
+			clearTimeout(moveTimer); //清除定时器。这里的逻辑是，每隔一小段时间检测一次鼠标坐标用以判断鼠标是否静止，如果鼠标静止，则执行changeColor函数。由于isStop中的time小于1s（这个定时器的间隔时间），所以会使这个定时器还未执行时就被清除掉，即不会导致变色。由此不断重复，直到检测出鼠标移动状态，停止执行changeColor函数，则moveTimer定时器不会被清除，此时便可以出现变色效果。这里需要注意的是isStop中的定时器间隔时间必须小于changeColor中的定时器间隔时间。
+			moveTimer = setTimeout(function() { //设置定时器，每隔1s改变一次颜色
+				zero.style.fill = colorList[Math.floor(Math.random()*colorList.length)]; 
+				changeColor();
+			}, 1000);
+		}
+		
+		function isStop(time) { //检测鼠标是否停止移动
+			c = b; //储存当前鼠标坐标X值
+			setTimeout(function() { //设置定时器，每隔time检测一次前后鼠标坐标的X值是否相等，如果相等（鼠标状态为静止），则执行changeColor函数
+				if(c == b) {
+					changeColor()
+				}
+				isStop(time);
+			}, time)
+		}
+	})()
+	</script>
+</body>
+</html>
