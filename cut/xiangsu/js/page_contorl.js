@@ -2,6 +2,8 @@ var lrAction = {
 		loginBgShow: function() {
 			$('#login_area_container').show().removeClass('login_bg_hiding').addClass('login_bg_showing');
 			$('.login_area').show().removeClass('to_zero').addClass('to_one');
+			
+			logoAction.showW();
 		},
 		loginBgHide: function() {
 			$('#login_area_container').removeClass('login_bg_showing').addClass('login_bg_hiding');
@@ -25,6 +27,8 @@ var lrAction = {
 		closeForm: function() {
 			$('.login_area').removeClass('to_one').addClass('to_zero');
 			this.loginBgHide();
+
+			logoAction.showB();
 		}
 	},
 	sbAction = {
@@ -33,6 +37,8 @@ var lrAction = {
 			$('#sidebar_container').show().removeClass('sidebar_container_hiding').addClass('sidebar_container_showing');
 			$('#nav_content').removeClass('nav_content_hiding').addClass('nav_content_showing');
 			i.closeShow($('#siteinfo_close'));
+
+			logoAction.showW();
 		},
 		sidebarHide: function() {
 			$('#sidebar_container').removeClass('sidebar_container_showing').addClass('sidebar_container_hiding');
@@ -65,6 +71,8 @@ var lrAction = {
 			this.wordsHide('1');this.wordsHide('2');this.wordsHide('3');
 			i.delayHide(370, [$('.siteinfo_words')]);
 			i.delayHide(570, objArr);
+
+			logoAction.showB();
 		},
 	},
 	ssAction = {
@@ -139,7 +147,7 @@ $('#close_site_show').click(function() {
 //site info
 $('#logo_area').click(function() {
 	sbAction.sidebarShow();
-	logoAction.showW();
+	
 });
 $('#nav_content a').click(function() {
 	if($(this).attr('data-index') != '0') {
@@ -151,7 +159,7 @@ $('#nav_content a').click(function() {
 $('#siteinfo_close').click(function() {
 	sbAction.close();
 	i.closeHide($(this));
-	logoAction.showB();
+	
 });
 
 //login && register
@@ -161,7 +169,6 @@ $('#login_btn, #login_switch').click(function() {
 	lrAction.loginBgShow();
 	lrAction.loginFormShow();
 
-	logoAction.showW();
 	return false;
 });
 $('#register_btn, #register_switch').click(function() {
@@ -170,14 +177,12 @@ $('#register_btn, #register_switch').click(function() {
 	lrAction.loginBgShow();
 	lrAction.registerFormShow();
 	
-	logoAction.showW();
 	return false;
 });
 $('.login_area_header .close, .submit_btn').click(function() {
 	var objArr = [$('#login_area_container'), $('.login_area')];
 	lrAction.closeForm();
 	i.delayHide(370, objArr);
-	logoAction.showB();
 });
 
 
@@ -223,7 +228,7 @@ $('.login_area_header .close, .submit_btn').click(function() {
 			changeColor();
 		}, 1000);
 	}
-	
+
 	function isStop(time) {
 		c = b;
 		setTimeout(function() {
