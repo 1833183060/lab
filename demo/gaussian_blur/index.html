@@ -40,49 +40,50 @@
 				canvasCtx.drawImage(img, 0, 0, imgWidth, imgHeight);
 
 			var imgData = canvasCtx.getImageData(0, 0, imgWidth, imgHeight),
-				imgPixel = imgData.data;
+				imgPixel = imgData.data,
+				newImgPixel = imgPixel;
 
-			var newImgPixel = [],
-				current,
-				temp = [],
-				temp2 = 0,
-				temp3,
-				newValue = 0,
-				b_row = 0;
+			var current,
+				newValue = [0,0,0],
+				b_row = 0,
+				weight = [],
+				weightSum = 0,
+				temp;
 
-			for(var i=0; i<imgPixel.length; i++) {
+			for(var i=-radius; i<=radius; i++) {
+				weight[i+radius] = [];
+				for(var j=-radius; j<=radius; j++) {
+					weight[i+radius][j+radius] = parseFloat(gaussian(i, j, radius).toFixed(6));
+				}
+			}
 
-				if((i+1) % 4 != 0) {
+			for(i=0; i<imgPixel.length; i+=4) {
 
-					for(var a = -radius; a<=radius; a++) {
-						if(imgPixel[i + a*imgWidth*4]) {
-							for(var b = -radius; b<=radius; b++) {
-								current = imgPixel[i + 4*(a*imgWidth + b)];
-								b_row = b*4 + (Math.floor(i/4)%(imgWidth) + 1);
+				for(var a = -radius; a<=radius; a++) {
 
-								if(current && b_row >= 0 && b_row <= imgWidth ) {
-									temp3 = gaussian(b, a, radius).toFixed(6);
-									temp2 += parseFloat(temp3);
-									temp.push(temp3, current);
-								}
+					if(imgPixel[i + a*imgWidth*4]) {
+						for(var b = -radius; b<=radius; b++) {
+							current = i + 4*(a*imgWidth + b);
+							b_row = b*4 + (Math.floor(i/4)%(imgWidth) + 1);
+
+							if(imgPixel[current] && b_row >= 0 && b_row <= imgWidth ) {
+								temp = weight[a+radius][b+radius];
+								newValue[0] += imgPixel[current] * temp;
+								newValue[1] += imgPixel[current+1] * temp;
+								newValue[2] += imgPixel[current+2] * temp;
+								weightSum += temp;
 							}
 						}
 					}
-					for(var c=0; c<temp.length; c += 2) {
-						newValue += (temp[c] * temp[c+1] / temp2);
-					}
-
-					imgPixel[i] = (Math.round(newValue));
 				}
-
-
-				temp = [];
-				newValue = 0;
-				temp2 = 0;
-				temp3 = 0;
+				for(j=0; j<newValue.length; j++) {
+					newImgPixel[i+j] = (Math.round(newValue[j] / weightSum));
+				}
+				newValue = [0,0,0];
+				weightSum = 0;
 			}
 
-			imgData.data = imgPixel;
+			imgData.data = newImgPixel;
 			canvasCtx.putImageData(imgData, 0, 0);
 
 		}
