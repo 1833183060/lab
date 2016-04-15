@@ -14,7 +14,7 @@ this.onmessage = function(event) {
 
 function launch(data) {
 	var radius = data.radius,
-		imgPixel = data.imgPixel,
+		imgPixel = data.imgPixel, //data.imgData.data, //<-slower 
 		imgWidth = data.imgWidth;
 
 	var current,

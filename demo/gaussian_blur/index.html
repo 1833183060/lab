@@ -10,7 +10,7 @@
 	<script>
 		window.onload = function() {
 			
-			loadImg('2.jpg', init, 5);
+			loadImg('3.jpg', init, 5);
 
 
 		}
@@ -60,8 +60,10 @@
 				var edge = radius;
 				
 				var imgData = canvasCtx.getImageData(0, imgHeight/workersNum*i-radius, imgWidth, imgHeight/workersNum+radius*2),
-					//imgData = canvasCtx.getImageData(0, 0, imgWidth, imgHeight/workersNum+radius*2)
+					//imgData = canvasCtx.getImageData(0, 0, imgWidth, imgHeight/workersNum+radius*2), //<-slower I don't know why it can be such f*cing slow.
 					imgPixel = imgData.data;
+
+					console.log(imgPixel.length)
 
 					worker.postMessage({
 						imgPixel: imgPixel,
