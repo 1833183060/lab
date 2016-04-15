@@ -10,7 +10,8 @@
 	<script>
 		window.onload = function() {
 			
-			loadImg('2.jpg', launch, 5);
+			loadImg('2.jpg', init, 5);
+
 
 		}
 
@@ -18,17 +19,12 @@
 			var img = new Image();
 				img.src = src;
 				img.onload = function() {
-					var startTime = +new Date();
-					callback.call(img, radius);
-					
-					var endTime = +new Date();
 
-		    		console.log(" 渲染时间：" + (endTime - startTime) + "ms");
+					callback.call(img, radius);
 				}
 		}
 
-		function launch(radius) {
-
+		function init(radius) {
 			var img = this,
 				imgWidth = img.width,
 				imgHeight = img.height;
@@ -39,62 +35,45 @@
 				canvasCtx = canvas.getContext('2d');
 				canvasCtx.drawImage(img, 0, 0, imgWidth, imgHeight);
 
-			var imgData = canvasCtx.getImageData(0, 0, imgWidth, imgHeight),
-				imgPixel = imgData.data,
-				newImgPixel = imgPixel;
+			var finished = 0,
+				startTime = new Date();
 
-			var current,
-				newValue = [0,0,0],
-				b_row = 0,
-				weight = [],
-				weightSum = 0,
-				temp;
+			var workersNum = 1,
+				onWorkerEnded = function(e) {
 
-			for(var i=-radius; i<=radius; i++) {
-				weight[i+radius] = [];
-				for(var j=-radius; j<=radius; j++) {
-					weight[i+radius][j+radius] = parseFloat(gaussian(i, j, radius).toFixed(6));
-				}
-			}
+					canvasCtx.putImageData(e.data.imgData, 0, imgHeight/workersNum*e.data.i, 0, radius, imgWidth, imgHeight/workersNum);
 
-			for(i=0; i<imgPixel.length; i+=4) {
+					finished++;
 
-				for(var a = -radius; a<=radius; a++) {
+					if(finished == workersNum) {
 
-					if(imgPixel[i + a*imgWidth*4]) {
-						for(var b = -radius; b<=radius; b++) {
-							current = i + 4*(a*imgWidth + b);
-							b_row = b*4 + (Math.floor(i/4)%(imgWidth) + 1);
-
-							if(imgPixel[current] && b_row >= 0 && b_row <= imgWidth ) {
-								temp = weight[a+radius][b+radius];
-								newValue[0] += imgPixel[current] * temp;
-								newValue[1] += imgPixel[current+1] * temp;
-								newValue[2] += imgPixel[current+2] * temp;
-								weightSum += temp;
-							}
-						}
+						var endTime = new Date();
+						console.log(" 总渲染时间：" + (endTime - startTime) + "ms");
 					}
-				}
-				for(j=0; j<newValue.length; j++) {
-					newImgPixel[i+j] = (Math.round(newValue[j] / weightSum));
-				}
-				newValue = [0,0,0];
-				weightSum = 0;
+				};
+
+			for(var i=0; i<workersNum; i++) {
+
+				var worker = new Worker('main.js');
+					worker.onmessage = onWorkerEnded;
+
+				var edge = radius;
+				
+				var imgData = canvasCtx.getImageData(0, imgHeight/workersNum*i-radius, imgWidth, imgHeight/workersNum+radius*2),
+					imgPixel = imgData.data;
+
+					worker.postMessage({
+						imgPixel: imgPixel,
+						radius: radius,
+						imgWidth: imgWidth,
+						imgData: imgData,
+						i: i
+					});
 			}
 
-			imgData.data = newImgPixel;
-			canvasCtx.putImageData(imgData, 0, 0);
-
 		}
 
-		function gaussian(x, y, o) {
-			var x2 = Math.pow(x, 2),
-				y2 = Math.pow(y, 2),
-				o2 = Math.pow(o, 2);
-
-			return Math.exp(-(x2 + y2) / (2 * o2)) / (2 * Math.PI * o2);
-		}
+		
 
 	</script>
 </body>
