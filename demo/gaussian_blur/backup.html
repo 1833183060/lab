@@ -56,15 +56,20 @@
 					weight[i+radius][j+radius] = parseFloat(gaussian(i, j, radius).toFixed(6));
 				}
 			}
+			var l = 0;
 
 			for(i=0; i<imgPixel.length; i+=4) {
 
 				for(var a = -radius; a<=radius; a++) {
 
-					if(imgPixel[i + a*imgWidth*4]) {
+					if(i + a*imgWidth*4 < 0) continue;
+
+					//if(imgPixel[i + a*imgWidth*4]) {
 						for(var b = -radius; b<=radius; b++) {
 							current = i + 4*(a*imgWidth + b);
 							b_row = b*4 + (Math.floor(i/4)%(imgWidth) + 1);
+
+							if (current<0) continue;
 
 							if(imgPixel[current] && b_row >= 0 && b_row <= imgWidth ) {
 								temp = weight[a+radius][b+radius];
@@ -74,7 +79,7 @@
 								weightSum += temp;
 							}
 						}
-					}
+					//}
 				}
 				for(j=0; j<newValue.length; j++) {
 					newImgPixel[i+j] = (Math.round(newValue[j] / weightSum));
@@ -83,7 +88,6 @@
 				weightSum = 0;
 			}
 
-			imgData.data = newImgPixel;
 			canvasCtx.putImageData(imgData, 0, 0);
 
 		}
