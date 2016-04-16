@@ -30,17 +30,29 @@ function launch(data) {
 			weight[i+radius][j+radius] = parseFloat(gaussian(i, j, radius).toFixed(6));
 		}
 	}
-
+	var k = 0,
+		l = 0;
 	for(i=0; i<imgPixel.length; i+=4) {
 
 		for(var a = -radius; a<=radius; a++) {
-
+			if(i+a*imgWidth*4<0) {
+				// l++;
+				continue;
+			}
 			if(imgPixel[i + a*imgWidth*4]) {
+				// console.log(imgPixel[i + a*imgWidth*4])
 				for(var b = -radius; b<=radius; b++) {
 					current = i + 4*(a*imgWidth + b);
 					b_row = b*4 + (Math.floor(i/4)%(imgWidth) + 1);
-
+					if (current<0) {
+						k++;	
+						continue;
+					}
 					if(imgPixel[current] && b_row >= 0 && b_row <= imgWidth ) {
+
+						//if(imgPixel[current] == undefined)
+							//console.log(imgPixel[current])
+						l++;
 						temp = weight[a+radius][b+radius];
 						newValue[0] += imgPixel[current] * temp;
 						newValue[1] += imgPixel[current+1] * temp;
@@ -56,7 +68,8 @@ function launch(data) {
 		newValue = [0,0,0];
 		weightSum = 0;
 	}
-
+	console.log(l)
+	console.log(k)
 	return data.imgData;
 
 }

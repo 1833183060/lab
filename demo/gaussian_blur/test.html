@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+
+	<script>
+		var arr = [0],
+			start = new Date(),
+			j = 100000
+
+		for(var i=-j; i<0; i++) {
+			if(arr[i]) {
+				console.log(i);
+			}
+		}
+		console.log(j);
+		console.log(new Date() - start + 'ms');
+	</script>
+
+</body>
+</html>

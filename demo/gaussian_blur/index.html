@@ -10,7 +10,7 @@
 	<script>
 		window.onload = function() {
 			
-			loadImg('3.jpg', init, 5);
+			loadImg('2.jpg', init, 5);
 
 
 		}
@@ -38,7 +38,7 @@
 			var finished = 0,
 				startTime = new Date();
 
-			var workersNum = 1,
+			var workersNum = 2,
 				onWorkerEnded = function(e) {
 
 					canvasCtx.putImageData(e.data.imgData, 0, imgHeight/workersNum*e.data.i, 0, radius, imgWidth, imgHeight/workersNum);
@@ -56,11 +56,9 @@
 
 				var worker = new Worker('main.js');
 					worker.onmessage = onWorkerEnded;
-
-				var edge = radius;
 				
 				var imgData = canvasCtx.getImageData(0, imgHeight/workersNum*i-radius, imgWidth, imgHeight/workersNum+radius*2),
-					//imgData = canvasCtx.getImageData(0, 0, imgWidth, imgHeight/workersNum+radius*2), //<-slower I don't know why it can be such f*cing slow.
+					//imgData = canvasCtx.getImageData(0, 0, imgWidth, imgHeight/workersNum+radius*2), //<-slower I don't know why it can be such f*cking slow.
 					imgPixel = imgData.data;
 
 					console.log(imgPixel.length)
