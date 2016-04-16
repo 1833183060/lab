@@ -1,0 +1,154 @@
+html, body {
+	margin: 0 auto;
+	font-family: "微软雅黑 Light";
+}
+html {
+	font-size: 10px;
+}
+body {
+	padding: 20px;
+}
+input, button ,textarea {
+	font-family: "微软雅黑 Light";
+}
+a {
+	text-decoration: none;
+}
+.clear {
+	clear: both;
+}
+
+/**** index ****/
+header {
+	margin-bottom: 10px;
+	overflow: hidden;
+	position: relative;
+
+	.user_info {
+		float: left;	
+		overflow: hidden;
+		display: table;
+
+		.user_avatar {
+			width: 45px; 
+			float: left;
+			margin-right: 7px;
+		}
+
+		.word_info {
+			//float: left;
+			display: table-cell;
+			vertical-align: middle;
+
+			.user_name {
+				font-size: 14px;
+				margin: 0;
+			}
+			.user_desc {
+				margin: 0;
+				margin-top: 5px;
+				font-size: 12px;
+			}
+		}
+	}
+	.user_nav {
+		float: right;
+		position: absolute;
+		bottom: 0;
+		right: 0;
+		margin-bottom: 6px;
+		font-size: 12px; 
+
+		a {
+			margin: 0 5px;
+		}
+	}
+}
+
+
+/** viewpager **/
+.vp_item {
+	text-shadow: 1px 1px 0 #aaa;
+}
+.vp_body,
+.vp_item,
+.vp_words,
+.vp_words_show,
+.vp_item_btn_group {
+	margin: 0 auto;
+	text-align: center;
+	width: 100%;
+	overflow: hidden;
+}
+.vp_body {
+	background: #ccc;
+	position: relative;
+	height: 500px;
+}
+.vp_item {
+	display: none;
+	position: absolute;
+}
+.vp_words {
+	position: absolute;
+	//z-index: 10;
+	top: 300px;
+	background: rgba(255,255,255,0.5);
+}
+.vp_img {
+	max-width: 100%;
+	min-height: 500px;
+}
+.vp_item_btn_group {
+	position: absolute;
+	bottom: 0;
+	margin-bottom: 20px;
+}
+.vp_item_btn {
+	display: inline-block;
+	width: 11px; height: 11px;
+	border-radius: 11px;
+	border: 1px solid #fff;
+	margin: 0 3px;
+}
+.vp_item_btn_group .active {
+	background: #fff;
+}
+.vp_btn_group svg {
+	background: transparent;
+}
+.vp_btn_group polyline {
+	fill: transparent;
+	stroke:rgba(255,255,255,0.8);
+	stroke-width:2
+}
+.vp_pre,
+.vp_next {
+	position: absolute;
+	height: 100%; width: 100px;
+	z-index: 10;
+	background: transparent;
+	border: none;
+	cursor: pointer;
+	//transition: all 0.4s;
+}
+.vp_pre:focus,
+.vp_next:focus {
+	outline: none;
+}
+.vp_pre:hover {
+	background-image: -moz-linear-gradient(left, rgba(255,255,255,1), rgba(255,255,255,0)); /* Firefox */
+	background-image: -webkit-gradient(linear, left bottom, right bottom, color-stop(0, rgba(255,255,255,1)), color-stop(1, rgba(255,255,255,0))); /* Saf4+, Chrome */
+}
+.vp_next:hover {
+	background-image: -moz-linear-gradient(right, rgba(255,255,255,1), rgba(255,255,255,0)); /* Firefox */
+	background-image: -webkit-gradient(linear, right bottom, left bottom, color-stop(0, rgba(255,255,255,1)), color-stop(1, rgba(255,255,255,0))); /* Saf4+, Chrome */
+}
+.vp_pre {
+	left: 0;
+	padding-left: 20px;
+}
+.vp_next {
+	right: 0;
+	padding-right: 20px;
+}
