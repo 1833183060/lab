@@ -10,8 +10,11 @@ var lrAction = {
 		},
 		loginFormShow: function() {
 			var callback = "$('#login_area_form').show().removeClass('to_zero').addClass('to_one')";
+			//this.hidden('.login_area_form');
 			this.registerFormHide();
-			i.delayHide(370, [$('#register_area_form')], callback);
+			this.forgetHide();
+			this.hidden('#change_pwd');
+			i.delayHide(350, [$('.login_area_form')], callback);
 		},
 		loginFormHide: function() {
 			$('#login_area_form').removeClass('to_one').addClass('to_zero');
@@ -19,10 +22,51 @@ var lrAction = {
 		registerFormShow: function() {
 			var callback = "$('#register_area_form').show().removeClass('to_zero').addClass('to_one')";
 			this.loginFormHide();
-			i.delayHide(370, [$('#login_area_form')], callback);
+			this.forgetHide();
+			i.delayHide(370, [$('.login_area_form')], callback);
 		},
 		registerFormHide: function() {
 			$('#register_area_form').removeClass('to_one').addClass('to_zero');
+			$('#register1').show();
+			$('#register2').hide();
+			$('#register_area_form .hint2').removeClass('active');
+			$('#register_area_form .hint1').addClass('active');
+		},
+		register1Hide: function() {
+			$('#register1').removeClass('to_one').addClass('to_zero');
+			$('#register_area_form .hint1').removeClass('active');
+		},
+		register2Show: function() {
+			var callback = "$('#register2').show().removeClass('to_zero').addClass('to_one')";
+			i.delayHide(370, [$('#register1')], callback);
+			$('#register_area_form .hint2').addClass('active');
+		},
+		forgetHide: function() {
+			$('#forget_pwd').removeClass('to_one').addClass('to_zero');
+			$('#forget_pwd .hint1').addClass('active');
+			$('#forget_pwd .hint2').removeClass('active');
+			$('#get_code').show();
+			$('#write_code').hide();
+		},
+		forgetShow: function() {
+			var callback = "$('#forget_pwd').show().removeClass('to_zero').addClass('to_one')";
+			this.loginFormHide();
+			i.delayHide(370, [$('#login_area_form')], callback);
+		},
+		writecodeShow: function() {
+			var callback = "$('#write_code').show().removeClass('to_zero').addClass('to_one')";
+			this.hidden('#get_code');
+			i.delayHide(370, [$('#get_code')], callback);
+			$('#forget_pwd .hint2').addClass('active');
+			$('#forget_pwd .hint1').removeClass('active');
+		},
+		hidden: function(hidden) {
+			$(hidden).removeClass('to_one').addClass('to_zero');
+		},
+		changepwdShow: function() {
+			var callback = "$('#change_pwd').show().removeClass('to_zero').addClass('to_one')";
+			this.hidden('#forget_pwd');
+			i.delayHide(370, [$('#forget_pwd')], callback);
 		},
 		closeForm: function() {
 			$('.login_area').removeClass('to_one').addClass('to_zero');
@@ -119,8 +163,43 @@ var lrAction = {
 		closeHide: function(obj) {
 			obj.removeClass('close_showing').addClass('close_hiding');
 		}
-	}
+	};
 
+
+var checkInput = {
+		email: function(a) {
+			var filter  = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+			if (filter.test(a)) {
+				return true;
+			} else {
+				alert('您的电子邮件格式不正确');
+				return false;
+			}
+		}
+	},
+	error = {
+		emailFormat: function() {
+			console.log('this is not a email addr.')
+		},
+		pwdShort: function() {
+			console.log('password too short.')
+		},
+		pwdLong: function() {
+			console.log('password too long.')
+		},
+		authCodeError: function() {
+			console.log('auth code error.')
+		},
+		loginError: function() {
+			console.log('username or password is not correct.')
+		},
+		emailNotExist: function() {
+			console.log('the email is not exist.')
+		},
+		pwdNotSame: function() {
+			console.log('the two passwords are not same.')
+		}
+	};
 
 
 //site show
@@ -179,15 +258,29 @@ $('#register_btn, #register_switch').click(function() {
 	
 	return false;
 });
-$('.login_area_header .close, .submit_btn').click(function() {
+$('.login_area_header .close, #r_submit2, #l_submit, #c_submit').click(function() {
 	var objArr = [$('#login_area_container'), $('.login_area')];
 	lrAction.closeForm();
 	i.delayHide(370, objArr);
 });
 
+$('#r_submit1').click(function() {
+	lrAction.register1Hide();
+	lrAction.register2Show();
+});
+
+$('#forget_pwd_link').click(function() {
+	lrAction.forgetShow();
+});
+$('#f_submit1').click(function() {
+	lrAction.writecodeShow();
+});
+$('#f_submit2').click(function() {
+	lrAction.changepwdShow();
+})
 
 
-(function(){
+;(function(){
 
 	$('#siteinfo').height($('body').height() - $('#footer_bottom').height() - parseInt($('#siteinfo').css('border-top'))*3);
 

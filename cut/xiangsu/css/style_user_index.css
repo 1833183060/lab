@@ -65,8 +65,7 @@ header {
 	}
 }
 
-
-/** viewpager **/
+/**** viewpager ****/
 .vp_item {
 	text-shadow: 1px 1px 0 #aaa;
 }
@@ -75,6 +74,7 @@ header {
 .vp_words,
 .vp_words_show,
 .vp_item_btn_group {
+	display: none;
 	margin: 0 auto;
 	text-align: center;
 	width: 100%;
@@ -83,7 +83,7 @@ header {
 .vp_body {
 	background: #ccc;
 	position: relative;
-	height: 500px;
+	height: 700px;
 }
 .vp_item {
 	display: none;
@@ -151,4 +151,21 @@ header {
 .vp_next {
 	right: 0;
 	padding-right: 20px;
+}
+
+
+/**** images ****/
+.images {
+	margin-top: 10px;
+
+	.img_item {
+		width: 20%;
+		height: 130px;
+		overflow: hidden;
+
+		img {
+			min-width: 100%;
+			min-height: 100%;			
+		}
+	}
 }

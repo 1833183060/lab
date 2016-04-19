@@ -512,6 +512,9 @@ footer .other_info .part a {
 .register_form2 {
 	display: none;
 }
+.write_code{
+	display: none;
+}
 /**** sidebar ****/
 .siteinfo {
 	position: absolute;
