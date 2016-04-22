@@ -16,7 +16,7 @@
 			</div>	
 		</div>	
 		<nav class="user_nav">
-			<a data-page="vp_body" href="">index</a>
+			<a class="active" data-page="vp_body" href="">index</a>
 			<a id="image_link" data-page="images" href="">images</a>
 			<a data-page="blog" href="">blog</a>
 		</nav>
@@ -24,7 +24,7 @@
 
 	<div id="layer" class="layer">
 		<div class="layer_content">
-			<img class="showed_img" src="http://photo2.fanfou.com/v1/mss_3d027b52ec5a4d589e68050845611e68/ff/n0/0b/z8/gp_308612.jpg@596w_1l.jpg" alt="">
+			<img id="showed_img" class="showed_img" src="" alt="">
 			<div class="btn">
 				<div id="prev" class="prev">prev</div>
 				<div id="next" class="next">next</div>
@@ -91,60 +91,6 @@
 
 	<div id="images" class="images main_page">
 		
-		<div class="img_item_box">
-			<div class="img_item">
-				<img class="img_self" src="http://null-42.github.io/sun.png" alt="">
-				<div class="img_info">
-					<h1 class="img_title">sdf</h1>
-					<p class="img_desc">sdfsdf</p>
-				</div>
-			</div>
-		</div>
-		<div class="img_item_box">
-			<div class="img_item">
-				<img class="img_self" src="http://photo2.fanfou.com/v1/mss_3d027b52ec5a4d589e68050845611e68/ff/n0/0b/z8/gp_308612.jpg@596w_1l.jpg" class="img_info" alt="">
-				<div class="img_info">
-					<h1 class="img_title">sdf</h1>
-					<p class="img_desc">sdfsdf</p>
-				</div>
-			</div>
-		</div>
-		<div class="img_item_box">
-			<div class="img_item">
-				<img class="img_self" src="http://null-42.github.io/sun.png" alt="">
-				<div class="img_info">
-					<h1 class="img_title">sdf</h1>
-					<p class="img_desc">sdfsdf</p>
-				</div>
-			</div>
-		</div>
-		<div class="img_item_box">
-			<div class="img_item">
-				<img class="img_self" src="http://photo2.fanfou.com/v1/mss_3d027b52ec5a4d589e68050845611e68/ff/n0/0b/z8/gp_308612.jpg@596w_1l.jpg" class="img_info" alt="">
-				<div class="img_info">
-					<h1 class="img_title">sdf</h1>
-					<p class="img_desc">sdfsdf</p>
-				</div>
-			</div>
-		</div>
-		<div class="img_item_box">
-			<div class="img_item">
-				<img class="img_self" src="http://null-42.github.io/sun.png" alt="">
-				<div class="img_info">
-					<h1 class="img_title">sdf</h1>
-					<p class="img_desc">sdfsdf</p>
-				</div>
-			</div>
-		</div>
-		<div class="img_item_box">
-			<div class="img_item">
-				<img class="img_self" src="http://photo2.fanfou.com/v1/mss_3d027b52ec5a4d589e68050845611e68/ff/n0/0b/z8/gp_308612.jpg@596w_1l.jpg" class="img_info">
-				<div class="img_info">
-					<h1 class="img_title">sdf</h1>
-					<p class="img_desc">sdfsdf</p>
-				</div>
-			</div>
-		</div>
 	</div>
 
 	<div class="blog main_page" id="blog">
@@ -174,6 +120,7 @@
 	<script src="./js/jquery-2.1.1.min.js"></script>
 	<script src="./js/jquery.viewpager.js"></script>
 	<script src="./js/display_control.js"></script>
+	<script src="./js/jquery.validate.min.js"></script>
 
 	<script>
 	setTimeout(function() {

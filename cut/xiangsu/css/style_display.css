@@ -26,6 +26,10 @@ a {
 }
 .images, .blog {
 	display: none;
+	padding: 0 10px;
+	width: 100%;
+	box-sizing: border-box;
+	left: 0;
 }
 
 /**** index ****/
@@ -71,6 +75,10 @@ header {
 
 		a {
 			margin: 0 5px;
+			color: #666;
+		}
+		a.active {
+			color: #000;
 		}
 	}
 }
@@ -234,13 +242,14 @@ header {
 
 	.img_item_box {
 		width: 25%;
-		padding: 6px;
+		padding: 10px;
 		box-sizing: border-box;
 		float: left;
 		height: 240px;
 
 		.img_item {
 			height: 100%;
+			width: 100%;
 			overflow: hidden;
 			background: @img_bg;
 			margin: 7px;
@@ -262,8 +271,9 @@ header {
 			}
 			.img_b {
 				height: 100%;
+				display: block;
 				position: relative;
-				/*margin-right: -50%;*/
+				margin-right: -50%;
 			}
 
 			.img_info {
@@ -313,7 +323,7 @@ header {
 /**** blog ****/
 .blog {
 	box-sizing: border-box;
-	padding: 20px;
+	padding: 20px 30px;
 	width: 100%;
 
 	.blog_header {
@@ -364,7 +374,6 @@ header {
 		}
 		.next {
 			float: right;
-			margin-right: 20px;
 		}
 	}
 }
