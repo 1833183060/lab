@@ -32,6 +32,23 @@ a {
 	left: 0;
 }
 
+.warning {
+	position: absolute;
+	margin: auto;
+	top: 0; right: 0; bottom: 0; left: 0;
+	padding: 30px;
+	background: rgba(0,0,0, .7);
+	width: 200px; height: 50px;
+	z-index: 30;
+	line-height: 50px;
+	text-align: center;
+	font-size: 25px;
+	color: #ddd;
+
+	display: none;
+	opacity: 1;
+}
+
 /**** index ****/
 header {
 	margin-bottom: 10px;
@@ -278,7 +295,8 @@ header {
 
 			.img_info {
 				position: absolute;
-				background: #ddd;
+				background: rgba(0,0,0, .6);
+				color: #eee;
 				bottom: 0;
 				width: 100%;
 				padding: 7px 15px;
@@ -383,41 +401,97 @@ header {
 	position: fixed;
 	width: 100%;
 	height: 100%;
-	background: rgba(0,0,0,.8);
+	background: #fff;
 	top: 0; left: 0;
 	z-index: 20;
-	display: table;
+	box-sizing: border-box;
+	padding: 20px;
+	
 	display: none;
+	opacity: 0;
+	
+	.back {
+		display: inline-block;
+		cursor: pointer;
+		font-size: 20px;
+		padding: 0 20px;
+	}
 	
 	.layer_content {
-		display: table-cell;
 		position: relative;
-		vertical-align: middle;
+		overflow: hidden;
 		text-align: center;
+		width: 100%;
+		height: 80%;
+		
+		.showed_img_box {
+			display: table-cell;
+			text-align: center;
+			vertical-align: middle;
+			height: 500px;
+			width: 2000px;
 
-		.showed_img {
-			max-height: 90%;
-			max-width: 90%;
+			.showed_img {
+				vertical-align: middle;
+				max-height: 100%;
+				max-width: 90%;
+				position: relative;
+				z-index: 1;
+			}
 		}
-		.btn {
-			color: #444;
+		
+	}
+
+	.img_info {
+		box-sizing: border-box;
+		padding: 0 20px;
+		
+		h1 {
+			margin-bottom: 0;
 			font-size: 18px;
-			width: 40%;
-			margin: 0 auto;
-			margin-top: 30px;
-			
-			div {
-				background: #fff;
-				padding: 5px 10px;
-				cursor: pointer;
-				border-radius: 5px;
-			}
-			.prev {
-				float: left;
-			}
-			.next {
-				float: right;
-			}
+			color: #444;
+		}
+		p {
+			margin-top: 5px;
+			font-size: 14px;
+			color: #666;
+		}
+	}
+	.btn {
+		color: #444;
+		font-size: 18px;
+		width: 100%;
+		position: absolute;
+		z-index: 0;
+		margin: 0 auto;
+		top: 43%; left: 0;
+		padding: 0 10px;
+		box-sizing: border-box;
+
+
+		button {
+			background: transparent;
+			border: none;
+			cursor: pointer;
+			transition: all 0.3s;
+			transform: scale(.6);
+			opacity: .6;
+		}
+		button:focus {
+			outline: none;
+		}
+		
+		polyline {
+			fill: transparent;
+			stroke: #666;
+			stroke-width: 3;
+		}
+
+		.prev {
+			float: left;
+		}
+		.next {
+			float: right;
 		}
 	}
 }

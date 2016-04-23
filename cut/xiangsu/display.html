@@ -18,18 +18,39 @@
 		<nav class="user_nav">
 			<a class="active" data-page="vp_body" href="">index</a>
 			<a id="image_link" data-page="images" href="">images</a>
-			<a data-page="blog" href="">blog</a>
+			<a id="blog_link" data-page="blog" href="">blog</a>
 		</nav>
 	</header>
 
+
 	<div id="layer" class="layer">
+		<div id="warning" class="warning"></div>
+
+		<div id="back" class="back"><----</div>
+
 		<div class="layer_content">
-			<img id="showed_img" class="showed_img" src="" alt="">
-			<div class="btn">
-				<div id="prev" class="prev">prev</div>
-				<div id="next" class="next">next</div>
+			<div class="showed_img_box">
+				<img id="showed_img" class="showed_img" src="http://photo2.fanfou.com/v1/mss_3d027b52ec5a4d589e68050845611e68/ff/n0/0b/z8/gp_308612.jpg@596w_1l.jpg" alt="">
 			</div>
 		</div>
+
+		<div class="img_info">
+			<h1 id="title">dfsklfj</h1>
+			<p id="desc">dsfjlsk</p>
+		</div>
+
+		<div class="btn">
+			<button id="prev_p" class="prev">
+				<svg width="20" height="70" version="1.1" xmlns="http://www.w3.org/2000/svg">
+					<polyline points="20,0 0,35 20,70"/>
+				</svg>
+			</button>
+			<button id="next_p" class="next">
+			<svg width="20" height="70" version="1.1" xmlns="http://www.w3.org/2000/svg">
+					<polyline points="0,0 20,35 0,70"/>
+				</svg>
+			</button>
+		</div>	
 	</div>
 	
 	<div id="vp_body" class="vp_body main_page">
@@ -93,23 +114,28 @@
 		
 	</div>
 
-	<div class="blog main_page" id="blog">
-		<div class="blog_header">
-			<h1>blog_name</h1>
-			<span>2016-4-20</span>
-		</div>	
-		<div class="blog_content">
-			<h1>ddknvk</h1>
-			<p>mmmmmdkjfclkvwekn</p>
-			<p>sdmvn sdjrjenv kdsjflk</p>
-			<img src="./img/code.png" alt="">
+	<div id="blog" class="blog main_page">
+		<div id="warning" class="warning"></div>
+		
+		<div id="blog_main" class="blog_main">
+			<div class="blog_header">
+				<h1 id="article_title">blog_name</h1>
+				<span id="article_time">2016-4-20</span>
+			</div>	
+			<div id="article_content" class="blog_content">
+				<h1>ddknvk</h1>
+				<p>mmmmmdkjfclkvwekn</p>
+				<p>sdmvn sdjrjenv kdsjflk</p>
+				<img src="./img/code.png" alt="">
+			</div>
 		</div>
+
 		<div class="btn_group">
-			<div class="prev">
+			<div id="prev_b" class="prev">
 				<h1>prev</h1>
 				<p>titletitletitle</p>
 			</div>
-			<div class="next">
+			<div id="next_b" class="next">
 				<h1>next</h1>
 				<p>titletitletitle</p>
 			</div>
@@ -120,7 +146,6 @@
 	<script src="./js/jquery-2.1.1.min.js"></script>
 	<script src="./js/jquery.viewpager.js"></script>
 	<script src="./js/display_control.js"></script>
-	<script src="./js/jquery.validate.min.js"></script>
 
 	<script>
 	setTimeout(function() {
