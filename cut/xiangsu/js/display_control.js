@@ -1,6 +1,7 @@
 var pageControl = {
     show: function(pageName, time) {
         var a = "$('"+pageName+"').show().removeClass('hide').addClass('show').css('animation-duration', '"+(time/1000)+"s');";
+
         this.hide('.main_page', time);
         this.delayHide(time, [$('.main_page')], a);
     },
@@ -21,7 +22,7 @@ var pageControl = {
 
 /****
 
-throw new Error('Illegal request!');
+
 
 ****/
 
@@ -30,6 +31,8 @@ function Images() {
     this.images = $('#images');
     this.layer = $('#layer');
     this.showed_img = $('#layer #showed_img');
+
+    this.hash = new Hash();
 
     this.model = '<div class="img_item_box"><div class="img_item"><img class="img_self" src="" alt=""><div class="img_info"><h1 class="img_title"></h1><p class="img_desc"></p></div></div></div>';
 
@@ -54,7 +57,8 @@ Images.prototype = {
     },
     showImage: function() {
         var data = this.data;
-        
+        var i;
+
         i=0;
         this.images.find('.img_self').each(function() {
             $(this).attr('src', data[i].path).attr('data-index', i);
@@ -161,6 +165,9 @@ Images.prototype = {
                     $(this).hide();
                 });
             });
+    },
+    readHash: function(url) {
+        this.hash.read(request, this, url, this.init, imgData);
     }
 }
 
@@ -169,6 +176,13 @@ function Blog() {
     this.data = '';
     this.blog = $('#blog');
     this.blog_main = $('#blog_main');
+    this.cid = '';
+
+    this.prev = $('#blog #prev_b');
+    this.next = $('#blog #next_b');
+
+    this.hash = new Hash();
+    this.PREFIX = 'blog';
 
     this.model = '<div class="blog_header"><h1 id="article_title"></h1><span id="article_time"></span></div><div id="article_content" class="blog_content"></div>';
 }
@@ -177,8 +191,14 @@ Blog.prototype = {
     init: function(data) {
         this.blog_main.html(this.model);
 
+        this.prev.unbind('click');
+        this.next.unbind('click');
+
         this.showArticle(data);
         this.changeArticle();
+    },
+    readHash: function(url) {
+        this.hash.read(request, this, url, this.init, blogData)
     },
     showArticle: function(data) {
         this.data = data[0];
@@ -186,31 +206,43 @@ Blog.prototype = {
         var date = new Date(parseInt(this.data.time) * 1000),
             time = date.getFullYear() + '/' + (date.getMonth() + 1)+ '/' + date.getDate();
 
+        this.cid = this.data.column_id;
+
         this.blog_main.find('#article_title').html(this.data.title);
         this.blog_main.find('#article_time').html(time);
         this.blog_main.find('#article_content').html(this.data.content);
         this.blog_main.attr('data-id', this.data.id);
+
+        this.hash.change(this.PREFIX, this.data.column_id, this.data.id);
+
     },
     changeArticle: function() {
         var _this = this;
-        var prev = $('#blog #prev_b'),
-            next = $('#blog #next_b');
+        var data;
 
-        prev.click(function() {
+        this.prev.click(function() {
             var id = parseInt(_this.blog_main.attr('data-id')) - 1;
 
+            data = {
+                "column_id": _this.cid,
+                "id": id.toString(),
+                "btn": -1
+            }
             /*** ajax ***/
-
-            _this.showArticle(blogData2);
+            request(_this, blogRequestURL, data, _this.showArticle, blogData2)
         });
 
-        next.click(function() {
+        this.next.click(function() {
             var id = parseInt(_this.blog_main.attr('data-id')) + 1;
 
+            data = {
+                "column_id": _this.cid,
+                "id": id.toString(),
+                "btn": 1
+            }
             /*** ajax ***/
-
-            _this.showArticle(blogData3);
-        })
+            request(_this, blogRequestURL, data, _this.showArticle, blogData3)
+        });
     },
     warning: function() {
 
@@ -218,112 +250,207 @@ Blog.prototype = {
 }
 
 
-var imgData = [
-    {
-        "id": 0,
-        "gid": 1,
-        "path": "http://null-42.github.io/sun.png",
-        "name": "null-42",
-        "description": "http://null-42.github.io/",
-        "status": 1
-    },
-    {
-        "id": 1,
-        "gid": 1,
-        "path": "http://photo2.fanfou.com/v1/mss_3d027b52ec5a4d589e68050845611e68/ff/n0/0b/z8/gp_308612.jpg@596w_1l.jpg",
-        "name": "Sevenskey",
-        "description": "http://sevenskey.github.io/",
-        "status": 1
-    },
-    {
-        "id": 2,
-        "gid": 1,
-        "path": "http://null-42.github.io/sun.png",
-        "name": "null-42",
-        "description": "http://null-42.github.io/",
-        "status": 1
-    },
-    {
-        "id": 3,
-        "gid": 1,
-        "path": "../img/code.png",
-        "name": "Sevenskey",
-        "description": "http://sevenskey.github.io/",
-        "status": 1
-    },
-    {
-        "id": 2,
-        "gid": 1,
-        "path": "http://null-42.github.io/sun.png",
-        "name": "null-42",
-        "description": "http://null-42.github.io/",
-        "status": 1
-    },
-    {
-        "id": 3,
-        "gid": 1,
-        "path": "../img/code.png",
-        "name": "Sevenskey",
-        "description": "http://sevenskey.github.io/",
-        "status": 1
-    }
-],
+function Index() {
+    this.data = '';
+    this.item_group = $('#index #item_group');
 
-blogData = [
-    {
-        "id": "2",
-        "uid": "23",
-        "title": "测试2",
-        "sub_title": "测试2",
-        "content": "哈哈哈",
-        "column_id": "8",
-        "time": "1461329106"
+    this.config = {
+            auto: true,
+            speed: 7000 
+        };
+
+    this.hash = new Hash();
+
+    this.model = '<div class="vp_item"><a class="vp_link" href=""><img class="vp_img" src="./img/code.png"></a><div class="vp_words"><h1 class="vp_title">This is the first picture.</h1><p class="vp_desc">This is a paragraph.</p></div></div>';
+}
+Index.prototype = {
+    constructor: Index,
+    init: function(data) {
+        this.data = data;
+
+        if(this.item_group.find('.vp_item').length == 0) {
+
+            for(var i=0; i<this.data.length; i++) {
+                this.item_group.append(this.model);
+            }
+
+            this.showImage();
+            this.launch(this.config);
+        }
+
+    },
+    readHash: function(url) {
+        this.hash.read(request, this, url, this.init, indexData)
+    },
+    showImage: function() {
+        var data = this.data;
+        var i;
+
+        i=0;
+        this.item_group.find('.vp_img').each(function() {
+            $(this).attr('src', data[i++].path);
+        });
+
+        i=0;
+        this.item_group.find('.vp_title').each(function() {
+            $(this).html(data[i++].name);
+        });
+
+        i=0;
+        this.item_group.find('.vp_desc').each(function() {
+            $(this).html(data[i++].description);
+        });
+
+        i=0;
+        this.item_group.find('.vp_link').each(function() {
+            if(data[i++].link != '') {
+                $(this).attr('herf', data[i].link);
+            } else {
+                $(this).attr('herf', '#');
+            }
+        })
+    },
+    launch: function(config) {
+        $().viewpager(config);
     }
-],
-blogData2 = [
-    {
-        "id": "1",
-        "uid": "23",
-        "title": "测试",
-        "sub_title": "测试2",
-        "content": "哈哈哈哈哈哈哈哈哈",
-        "column_id": "8",
-        "time": "1461329106"
-    }
-],
-blogData3 = [
-    {
-        "id": "3",
-        "uid": "23",
-        "title": "测试3",
-        "sub_title": "测试2",
-        "content": "哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈",
-        "column_id": "8",
-        "time": "1461329106"
-    }
-];
+}
 
 
-var aImages = new Images();
-var aBlog = new Blog();
+function Hash() {
+    this.cid = '';
+    this.id = '';
+    this.lo = window.location;
+    this.CONNECTER = '-';
+}
+Hash.prototype = {
+    constructor: Hash,
+    change: function(prefix, cid, id) {
+        this.cid = cid;
+        this.id = id;
+        this.prefix = prefix;
+
+        var hash;
+
+        if(this.id) {
+            hash = this.prefix + this.cid + this.CONNECTER + this.id;
+        } else {
+            hash = this.prefix + this.cid;
+        }
+
+        this.lo.hash = hash;
+    },
+    read: function(callback, _this, url, callback2, jiadata) {
+        var hash = this.lo.hash.replace(/#/g, '');
+        var idArr = hash.split(this.CONNECTER);
+        console.log(hash)
+
+        var cid = idArr[0],
+            id = idArr[1];
+
+        var data;
+
+        if(id) {
+            data = {
+                column_id: cid,
+                id: id
+            };
+            console.log('cid-id')
+            callback(_this, url, data, callback2, jiadata);
+
+        } else if (cid != '') {
+            data = {gid: cid};
+            console.log('cid')
+            callback(_this, url, data, callback2, jiadata);
+
+        } else if(cid == '') {
+            callback(_this, url, {}, callback2, jiadata);
+        }
+
+    }
+}
+
+
+function request(_this, url, data, callback, jiadata) {
+
+    var request = $.ajax({
+        url: url,
+        method: "POST",
+        data: data,
+        dataType: "json"
+    });
+
+    request.success(function(data) {
+        if(data == 0) {
+            ifError();
+        } else {
+
+            callback.call(_this, data);
+        }
+    });
+
+    request.error(function(jqXHR, textStatus) {
+        callback.call(_this, jiadata);
+        throw new Error('Request failed! This is the test data.');
+    });
+}
+
+function initSite() {
+    var hash = window.location.hash
+    var pageClass = hash.replace(/#|\d*|-*/g, ''),
+        cid = hash.replace(/#|-.|\D/g, ''),
+        id = hash.replace(/#\w*-?|[^\d*]/g, '');
+
+
+    var a = $('.user_nav a[href=#'+cid+']');
+
+    if (pageClass == 'index' && pageClass == '') {
+        cid = '';
+    } 
+    a.trigger('click');
+
+    if(id != '') {
+        window.location.hash = 'blog' + cid + '-' + id;
+    }
+}
+
+function ifError() {
+    alert('404');
+}
+
+
+var aImages = new Images(),
+    aBlog = new Blog(),
+    aHash = new Hash(),
+    aIndex = new Index();
+
+var imgRequestURL = '/Design/ajaxGetGalleryList',
+    blogRequestURL = '/Design/ajaxGetOneBlog',
+    indexRequestURL = '/Design/ajaxGetIndexPic';
 
 
 $('.user_nav a').click(function() {
-    var page = '#' + $(this).attr('data-page'),
-        id = $(this).attr('id');
+    var page = $(this).attr('data-page');
+
     $('.user_nav a').removeClass('active');
     $(this).addClass('active');
-    pageControl.show(page, 300);
+    pageControl.show('#'+page, 300);
 
-    if(id == 'image_link') {
+    aHash.change(page, $(this).attr('href').replace(/#/g, ''))
 
-        aImages.init(imgData);
+    if(page == 'images') {
 
-    } else if(id == 'blog_link') {
+        aImages.readHash(imgRequestURL);
 
-        aBlog.init(blogData);
+    } else if(page == 'blog') {
+
+        aBlog.readHash(blogRequestURL);
+
+    } else if(page == 'index') {
+        aIndex.readHash(indexRequestURL);
     }
+
 
     return false;
 });
 
+initSite();

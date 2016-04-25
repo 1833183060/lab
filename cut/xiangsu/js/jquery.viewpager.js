@@ -14,7 +14,7 @@
 		this.speed = options.speed ? options.speed : 2000;
 		this.wordsIsOpen = 0;
 
-		this.vp_body = $('#vp_body');
+		this.vp_body = $('#index');
 		this.vp_img = $('.vp_img');
 
 		this.resetStyle();
@@ -133,7 +133,7 @@
 		if(time){
 			this._time = time;
 			this.timer = setTimeout(function(){
-				if(_this.publicUse.index == _this.publicUse.itemList.length-1){
+				if(_this.publicUse.index == _this.vp_img.length-1){
 					_this.publicUse.index = -1;
 				}
 				_this.publicUse.index++;
@@ -148,15 +148,15 @@
 
 	Viewpager.prototype.vpControl = function(){ 
 		var _this = this;
-		var btnNum = _this.publicUse.itemList.length;
+		var btnNum = _this.vp_img.length;
 
 		_this.createItemBtn(btnNum); //生成圆点
 		showContent(0);  //打开页面后显示第一个item
 
-		$('#vp_body #pre').click(function(){  //显示前一个item
+		this.vp_body.find('#pre').click(function(){  //显示前一个item
 			clearTimeout(_this.timer);  //点击后清除定时器
 			if(_this.publicUse.index == 0){
-				_this.publicUse.index = _this.publicUse.itemList.length;
+				_this.publicUse.index = _this.vp_img.length;
 			}
 			_this.publicUse.index--;
 			showContent(_this.publicUse.index);
@@ -164,9 +164,9 @@
 
 			_this.autoSwitch(_this._time); //重新启动定时器
 		}) 
-		$('#vp_body #next').click(function(){  //显示后一个item
+		this.vp_body.find('#next').click(function(){  //显示后一个item
 			clearTimeout(_this.timer);
-			if(_this.publicUse.index == _this.publicUse.itemList.length-1){
+			if(_this.publicUse.index == _this.vp_img.length-1){
 				_this.publicUse.index = -1;
 			}
 			_this.publicUse.index++;

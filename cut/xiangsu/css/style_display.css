@@ -197,14 +197,14 @@ header {
 	margin: 20px;
 	border-radius: 50%;
 	height: 30px; width: 30px;
-	border: 1px solid #fff;
+	border: 2px solid #fff;
 	cursor: pointer;
 	opacity: .7;
 
 	polyline {
 		fill: transparent;
 		stroke:rgba(255,255,255,1);
-		stroke-width: 1;
+		stroke-width: 2;
 	}
 	&:hover {
 		opacity: 1;
@@ -361,6 +361,8 @@ header {
 	.blog_content {
 		color: @blog_content_color;
 
+		font-size: 12px;
+
 		p {
 			font-size: 12px;
 		}	
@@ -375,6 +377,7 @@ header {
 		box-sizing: border-box;
 		width: 100%;
 		overflow: hidden;
+		margin-top: 40px;
 		p {
 			font-size: 14px;
 			margin-top: 0

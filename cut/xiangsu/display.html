@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0,maximum-scale=1.0, user-scalable=no">
 	<title>User Index</title>
 
 	<link rel="stylesheet/less" href="./css/style_display.css">
@@ -16,9 +17,21 @@
 			</div>	
 		</div>	
 		<nav class="user_nav">
-			<a class="active" data-page="vp_body" href="">index</a>
-			<a id="image_link" data-page="images" href="">images</a>
-			<a id="blog_link" data-page="blog" href="">blog</a>
+			<a class="active" data-page="index" href="#">index</a>
+			<a data-page="images" href="#2">images</a>
+			<a data-page="blog" href="#3">blog</a>
+			<!-- if you want to use volist, please follow the format below.
+
+			data-page: The number of the kinds of the values is 3: "blog", "images", "index". If the page is a blog, the value of the attribute is "blog", if the page is a images, the value of the attribute is "images", if the page is index, the value of the attribute is "index". 
+
+			href: # + cid
+
+			innerHTML: the name of this page.
+			
+			Example:
+			<a data-page="blog" href="#3">blog</a>
+				
+			 -->
 		</nav>
 	</header>
 
@@ -53,7 +66,7 @@
 		</div>	
 	</div>
 	
-	<div id="vp_body" class="vp_body main_page">
+	<div id="index" class="vp_body main_page">
 		<div class="vp_btn_group">
 			<button id="pre" class="vp_pre">
 				<svg width="20" height="70" version="1.1" xmlns="http://www.w3.org/2000/svg">
@@ -67,38 +80,11 @@
 			</button>
 		</div>
 
-		<div class="vp_item_group">
+		<div id="item_group" class="vp_item_group">
 
 			<!-- You can add any number of groups of items here -->
 
-			<div class="vp_item">
-				<img class="vp_img" src="./img/code.png">
-				<div class="vp_words">
-					<h1>This is the first picture.</h1>
-					<p>This is a paragraph.</p>
-				</div>
-			</div>
-			<div class="vp_item">
-				<img class="vp_img" src="./img/code.png">
-				<div class="vp_words">
-					<h1>This is the second picture.</h1>
-					<p>This is a paragraph paragraph.</p>
-				</div>
-			</div>
-			<div class="vp_item">
-				<img class="vp_img" src="http://photo2.fanfou.com/v1/mss_3d027b52ec5a4d589e68050845611e68/ff/n0/0b/z8/gp_308612.jpg@596w_1l.jpg">
-				<div class="vp_words">
-					<h1>This is the first picture.</h1>
-					<p>This is a paragraph.</p>
-				</div>
-			</div>
-			<div class="vp_item">
-				<img class="vp_img" src="./img/code.png">
-				<div class="vp_words">
-					<h1>This is the third picture.</h1>
-					<p>This is a paragraph paragraph paragraph.</p>
-				</div>
-			</div>
+			
 		</div> <!-- vp_item_group -->
 
 		<div id="vp_item_btn_group" class="vp_item_btn_group"></div>	
@@ -111,49 +97,36 @@
 	</div> <!-- vp_body -->
 
 	<div id="images" class="images main_page">
-		
+	<!-- images	 -->
 	</div>
 
 	<div id="blog" class="blog main_page">
 		<div id="warning" class="warning"></div>
-		
+
 		<div id="blog_main" class="blog_main">
-			<div class="blog_header">
-				<h1 id="article_title">blog_name</h1>
-				<span id="article_time">2016-4-20</span>
-			</div>	
-			<div id="article_content" class="blog_content">
-				<h1>ddknvk</h1>
-				<p>mmmmmdkjfclkvwekn</p>
-				<p>sdmvn sdjrjenv kdsjflk</p>
-				<img src="./img/code.png" alt="">
-			</div>
+		<!-- blog -->
 		</div>
 
 		<div class="btn_group">
 			<div id="prev_b" class="prev">
 				<h1>prev</h1>
-				<p>titletitletitle</p>
+				<p></p>
 			</div>
 			<div id="next_b" class="next">
 				<h1>next</h1>
-				<p>titletitletitle</p>
+				<p></p>
 			</div>
 		</div>
 	</div>
 	
+	<script src="./js/test_data.js"></script>	
 	<script src="./js/less.js"></script>
 	<script src="./js/jquery-2.1.1.min.js"></script>
 	<script src="./js/jquery.viewpager.js"></script>
 	<script src="./js/display_control.js"></script>
 
 	<script>
-	setTimeout(function() {
-		$().viewpager({
-			auto: true,
-			speed: 7000	
-		});
-	}, 1000)
+	
 
 	</script>
 
