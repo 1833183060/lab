@@ -370,6 +370,24 @@ Hash.prototype = {
 }
 
 
+function Nav() {
+    this.data = '';
+}
+Nav.prototype = {
+    constructor: Nav,
+    init: function(data) {
+        this.data = data;
+
+        this.show();
+    },
+    show: function() {
+        var data = this.data;
+        
+        
+    }
+}
+
+
 function request(_this, url, data, callback, jiadata) {
 
     var request = $.ajax({

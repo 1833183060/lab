@@ -102,4 +102,46 @@ indexData = [
         "description": "22sdfsdf",
         "link": ""
     }
-]
+],
+
+navData = [
+    {
+        "id": "145",
+        "name": "画廊",
+        "uid": "23",
+        "wid": "39",
+        "type": "1",
+        "visible": "1",
+        "order": null,
+        "default": "1",
+        "time": "1461404115",
+        "status": "1",
+        "cover": null
+    },
+    {
+        "id": "146",
+        "name": "博客",
+        "uid": "23",
+        "wid": "39",
+        "type": "2",
+        "visible": "0",
+        "order": null,
+        "default": "1",
+        "time": "1461404115",
+        "status": "1",
+        "cover": null
+    },
+    {
+        "id": "157",
+        "name": "未命名",
+        "uid": "23",
+        "wid": "39",
+        "type": "0",
+        "visible": "1",
+        "order": null,
+        "default": "0",
+        "time": "1461659710",
+        "status": "1",
+        "cover": null
+    }
+];
