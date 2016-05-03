@@ -30,6 +30,7 @@ function launch(data) {
 			weight[i+radius][j+radius] = parseFloat(gaussian(i, j, radius).toFixed(6));
 		}
 	}
+	
 	var k = 0,
 		l = 0;
 	for(i=0; i<imgPixel.length; i+=4) {

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Gaussian Blur</title>
+</head>
+<body>
+	<button onclick="loadImg('3.jpg', init, [1, matrix.original]); ">Original</button>
+	<button onclick="loadImg('3.jpg', init, [1, matrix.sharpen(1)]);">Sharpen</button>
+	<button onclick="loadImg('3.jpg', init, [1, matrix.edgeDetection]);">Edge Detection</button>
+	<button onclick="loadImg('3.jpg', init, [1, matrix.embossingFilter]);">Embossing Filter</button>
+	<button onclick="loadImg('3.jpg', init, [1, matrix.averagingBlur]);">Averaging Blur</button>
+	<button onclick="loadImg('3.jpg', init, [4, matrix.motionBlur(4)]);">Motion Blur</button>
+	<button onclick="loadImg('3.jpg', init, [4, matrix.gaussianBlur(4)]);">Gaussian Blur</button>
+	<br>
+	<canvas id="mycanvas"></canvas>
+
+	<script>
+
+	var matrix = {
+		original: [[0, 0, 0], [0, 1, 0], [0, 0, 0]],
+		sharpen: function(radius) {
+			var arr = [],
+				a = radius * 2 + 1;
+			for(var i=0; i<a; i++) {
+				arr[i] = [];
+				for(var j=0; j<a; j++) {
+					arr[i][j] = -1;
+				}
+			}
+			arr[radius+1][radius+1] = a * a;
+
+			return arr;
+		}, //[[-1, -1, -1], [-1, 9, -1], [-1, -1, -1]],
+		edgeDetection: [[-1, -1, -1], [-1, 8, -1], [-1, -1, -1]],
+		embossingFilter: [[-1, -1, 0], [-1, 0, 1], [0, 1, 1]],
+		averagingBlur: [[0, 0.2, 0], [0.2, 0, 0.2], [0, 0.2, 0]],
+		motionBlur: function(radius) {
+			var arr = [],
+				a = radius*2 + 1;
+			for(var i=0; i<a; i++) {
+				arr[i] = [];
+				for(var j=0; j<a; j++) {
+					if(j == i) {
+						arr[i][j] = 1;
+					} else {
+						arr[i][j] = 0;
+					}
+				}
+			}
+			return arr;
+		},
+		gaussianBlur: function(radius) {
+			var arr = [];
+			for(var i=-radius; i<=radius; i++) {
+				arr[i+radius] = [];
+				for(var j=-radius; j<=radius; j++) {
+					arr[i+radius][j+radius] = parseFloat(gaussian(i, j, radius).toFixed(6));
+				}
+			}
+			return arr;
+		}
+	}
+
+	function gaussian(x, y, o) {
+		var x2 = Math.pow(x, 2),
+			y2 = Math.pow(y, 2),
+			o2 = Math.pow(o, 2);
+
+		return Math.exp(-(x2 + y2) / (2 * o2)) / (2 * Math.PI * o2);
+	}
+
+	function loadImg(src, callback, args) {
+		var img = new Image();
+			img.src = src;
+			img.onload = function() {
+
+				callback.apply(img, args);
+			}
+	}
+
+	function init(radius, matrix) {
+		var img = this,
+			imgWidth = img.width,
+			imgHeight = img.height;
+
+		var canvas = document.getElementById('mycanvas');
+			canvas.width = imgWidth;
+			canvas.height = imgHeight;
+			canvasCtx = canvas.getContext('2d');
+			canvasCtx.drawImage(img, 0, 0, imgWidth, imgHeight);
+
+		var finished = 0,
+			startTime = new Date();
+
+		var workersNum = 2, //设定线程个数
+			onWorkerEnded = function(e) {
+
+				canvasCtx.putImageData(e.data.imgData, 0, imgHeight/workersNum*e.data.i, 0, radius, imgWidth, imgHeight/workersNum);
+
+				finished++;
+
+				if(finished == workersNum) {
+
+					var endTime = new Date();
+					console.log(" 总渲染时间：" + (endTime - startTime) + "ms");
+				}
+			};
+
+		for(var i=0; i<workersNum; i++) {
+
+			var worker = new Worker('main.js');
+				worker.onmessage = onWorkerEnded;
+			
+			var imgData = canvasCtx.getImageData(0, imgHeight/workersNum*i-radius, imgWidth, imgHeight/workersNum+radius*2),
+				imgPixel = imgData.data;
+
+				worker.postMessage({
+					imgPixel: imgPixel,
+					radius: radius,
+					imgWidth: imgWidth,
+					imgData: imgData,
+					i: i,
+					matrix: matrix
+				});
+		}
+
+	}
+
+	</script>
+</body>
+</html>
