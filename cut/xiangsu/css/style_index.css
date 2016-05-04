@@ -1,3 +1,14 @@
+.inputBox {
+	position: relative;
+}
+.inputBox .warning {
+	position: absolute;
+	color: red;
+	top: 22px; right: 10px;
+	font-size: 14px;
+	pointer-events: none;
+}
+
 @font-face {font-family: 'Source Han Sans blod';
   src: url('//at.alicdn.com/t/zs9wvq850vish5mi.eot'); /* IE9*/
   src: url('//at.alicdn.com/t/zs9wvq850vish5mi.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
@@ -407,14 +418,14 @@ footer .other_info .part a {
 }
 .auth_code_area .index_text_inp {
 	float: left;
-	width: 18rem;
+	width: 16rem;
 }
 .auth_code {
-	float: left;
+	float: right;
 	display: inline-block;
 	height: 46px;
 	background: #9B9B9B;
-	width: 12rem; 	
+	width: 14rem; 	
 	margin-top: 8px;
 }
 .login_area_form {

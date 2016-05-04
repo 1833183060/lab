@@ -7,9 +7,11 @@ var lrAction = {
 		},
 		loginBgHide: function() {
 			$('#login_area_container').removeClass('login_bg_showing').addClass('login_bg_hiding');
+
+			$('.inputBox .warning').html('');
 		},
 		loginFormShow: function() {
-			var callback = "$('#login_area_form').show().removeClass('to_zero').addClass('to_one')";
+			var callback = "$('#login_area_form').show().removeClass('to_zero').addClass('to_one').find('form input').eq(0).focus()";
 			//this.hidden('.login_area_form');
 			this.registerFormHide();
 			this.forgetHide();
@@ -18,9 +20,11 @@ var lrAction = {
 		},
 		loginFormHide: function() {
 			$('#login_area_form').removeClass('to_one').addClass('to_zero');
+
+			$('.inputBox .warning').html('');
 		},
 		registerFormShow: function() {
-			var callback = "$('#register_area_form').show().removeClass('to_zero').addClass('to_one')";
+			var callback = "$('#register_area_form').show().removeClass('to_zero').addClass('to_one').find('form input').eq(0).focus()";
 			this.loginFormHide();
 			this.forgetHide();
 			i.delayHide(370, [$('.login_area_form')], callback);
@@ -31,13 +35,17 @@ var lrAction = {
 			$('#register2').hide();
 			$('#register_area_form .hint2').removeClass('active');
 			$('#register_area_form .hint1').addClass('active');
+
+			$('.inputBox .warning').html('');
 		},
 		register1Hide: function() {
 			$('#register1').removeClass('to_one').addClass('to_zero');
 			$('#register_area_form .hint1').removeClass('active');
+
+			$('.inputBox .warning').html('');
 		},
 		register2Show: function() {
-			var callback = "$('#register2').show().removeClass('to_zero').addClass('to_one')";
+			var callback = "$('#register2').show().removeClass('to_zero').addClass('to_one').find('input').eq(0).focus()";
 			i.delayHide(370, [$('#register1')], callback);
 			$('#register_area_form .hint2').addClass('active');
 		},
@@ -47,14 +55,16 @@ var lrAction = {
 			$('#forget_pwd .hint2').removeClass('active');
 			$('#get_code').show();
 			$('#write_code').hide();
+
+			$('.inputBox .warning').html('');
 		},
 		forgetShow: function() {
-			var callback = "$('#forget_pwd').show().removeClass('to_zero').addClass('to_one')";
+			var callback = "$('#forget_pwd').show().removeClass('to_zero').addClass('to_one').find('form input').eq(0).focus()";
 			this.loginFormHide();
 			i.delayHide(370, [$('#login_area_form')], callback);
 		},
 		writecodeShow: function() {
-			var callback = "$('#write_code').show().removeClass('to_zero').addClass('to_one')";
+			var callback = "$('#write_code').show().removeClass('to_zero').addClass('to_one').find('input').eq(0).focus()";
 			this.hidden('#get_code');
 			i.delayHide(370, [$('#get_code')], callback);
 			$('#forget_pwd .hint2').addClass('active');
@@ -62,9 +72,11 @@ var lrAction = {
 		},
 		hidden: function(hidden) {
 			$(hidden).removeClass('to_one').addClass('to_zero');
+
+			$('.inputBox .warning').html('');
 		},
 		changepwdShow: function() {
-			var callback = "$('#change_pwd').show().removeClass('to_zero').addClass('to_one')";
+			var callback = "$('#change_pwd').show().removeClass('to_zero').addClass('to_one').find('form input').eq(0).focus()";
 			this.hidden('#forget_pwd');
 			i.delayHide(370, [$('#forget_pwd')], callback);
 		},
@@ -166,38 +178,175 @@ var lrAction = {
 	};
 
 
-var checkInput = {
-		email: function(a) {
-			var filter  = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-			if (filter.test(a)) {
+var check = {
+		emailFormat: function(obj, error) {
+			var re = /^\w+(\.\w+)*@(\w)+((\.\w+)+)$/;
+			var is = re.test(obj.value);
+			
+			if(is) {
+				error.call(obj, 1);
 				return true;
 			} else {
-				alert('您的电子邮件格式不正确');
+				error.call(obj);
+				return false;
+			}
+		},
+		pwdFormat: function(obj, error) {
+			var re = /^[^\s*].{5,18}$/;
+			var is = re.test(obj.value);
+
+			if(is) {
+				error.call(obj, 1);
+				return true;
+			} else {
+				error.call(obj);
+				return false;
+			}
+		},
+		emailExist: function(obj, error) {
+			/*ajax*/
+			error.call(obj);
+//				error.call(obj, 1);
+		},
+		login: function(obj, email, pwd, error) {
+			/*ajax*/
+			var email = $('#login_email').val();
+			var password = $('#login_password').val();
+			$.post('/User/doLogin', {email: email, password: password}, function (data) {
+				if (data == 1) {
+					location.href = '/User/index';	
+				} else {
+					error.call(obj);
+				}
+			})
+		},
+		authCode: function(obj, error) {
+			/*ajax*/
+			var email = $('#reg_email').val();
+			var password = $('#reg_password').val();
+			var verify_code = $('#reg_verify_code').val();
+
+			console.log(email+' '+password+' '+verify_code)
+
+			$.post('/User/doReg', {email: email, password: password, verify_code: verify_code}, function (data) {
+				if (data == 2) {
+					error.call(obj);
+				} else if (data == 1) {
+					alert('注册成功');
+				}
+			})
+		},
+		eAuthCode: function(obj, error) {
+			/*ajax*/
+			error.call(obj);
+		},
+		pwdSame: function(pwd1, pwd2, error) {
+			if(pwd1.value == pwd2.value) {
+				error.callback(pwd2, 1);
+				return true;
+			} else {
+				error.call(pwd2);
+				return false;
+			}
+		},
+		username: function(obj, error) {
+			var re = /^\w{2,15}$/g;
+			var is = re.test(obj.value);
+
+			if(is) {
+				error.call(obj, 1);
+				return true;
+			} else {
+				error.call(obj);
 				return false;
 			}
 		}
 	},
 	error = {
-		emailFormat: function() {
-			console.log('this is not a email addr.')
+		username: function(e) {
+			if(e) {
+				$(this).parent().find('.warning').empty();
+			} else {
+				$(this).parent().find('.warning').html('用户名格式不正确');
+				console.log('username is not correct.')
+			}
 		},
-		pwdShort: function() {
-			console.log('password too short.')
+		emailFormat: function(e) {
+			if(e) {
+				$(this).parent().find('.warning').html('');
+				console.log('email is ok.')
+			} else {
+				$(this).parent().find('.warning').html('邮箱格式不正确');
+				console.log('this is not a email addr.')
+			}
 		},
-		pwdLong: function() {
-			console.log('password too long.')
+		pwdFormat: function(e) {
+			if(e) {
+				$(this).parent().find('.warning').html('');
+			} else {
+				$(this).parent().find('.warning').html('密码格式不正确');				
+				console.log('password isn\'t up to the standard.')
+			}
 		},
-		authCodeError: function() {
-			console.log('auth code error.')
+		authCodeError: function(e) {
+			if(e) {
+				$(this).parent().find('.warning').html('');
+			} else {
+				$(this).parent().find('.warning').html('验证码不正确');
+				console.log('auth code error.')
+			}
 		},
-		loginError: function() {
-			console.log('username or password is not correct.')
+		loginError: function(e) {
+			if(e) {
+				$(this).parent().find('.warning').html('');
+			} else {
+				$(this).parent().find('.warning').html('邮箱或密码错误');
+				console.log('username or password is not correct.')
+			}
 		},
-		emailNotExist: function() {
-			console.log('the email is not exist.')
+		emailNotExist: function(e) {
+			if(e) {
+				$(this).parent().find('.warning').html('');
+			} else {
+				$(this).parent().find('.warning').html('该邮箱不存在');
+				console.log('the email is not exist.')
+			}
 		},
-		pwdNotSame: function() {
-			console.log('the two passwords are not same.')
+		pwdNotSame: function(e) {
+			if(e) {
+				$(this).parent().find('.warning').html('');
+			} else {
+				$(this).parent().find('.warning').html('两次输入密码不一致');
+				console.log('the two passwords are not same.')
+			}
+		},
+		eAuthCodeIncorrect: function(e) {
+			if(e) {
+				$(this).parent().find('.warning').html('');
+			} else {
+				$(this).parent().find('.warning').html('验证码不正确');
+				console.log('eAuthCode is incorrect.')
+			}
+		}
+	},
+	input = {
+		login: {
+			email: document.forms.loginForm.email,
+			pwd: document.forms.loginForm.pwd
+		},
+		register: {
+			email: document.forms.registerForm1.email,
+			pwd: document.forms.registerForm1.pwd,
+			authcode: document.forms.registerForm1.authcode,
+			username: document.forms.registerForm2.username
+		},
+		fetchPwd: {
+			email: document.forms.getCode.email,
+			authcode: document.forms.writeCode.authcode
+		},
+		changePwd: {
+			first: document.forms.changePwd.first,
+			second: document.forms.changePwd.second
 		}
 	};
 
@@ -242,6 +391,9 @@ $('#siteinfo_close').click(function() {
 });
 
 //login && register
+$('form').submit(function() {
+	return false;
+});
 $('#login_btn, #login_switch').click(function() {
 	if($('#login_area_container').hasClass('login_bg_hiding'))
 		$('.login_area_form').hide();
@@ -258,26 +410,99 @@ $('#register_btn, #register_switch').click(function() {
 	
 	return false;
 });
-$('.login_area_header .close, #r_submit2, #l_submit, #c_submit').click(function() {
-	var objArr = [$('#login_area_container'), $('.login_area')];
-	lrAction.closeForm();
-	i.delayHide(370, objArr);
-});
-
-$('#r_submit1').click(function() {
-	lrAction.register1Hide();
-	lrAction.register2Show();
-});
 
 $('#forget_pwd_link').click(function() {
 	lrAction.forgetShow();
 });
+
+$('.login_area_header .close').click(function() {
+	closeTheTopArea();
+});
+
+function closeTheTopArea() {
+	var objArr = [$('#login_area_container'), $('.login_area')];
+
+	lrAction.closeForm();
+	i.delayHide(370, objArr);
+}
+
+
+/* need to checkout */
+
+function whenBlurCheck(obj, check, args) {
+	$(obj).blur(function() {
+		check.apply(this, args);
+	})
+}
+
+whenBlurCheck(input.register.email, check.emailFormat, [input.register.email, error.emailFormat])
+whenBlurCheck(input.register.pwd, check.pwdFormat, [input.register.pwd, error.pwdFormat])
+whenBlurCheck(input.register.authcode, check.authCode, [input.register.authcode, error.authCodeError])
+whenBlurCheck(input.register.username, check.username, [input.register.username, error.username])
+whenBlurCheck(input.fetchPwd.authcode, check.eAuthCode, [input.fetchPwd.authcode, error.eAuthCodeIncorrect])
+whenBlurCheck(input.changePwd.first, check.pwdFormat, [input.changePwd.first, error.pwdFormat])
+whenBlurCheck(input.changePwd.second, check.pwdSame, [input.changePwd.first, input.changePwd.second, error.pwdNotSame])
+
+$('#l_submit').click(function() {
+	var e = input.login.email.value,
+		p = input.login.pwd.value;
+
+	if(check.login(input.login.email, e, p, error.loginError)) {
+		closeTheTopArea();
+	}
+});
+
+$('#r_submit1').click(function() {
+	var e = input.register.email,
+		p = input.register.pwd,
+		a = input.register.authcode;
+
+	if(check.emailFormat(e, error.emailFormat) && check.pwdFormat(p, error.pwdFormat) && check.authCode(a, error.authCodeError)) {
+
+		lrAction.register1Hide();
+		lrAction.register2Show();
+	}
+});
+$('#r_submit2').click(function() {
+	var u = input.register.username;
+	var nickname = $('#nickname').val();
+
+	if(check.username(u, error.username)) {
+
+		$.post('/User/setNickName', {nickname: nickname}, function (data) {
+			console.log(data);
+			if (data == 1) {
+				closeTheTopArea();
+			} else if (data == 0) {
+				alert('注册失败');
+			}
+		})
+	}
+});
+
 $('#f_submit1').click(function() {
-	lrAction.writecodeShow();
+	var e = input.fetchPwd.email;
+
+	if(check.emailExist(e, error.emailNotExist)) {
+		lrAction.writecodeShow();
+	}
 });
 $('#f_submit2').click(function() {
-	lrAction.changepwdShow();
+	var a = input.fetchPwd.authcode;
+
+	if(check.eAuthCode(a, error.eAuthCodeIncorrect)) {
+		lrAction.changepwdShow();
+	}
 })
+
+$('#c_submit').click(function() {
+	var p1 = input.changePwd.first,
+		p2 = input.changePwd.second;
+
+	if(check.pwdSame(p1, p2, error.pwdNotSame) && check.pwdFormat(p1, error.pwdFormat)) {
+		closeTheTopArea();
+	}
+});
 
 
 ;(function(){

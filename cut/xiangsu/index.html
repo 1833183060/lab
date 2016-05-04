@@ -68,23 +68,36 @@
 					<span class="form_switch_area">或 <a id="login_switch" class="form_switch_link" href="">登录</a></span>
 				</div>
 				<div class="forms">
-					<form id="register1">
-						<input class="index_text_inp" type="text" placeholder="请输入有效的邮箱" /><br>
-						<input class="index_text_inp" type="password" placeholder="密码（6-18位数字或字符）" /><br>
+					<form id="register1" name="registerForm1">
+						<div class="inputBox">
+							<input class="index_text_inp" name="email" id="reg_email" type="text" placeholder="请输入有效的邮箱" />
+							<div class="warning"></div>
+						</div>
+						<div class="inputBox">
+							<input class="index_text_inp" name="pwd" id="reg_password" type="password" placeholder="密码（6-18位数字或字符）" />
+							<div class="warning"></div>
+						</div>
 						<div class="auth_code_area">
-							<input class="index_text_inp" type="text" placeholder="输入验证码" />
-							<div class="auth_code"></div>
+							<div class="inputBox" style="display: inline-block;">
+								<input class="index_text_inp" name="authcode" id="reg_verify_code" type="text" placeholder="输入验证码" />
+								<div class="warning"></div>
+							</div>
+							<div class="auth_code">
+								<img id="captcha" alt="验证码" src="{:U('Home/Common/createVerify',array())}" title="点击刷新">
+							</div>
 						</div>
 						<div class="submit_btn_area">
 							<!-- <div class="submit_btn_arrow">-----</div> -->
-							<input class="submit_btn" id="r_submit1" type="button" />
+							<input class="submit_btn" id="r_submit1" type="submit" />
 						</div>
 					</form>
-					<form id="register2" class="register_form2">
-						<input class="index_text_inp" type="text" placeholder="请设置用户名" /><br>
+					<form id="register2" class="register_form2" name="registerForm2">
+						<div class="inputBox">
+							<input class="index_text_inp" type="text" id="nickname" name="username" placeholder="请设置用户名（3-15位数字或字符）" />
+						</div>
 						<div class="submit_btn_area">
 							<!-- <div class="submit_btn_arrow">-----</div> -->
-							<input class="submit_btn" id="r_submit2" type="button" />
+							<input class="submit_btn" id="r_submit2" type="submit" />
 						</div>
 					</form>
 				</div>
@@ -97,13 +110,19 @@
 					<span class="form_switch_area">或 <a id="register_switch" class="form_switch_link" href="">注册</a></span>
 				</div>
 				<div class="forms">
-					<form id="login">
-						<input class="index_text_inp" type="text" placeholder="注册邮箱" /><br>
-						<input class="index_text_inp" type="password" placeholder="密码" /><br>
+					<form id="login" name="loginForm">
+						<div class="inputBox">
+							<input class="index_text_inp" id='login_email' name="email" type="text" placeholder="注册邮箱" />
+							<div class="warning"></div>
+						</div>
+						<div class="inputBox">
+							<input class="index_text_inp" id="login_password" name="pwd" type="password" placeholder="密码" />
+							<div class="warning"></div>
+						</div>
 						<a id="forget_pwd_link" class="forget_pwd_link" href="#">忘记密码</a>
 						<div class="submit_btn_area">
 							<!-- <div class="submit_btn_arrow">-----</div> -->
-							<input class="submit_btn" id="l_submit" type="button" />
+							<input class="submit_btn" id="l_submit" type="submit" />
 						</div>
 					</form>
 				</div>
@@ -123,16 +142,22 @@
 					<span class="form_switch_area">或 <a id="login_switch" class="form_switch_link" href="">登录</a></span>
 				</div>
 				<div class="forms">
-					<form id="get_code">
-						<input class="index_text_inp" type="text" placeholder="输入注册邮箱，获取验证码" /><br>
+					<form id="get_code" name="getCode">
+						<div class="inputBox">
+							<input class="index_text_inp" name="email" type="text" placeholder="输入注册邮箱，获取验证码" />
+							<div class="warning"></div>
+						</div>
 						<div class="submit_btn_area">
-							<input class="submit_btn" id="f_submit1" type="button" />
+							<input class="submit_btn" id="f_submit1" type="submit" />
 						</div>
 					</form>
-					<form id="write_code" class="write_code">
-						<input class="index_text_inp" type="text" placeholder="输入验证码" /><br>
+					<form id="write_code" class="write_code" name="writeCode">
+						<div class="inputBox">
+							<input class="index_text_inp" name="authcode" type="text" placeholder="输入验证码" />
+							<div class="warning"></div>
+						</div>
 						<div class="submit_btn_area">
-							<input class="submit_btn" id="f_submit2" type="button" />
+							<input class="submit_btn" id="f_submit2" type="submit" />
 						</div>
 					</form>
 				</div>
@@ -144,11 +169,17 @@
 					<span class="form_switch_area">或 <a id="login_switch" class="form_switch_link" href="">登录</a></span>
 				</div>
 				<div class="forms">
-					<form id="change_pwd_form" class="change_pwd_form">
-						<input class="index_text_inp" type="text" placeholder="新密码" /><br>
-						<input class="index_text_inp" type="text" placeholder="确认新密码" /><br>
+					<form id="change_pwd_form" class="change_pwd_form" name="changePwd">
+						<div class="inputBox">
+							<input class="index_text_inp" name="first" type="password" placeholder="新密码" />
+							<div class="warning"></div>
+						</div>
+						<div class="inputBox">
+							<input class="index_text_inp" name="second" type="password" placeholder="确认新密码" />
+							<div class="warning"></div>
+						</div>
 						<div class="submit_btn_area">
-							<input class="submit_btn" id="c_submit" type="button" />
+							<input class="submit_btn" id="c_submit" type="submit" />
 						</div>
 					</form>
 				</div>

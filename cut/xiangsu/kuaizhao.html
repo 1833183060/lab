@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	body {
+		margin: 0;
+		background: #aaa;
+	}
+	</style>
+</head>
+<body>
+	<a id="downloadLnk" download="YourFileName.jpg">Download as image</a>
+	<script>
+
+	var a = 'http://photo.fanfou.com/v1/mss_3d027b52ec5a4d589e68050845611e68/ff/n0/0c/ac/pm_140738.jpg@596w_1l.jpg';
+
+	createSnapshoot(a, a, 320, test, ['111', '222'], ['111', '33333']); //参数分别为 用户头像，用户最新上传的轮播图，要生成的快照的高度，快照生成完毕后所要执行的回调函数，[用户名，用户描述]，[导航]。最后两个参数是可选的。
+
+	function test() { //这是一个回调函数，里面应写ajax，createSnapshoot返回的二进制图像储存在this中。
+		var _this = this;
+
+		downloadLnk.addEventListener('click', function(){
+			this.href = _this;
+		}, false);
+	}
+
+	function createSnapshoot(avatarSrc, bigimgSrc, H, callback, userInfo, nav) {
+		var WH = 28 / 19,
+			H = H,
+			W = H * WH,
+			PADDING = W / 100;
+
+		var avatarW, avatarH, bigimgW, bigimgH;
+
+		preLoadImg([avatarSrc, bigimgSrc]).done(function(imgs) {
+			imgs[0].width = avatarW = H / 12;
+			imgs[0].height = avatarH = H / 12;
+
+			bigimgW = imgs[1].width;
+			bigimgH = imgs[1].height;
+
+			var canvas = drawImg(imgs[0], imgs[1], userInfo, nav);
+			var dt = canvas.toDataURL('image/jpeg');
+
+			if(callback) {
+				callback.call(dt);
+			}
+
+		});
+
+		function preLoadImg(imgArr) {
+			var imgArr = typeof imgArr == 'object' ? imgArr : [imgArr];
+			var imgObjArr = [];
+			var loadedImg = 0;
+			var callback = function() {};
+
+			for(var i=0; i<imgArr.length; i++) {
+				imgObjArr[i] = new Image();
+				imgObjArr[i].crossOrigin = 'Anonymous';
+				imgObjArr[i].src = imgArr[i];
+				imgObjArr[i].onload = function() {
+					imgLoaded();
+				}
+				imgObjArr[i].onerror = function() {
+					imgLoaded();
+				}
+			}
+
+			function imgLoaded() {
+				loadedImg++;
+				if(loadedImg == imgArr.length) {
+					callback(imgObjArr);
+				}
+			}
+
+			return {
+				done: function(f) {
+					callback = f || callback;
+				}
+			}
+		}
+
+		function drawImg(avatar, bigimg, userInfo, nav) {
+			var snapshoot = document.createElement('canvas');
+				snapshoot.height = H;
+				snapshoot.width = W;
+			var sW = snapshoot.width,
+				sH = snapshoot.height;
+
+			var ctx = snapshoot.getContext('2d');
+
+				ctx.fillStyle = '#fff';
+				ctx.fillRect(0,0, sW, sH);
+
+			var bsWH = bigimgW / bigimgH,
+				bdW = sW-PADDING*2,
+				bdH = sH-PADDING*4-avatarH,
+				bdWH = bdW / bdH;
+
+			var bsX, bsY, bsW, bsH;
+
+			if(bsWH > bdWH) {
+				bsH = bigimgH;
+				bsW = bsH * bdWH;
+				bsX = (bigimgW - bsW) / 2;
+				bsY = 0;
+			} else {
+				bsW = bigimgW;
+				bsH = bsW / bdWH;
+				bsX = 0;
+				bsY = (bigimgH - bsH) / 2;
+			}
+
+			console.log(bsH)
+
+			ctx.drawImage(avatar, PADDING, PADDING, PADDING+avatarW, PADDING+avatarH);
+			ctx.drawImage(bigimg, bsX, bsY, bsW, bsH, PADDING, PADDING*3+avatarH, bdW, bdH);
+
+			writeWords(ctx, sW, sH, userInfo, nav);
+
+			return snapshoot;
+		}
+
+		function writeWords(ctx, sW, sH, userInfo, nav) {
+			var fontSizeB = avatarH / 4,
+				fontSizeS = avatarH / 5;
+
+			ctx.fillStyle = '#000';
+
+			ctx.font = fontSizeB + ' serif';
+			ctx.fillText(userInfo ? userInfo[0] : 'Username', PADDING*3+avatarW, PADDING*3+(avatarH-fontSizeB-fontSizeS-PADDING)/2);
+
+			ctx.font = fontSizeS + ' serif';
+			ctx.fillText(userInfo ? userInfo[1] || 'infomation' : 'infomation', PADDING*3+avatarW, PADDING*5+(avatarH-fontSizeB-fontSizeS-PADDING)/2);
+
+			ctx.textAlign = 'right';
+			if(nav) {
+				var navStr = '';
+				for(var i=0; i<nav.length; i++) {
+					navStr += (' ' + nav[i]);
+				}
+				ctx.fillText(navStr, sW-PADDING, PADDING*5+(avatarH-fontSizeB-fontSizeS-PADDING)/2);
+			} else {
+				ctx.fillText('Index Gallery Blog', sW-PADDING, PADDING*5+(avatarH-fontSizeB-fontSizeS-PADDING)/2);
+			}
+		}
+	}
+	</script>
+</body>
+</html>
