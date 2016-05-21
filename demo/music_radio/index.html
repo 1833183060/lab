@@ -96,40 +96,21 @@
 				if (xhttp.readyState == 4 && xhttp.status == 200) {
 				    var data = JSON.parse(xhttp.responseText);
 				    
-				} else {
-					var data = {
-						"recommend": [
-							{
-								"mp3Url": "./test_data/music1.mp3",
-								"name": "线性代数起床专用铃声",
-								"artists": [
-									{
-										"name": "谷歌娘"
-									}
-								],	
-								"album": {
-									"picUrl": "./test_data/2.jpg"
-								}
-							}
-						],
-						"code": "200"
+					var musicData = data.recommend;
+					var newMusicData = {};
+
+					for(var i=0; i<musicData.length; i++) {
+						newMusicData[i] = {};
+						newMusicData[i].song_src = musicData[i].mp3Url;
+						newMusicData[i].song_name = musicData[i].name;
+						newMusicData[i].artist_name = musicData[i].artists[0].name;
+						newMusicData[i].img = musicData[i].album.picUrl;
 					}
-				}
+					console.log(newMusicData);
+					player.createPlayList(newMusicData);
 
-				var musicData = data.recommend;
-				var newMusicData = {};
-
-				for(var i=0; i<musicData.length; i++) {
-					newMusicData[i] = {};
-					newMusicData[i].song_src = musicData[i].mp3Url;
-					newMusicData[i].song_name = musicData[i].name;
-					newMusicData[i].artist_name = musicData[i].artists[0].name;
-					newMusicData[i].img = musicData[i].album.picUrl;
-				}
-				console.log(newMusicData);
-				player.createPlayList(newMusicData);
-
-				player.play(window.localStorage.index?parseInt(window.localStorage.index):0); //auto play
+					player.play(window.localStorage.index?parseInt(window.localStorage.index):0); //auto play
+				} 
 			};
 			xhttp.open("GET", json_path, true);
 			xhttp.send();

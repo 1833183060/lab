@@ -222,6 +222,7 @@ Player.prototype.add = function(data) { //追加播放列表
 Player.prototype.load = function(theSong) { //加载音乐
 	var theSong = theSong != undefined ? theSong : this.playList[this.index];
 	var _this = this;
+	console.log(theSong)
 	this.pEle.songName.innerHTML = theSong.song_name;
 	this.pEle.singer.innerHTML = theSong.artist_name;
 	this.pEle.bgImg.style.backgroundImage = 'url(' + theSong.img + ')';
