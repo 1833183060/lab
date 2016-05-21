@@ -213,6 +213,10 @@ var check = {
 			var email = $('#login_email').val();
 			var password = $('#login_password').val();
 			$.post('/User/doLogin', {email: email, password: password}, function (data) {
+
+				console.log(email + ' ' + password)
+				console.log(data)
+
 				if (data == 1) {
 					location.href = '/User/index';	
 				} else {
@@ -220,19 +224,25 @@ var check = {
 				}
 			})
 		},
-		authCode: function(obj, error) {
+		authCode: function(obj) {
 			/*ajax*/
 			var email = $('#reg_email').val();
 			var password = $('#reg_password').val();
 			var verify_code = $('#reg_verify_code').val();
-
 			console.log(email+' '+password+' '+verify_code)
 
 			$.post('/User/doReg', {email: email, password: password, verify_code: verify_code}, function (data) {
+
+				console.log(data)
+				$('.inputBox .warning').html('');
+
 				if (data == 2) {
-					error.call(obj);
-				} else if (data == 1) {
-					alert('注册成功');
+					error.authCodeError.call(obj[1]);
+				} else if (data.status == 1) {
+					lrAction.register1Hide();
+					lrAction.register2Show();
+				} else if(data.status == 0) {
+					error.emailRepeat.call(obj[0]);
 				}
 			})
 		},
@@ -326,6 +336,13 @@ var check = {
 			} else {
 				$(this).parent().find('.warning').html('验证码不正确');
 				console.log('eAuthCode is incorrect.')
+			}
+		},
+		emailRepeat: function(e) {
+			if(e) {
+				$(this).parent().find('.warning').html('');
+			} else {
+				$(this).parent().find('.warning').html('这个邮箱已经被注册过');
 			}
 		}
 	},
@@ -437,7 +454,7 @@ function whenBlurCheck(obj, check, args) {
 
 whenBlurCheck(input.register.email, check.emailFormat, [input.register.email, error.emailFormat])
 whenBlurCheck(input.register.pwd, check.pwdFormat, [input.register.pwd, error.pwdFormat])
-whenBlurCheck(input.register.authcode, check.authCode, [input.register.authcode, error.authCodeError])
+// whenBlurCheck(input.register.authcode, check.authCode, [input.register.authcode, error.authCodeError])
 whenBlurCheck(input.register.username, check.username, [input.register.username, error.username])
 whenBlurCheck(input.fetchPwd.authcode, check.eAuthCode, [input.fetchPwd.authcode, error.eAuthCodeIncorrect])
 whenBlurCheck(input.changePwd.first, check.pwdFormat, [input.changePwd.first, error.pwdFormat])
@@ -457,10 +474,9 @@ $('#r_submit1').click(function() {
 		p = input.register.pwd,
 		a = input.register.authcode;
 
-	if(check.emailFormat(e, error.emailFormat) && check.pwdFormat(p, error.pwdFormat) && check.authCode(a, error.authCodeError)) {
-
-		lrAction.register1Hide();
-		lrAction.register2Show();
+	if(check.emailFormat(e, error.emailFormat) && check.pwdFormat(p, error.pwdFormat)) {
+		 check.authCode([e, a])
+		
 	}
 });
 $('#r_submit2').click(function() {
@@ -470,7 +486,9 @@ $('#r_submit2').click(function() {
 	if(check.username(u, error.username)) {
 
 		$.post('/User/setNickName', {nickname: nickname}, function (data) {
+
 			console.log(data);
+			
 			if (data == 1) {
 				closeTheTopArea();
 			} else if (data == 0) {
