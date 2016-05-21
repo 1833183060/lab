@@ -1,0 +1,17 @@
+{
+	"recommend": [
+		{
+			"mp3Url": "../test_data/music1.mp3",
+			"name": "线性代数起床专用铃声",
+			"artists": [
+				{
+					"name": "谷歌娘"
+				}
+			],	
+			"album": {
+				"picUrl": "../test_data/2.jpg"
+			}
+		}
+	],
+	"code": "200"
+}

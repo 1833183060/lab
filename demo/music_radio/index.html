@@ -47,13 +47,16 @@
 			<!-- <div class="open_lyric_btn"><a href="#">Open Lyric</a></div> -->
 		</div>
 	</main>
+
+	<canvas id="wave_canvas" class="wave_canvas"></canvas>
 	
 	<script src="./js/player.js"></script>
-	<script src="http://w.ujn.me/Public/Home/js/jquery-2.1.1.min.js"></script>
+	<script src="./js/wave.js"></script>
 	<script>
 		window.onload = function() {
 			document.getElementById('load_tip').style.display = 'none';
 		}
+
 		var player = new Player({
 			audioObj: 'myaudio',
 			playBtn: 'play',
@@ -68,22 +71,51 @@
 			discImg: 'disc_img'
 		});
 
-		$.getJSON('./test_data/music_json.json', function(data) {
-			var musicData = data.recommend;
-			var newMusicData = {};
-			//console.log(musicData);
+		if( ! window.navigator.onLine) {
+			window.localStorage.index = 0;
+			loadJson('./test_data/music_json_offline.json');	
+			launch('myaudio', 'wave_canvas')
+		} else {
+			loadJson('./test_data/music_json.json');
+		}
 
-			for(var i=0; i<musicData.length; i++) {
-				newMusicData[i] = {};
-				newMusicData[i].song_src = musicData[i].mp3Url;
-				newMusicData[i].song_name = musicData[i].name;
-				newMusicData[i].artist_name = musicData[i].artists[0].name;
-				newMusicData[i].img = musicData[i].album.picUrl;
-			}
-			player.createPlayList(newMusicData);
+		function launch(audioId, canvasId) {
+			var audioNode = typeof audioId == 'object' ?  audioId : document.getElementById(audioId);
+			var canvasNode = typeof canvasId == 'object' ?  canvasId : document.getElementById(canvasId);
 
-			player.play(window.localStorage.index?parseInt(window.localStorage.index):0); //auto play
-		});
+			canvasNode.width = document.body.clientWidth;
+			canvasNode.height = document.body.clientHeight;
+
+			var test = new Wave(audioNode, canvasNode);
+			test.render();
+		}
+		
+		function loadJson(json_path) {
+			var xhttp = new XMLHttpRequest();
+			xhttp.onreadystatechange = function() {
+				if (xhttp.readyState == 4 && xhttp.status == 200) {
+				    var data = JSON.parse(xhttp.responseText);
+				    var musicData = data.recommend;
+					var newMusicData = {};
+
+					for(var i=0; i<musicData.length; i++) {
+						newMusicData[i] = {};
+						newMusicData[i].song_src = musicData[i].mp3Url;
+						newMusicData[i].song_name = musicData[i].name;
+						newMusicData[i].artist_name = musicData[i].artists[0].name;
+						newMusicData[i].img = musicData[i].album.picUrl;
+					}
+					console.log(newMusicData);
+					player.createPlayList(newMusicData);
+
+					player.play(window.localStorage.index?parseInt(window.localStorage.index):0); //auto play
+
+
+				}
+			};
+			xhttp.open("GET", json_path, true);
+			xhttp.send();
+		}
 	</script>
 </body>
 </html>

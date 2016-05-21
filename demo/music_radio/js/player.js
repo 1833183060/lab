@@ -93,6 +93,10 @@ Player.prototype.init = function() { //初始化播放器，设置一些必要�
 		_this.pEle.playBtn.style.display = 'inline';
 		_this.pEle.pauseBtn.style.display = 'none';
 	} //update
+	this.audio.onerror = function() {
+		_this.index += 1;
+		_this.next();
+	}
 
 	window.onbeforeunload = function() {
 		window.localStorage.index = _this.index; //record the last you have listened.
@@ -266,7 +270,9 @@ Player.prototype.prev = function() {
 			this.index -= 1;
 			this.load();
 		} else {
-			alert('this is the first one.');
+			this.index = this.playList.length - 1;
+			this.pauseTime = 0;
+			this.load();
 		}
 	}
 }
@@ -278,7 +284,9 @@ Player.prototype.next = function() {
 			this.index += 1;
 			this.load();
 		} else {
-			alert('this is the last one.');
+			this.index = 0;
+			this.pauseTime = 0;
+			this.load();
 		}
 	}
 }
