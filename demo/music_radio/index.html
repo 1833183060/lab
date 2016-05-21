@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0,maximum-scale=1.0, user-scalable=no">
+	<title>Music Radio</title>
+
+	<link rel="stylesheet" href="./css/style.css">
+	<link rel="stylesheet" href="./iconfont/iconfont.css">
+</head>
+<body>
+	<div id="load_tip" class="load_tip">
+		<h1>电台君正努力加载中/w\</h1>
+	</div>
+	<div id="progress_wrapper" class="progress_wrapper">
+		<div id="progressing" class="progressing"></div>
+	</div>
+	<div id="bg_img" class="bg_img">
+		<div class="bg_color"></div>
+	</div>
+	<main>
+		<div class="abox">
+			<div class="music_info">
+				<h1><span id="song_name"></span> ~ <span id="singer"></span></h1>
+			</div>
+			<div class="disc">
+				<div id="disc_img" class="disc_img"></div>
+			</div>
+			<div class="player">
+				<audio id="myaudio"></audio>
+				<div id="prev" class="player_btn prev_btn">
+					<i class="iconfont icon-arrowleftoff"></i>
+				</div>
+				<div class="play_and_pause">
+					<div id="play" class="player_btn play_btn">
+						<i class="iconfont icon-play"></i>
+					</div>
+					<div id="pause" class="player_btn pause_btn">
+						<i class="iconfont icon-pause"></i>
+					</div>
+				</div>
+				<div id="next" class="player_btn next_btn">
+					<i class="iconfont icon-arrowleftoff right_arrow"></i>
+				</div>
+			</div>
+			<!-- <div class="open_lyric_btn"><a href="#">Open Lyric</a></div> -->
+		</div>
+	</main>
+	
+	<script src="./js/player.js"></script>
+	<script src="http://w.ujn.me/Public/Home/js/jquery-2.1.1.min.js"></script>
+	<script>
+		window.onload = function() {
+			document.getElementById('load_tip').style.display = 'none';
+		}
+		var player = new Player({
+			audioObj: 'myaudio',
+			playBtn: 'play',
+			pauseBtn: 'pause',
+			prevBtn: 'prev',
+			nextBtn: 'next',
+			songName: 'song_name',
+			singer: 'singer',
+			progressWrapper: 'progress_wrapper',
+			progressing: 'progressing',
+			bgImg: 'bg_img',
+			discImg: 'disc_img'
+		});
+
+		$.getJSON('./test_data/music_json.json', function(data) {
+			var musicData = data.recommend;
+			var newMusicData = {};
+			//console.log(musicData);
+
+			for(var i=0; i<musicData.length; i++) {
+				newMusicData[i] = {};
+				newMusicData[i].song_src = musicData[i].mp3Url;
+				newMusicData[i].song_name = musicData[i].name;
+				newMusicData[i].artist_name = musicData[i].artists[0].name;
+				newMusicData[i].img = musicData[i].album.picUrl;
+			}
+			player.createPlayList(newMusicData);
+
+			player.play(window.localStorage.index?parseInt(window.localStorage.index):0); //auto play
+		});
+	</script>
+</body>
+</html>

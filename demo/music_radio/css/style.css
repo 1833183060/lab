@@ -1,0 +1,145 @@
+html, body{
+	width: 100%; height: 100%;
+	font-family: Microsoft YaHei;
+}
+body {
+	margin: 0;
+	overflow: hidden;
+}
+
+.load_tip {
+	position: absolute;
+	height: 100%; width: 100%;
+	background: rgba(255,255,255,.8);
+	z-index: 5;
+	display: table;
+}
+.load_tip h1 {
+	margin: 0;
+	color: #444;
+	display: table-cell;
+	vertical-align: middle;
+	text-align: center;
+}
+
+.progress_wrapper {
+	background: rgba(0,0,0,.5);
+	width: 100%; height: 5px;
+	position: relative;
+	z-index: 2;
+}
+.progressing {
+	background: #f00;
+	position: absolute;
+	width: 0; height: 100%;
+	opacity: .8;	
+}
+
+.bg_img {
+	position: absolute;
+	top: -10%; left: -10%;
+	width: 120%; height: 120%;
+	background-size: cover;
+	background-repeat: no-repeat;
+	-webkit-filter: blur(40px);
+	filter: blur(40px);
+	-moz-filter: blur(40px);
+}
+.bg_color {
+	background: rgba(0,0,0, .5);
+	width: 100%; height: 100%;
+}
+
+main {
+	display: table;
+	vertical-align: middle;
+	width: 100%; height: 100%;
+}
+main .abox {
+	display: table-cell;
+	vertical-align: middle;
+	text-align: center;
+	position: relative;
+}
+.music_info h1 {
+	color: #eee;	
+	text-shadow: 0 0 7px #000;
+}
+.disc {
+	margin: auto;
+	width: 300px; height: 300px;
+	border-radius: 50%;
+	border: 4px solid rgba(255,255,255, .1);
+	background-color: rgba(0,0,0, .7);
+	background-size: cover;
+	background-repeat: no-repeat;
+	position: relative;
+
+	animation: spin 17s linear infinite;
+	-webkit-animation: spin 17s linear infinite;
+}
+.disc_img {
+	width: 60%; height: 60%;
+	border-radius: 50%;
+	border: 3px solid rgba(0,0,0, 1);
+	box-shadow: 0 0 4px 2px #000;
+	background-size: cover;
+	background-repeat: no-repeat;
+	margin: auto;
+	position: absolute;
+	top: 0; right: 0; bottom: 0; left: 0;
+}
+.disc_position {
+	top: -25%;
+	right: 0; left: 0;
+}
+
+@keyframes spin {
+	100% {
+		transform: rotate(360deg);
+	}
+}
+@-webkit-keyframes spin {
+	100% {
+		-webkit-transform: rotate(360deg);
+	}
+}
+
+
+.player {
+	margin-top: 30px;
+}
+.player_btn {
+	display: inline-block;
+	cursor: pointer;
+}
+.next_btn {
+	transform: rotate(180deg);
+	-webkit-transform: rotate(180deg);
+}
+.player_btn .iconfont {
+	color: #eee;
+	font-size: 40px;
+	line-height: 24px;
+}
+.pause_btn {
+	margin-top: 5px;
+}
+.play_and_pause {
+	position: relative;
+	display: inline-block;
+	width: 60px; height: 40px;
+	margin: 0 40px;
+}
+.play_and_pause .iconfont {
+	font-size: 60px;
+}
+.play_btn {
+	position: absolute;
+	top: 10px; left: 0;
+}
+.pause_btn {
+	position: absolute;
+	top: 10px; left: 0;
+	display: none;
+}
