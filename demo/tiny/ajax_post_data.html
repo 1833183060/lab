@@ -41,7 +41,7 @@ $('.card button').on('click', function() {
             index: $(this).parent().attr('data-index'),
             content: $(this).parent().find('.content').text()
         },
-        error: function() {
+        complete: function() {
             alert('index: ' + this.contents.index + '\ncontent: ' + this.contents.content);
         }
     })
