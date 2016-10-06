@@ -243,6 +243,8 @@
         },
 
         makeupExp: function( str ) {
+
+            // fu*k your uncle
             switch( true ) {
                 case str == '=' :
                     if( !this.lock && !this.bracketFlag && !this.equalFlag) {
