@@ -57,7 +57,8 @@ blogData = [
         "sub_title": "测试2",
         "content": "哈哈哈",
         "column_id": "146",
-        "time": "1461329106"
+        "time": "1461329106",
+        "cover": "http://sev.snsu.me/Public/Uploads/2016-05-09/57305b7f9cb7a.jpg"
     }
 ],
 blogData2 = [
@@ -89,8 +90,8 @@ indexData = [
         "path": "http://photo2.fanfou.com/v1/mss_3d027b52ec5a4d589e68050845611e68/ff/n0/0b/z8/gp_308612.jpg@596w_1l.jpg",
         "wid": "39",
         "time": "1461404139",
-        "name": "33333",
-        "description": "22首页下方简介文字，web端只显示浏览器当前页面宽度的三分之一，显示这么长阅读太累了，而且不好看。+手机端的适配首页下方简介文字，web端只显示浏览器当前页面宽度的三分之一，显示这么长阅读太累了，而且不好看。+手机端的适配",
+        "name": "",
+        "description": "",
         "link": ""
     },
     {
@@ -142,7 +143,7 @@ navData = [
         "uid": "23",
         "wid": "39",
         "type": "2",
-        "visible": "0",
+        "visible": "1",
         "order": null,
         "default": "1",
         "time": "1461404115",

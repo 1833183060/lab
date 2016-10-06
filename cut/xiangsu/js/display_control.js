@@ -1,48 +1,88 @@
 var GLOBAL_PATH = '/Public/';
 
-var pageControl = {
-    show: function(pageName, time) {
-        var a = "$('"+pageName+"').show().removeClass('hide').addClass('show').css('animation-duration', '"+(time/1000)+"s');";
 
-        this.hide('.main_page', time);
-        this.delayHide(time, [$('.main_page')], a);
+function EventTarget() {
+    this.handlers = {};
+}
+EventTarget.prototype = {
+    constructor: EventTarget,
+    addHander: function(event, action) {
+        if(typeof this.handlers[event] == 'undefined') {
+            this.handlers[event] = new Array();
+        }
+        this.handlers[event].push(action);
     },
-    hide: function(pageName, time) {
-        var page = $(pageName);
-        page.removeClass('show').addClass('hide');
-    },
-    delayHide: function(time, objArr, callback) {
-        setTimeout(function(){
-            for(var i=0; i<objArr.length; i++) {
-                objArr[i].hide();
+    removeHander: function(event, action) {
+        if(this.handlers[event] instanceof Array) {
+            var actionArr = this.handlers[event];
+            for(var i=0; i<actionArr.length; i++) {
+                if(actionArr[i] == action) {
+                    actionArr.splice(i, 1);
+                    break;
+                }
             }
-            eval(callback);
-        }, time+70);
+        }
+    },
+    trigger: function(bindConfig) {
+        if(!bindConfig.target) {
+            bindConfig.target = this;
+        }
+        if(this.handlers[bindConfig.event] instanceof Array) {
+            var actionArr = this.handlers[bindConfig.event];
+            for(var i=0; i<actionArr.length; i++) {
+                actionArr[i](bindConfig);
+            }
+        }
     }
-}; //控制页面的切换效果
+}
+
+function extend(subType, superType) {
+    var prototype = Object(superType.prototype);
+    prototype.constructor = subType;
+    subType.prototype = prototype;
+}
 
 
-/****
+
+function PageControl() { //控制页面的切换效果
+    EventTarget.call(this);
+}
+extend(PageControl, EventTarget);
+PageControl.prototype.show = function(pageName, time) {
+     var a = "$('"+pageName+"').show().removeClass('hide').addClass('show').css('animation-duration', '"+(time/1000)+"s');";
+
+    this.hide('.main_page', time);
+    this.delayHide(time, [$('.main_page')], a);
+
+    this.trigger({event: 'haveContent'});
+}
+PageControl.prototype.hide = function(pageName, time) {
+    var page = $(pageName);
+    page.removeClass('show').addClass('hide');
+}
+PageControl.prototype.delayHide = function(time, objArr, callback) {
+    setTimeout(function(){
+        for(var i=0; i<objArr.length; i++) {
+            objArr[i].hide();
+        }
+        eval(callback);
+    }, time+70);
+}
 
 
 
-****/
-
+/* *
+ *
+ *
+ *
+ * */
 function Images() { //画廊
     this.data = '';
     this.images = $('#images');
-    this.layer = $('#layer');
-    this.showed_img = $('#layer #showed_img');
 
     this.hash = new Hash();
 
-    // this.model = '<div class="img_item_box"><div class="img_item"><div class="img_info"><h1 class="img_title"></h1><p class="img_desc"></p></div></div></div>';
-
-    this.model = '<div class="img_item_box"><a class="fancybox-thumbs" data-fancybox-group="thumb" href="( src )"><div class="img_item" style="background-image:url(( src ))"><div class="img_info"><h1 class="img_title">( title )</h1><p class="img_desc">( desc )</p></div></div></a></div>';
-
-    // this.model = '<div class="floatItem galleryItem" ><a class="fancybox-gallery" href="{$vo.path}" data-fancybox-group="thumb" title="{$vo.name}" data-description="{$vo.description}"><div class="galleryImg" name="{$vo.id}"  alt="" style="background-image: url({$vo.path});"><div class="galleryImgCover"><div class="galleryImgTitle">{$vo.name}</div><div class="galleryImgDisc">{$vo.description}</div></div></div></a></div>';
-
-    // this.changeImage();
+    this.model = '<div class="img_item_box"><a class="fancybox-thumbs" data-fancybox-group="thumb" href="( src )" title="( title )" data-description="( desc )"><div class="img_item" style="background-image:url(( src )@!gallery_thumb)"><div class="img_info"><h1 class="img_title">( title )</h1><p class="img_desc">( desc )</p></div></div></a></div>';
 }
 
 Images.prototype = {
@@ -52,14 +92,28 @@ Images.prototype = {
         this.data = data;
         this.images.html('');
 
-        // var num = this.data.length;
-        
-        // for(var i=0; i<num; i++) {
-        //     this.images.append(this.model);
-        // }
-
         this.showImage();
-        // this.launchLayer();
+        this.autoSwitch();
+    },
+    autoSwitch: function() {
+        var _this = this;
+
+        var width = _this.images.find('.img_item_box:last-child').width(),
+            windowWidth = this.images.width() - 80;
+        if(width <= 100) {
+            width = width / 100 * windowWidth;
+        }
+        this.images.find('.img_item_box').each(function() {
+            console.log(width)
+            $(this).height(width / 1.33);
+        });
+
+        $(window).resize(function() {
+            var width = _this.images.find('.img_item_box:last-child').width();
+            _this.images.find('.img_item_box').each(function() {
+                $(this).height(width / 1.33);
+            });
+        });
     },
     showImage: function() { //填充数据
         var data = this.data;
@@ -67,109 +121,32 @@ Images.prototype = {
         var num = data.length;
 
         for(var i = 0; i<data.length; i++) {
+
             config.src = data[i].path;
             config.title = data[i].name;
             config.desc = data[i].description;
 
-            this.images.append(modelPre(this.model, config));   
+            this.images.append(modelPre(this.model, config));
+
+            if(config.title == '' && config.desc == '') {
+                this.images.find('.img_item_box:last-child .img_info').hide()
+            }
         }
-
-        // this.images.find('.img_item_box').each(function() {
-        //     data[i].path = data[i].path.indexOf('Public') != -1 ? data[i].path : GLOBAL_PATH + data[i].path;
-
-        //     $(this).find('.img_item').css('background-image', 'url('+ data[i].path +')').attr('data-index', i).attr('data-src', data[i].path);
-        //     $(this).find('.fancybox-thumbs').attr('href', data[i].path);
-        //     $(this).find('img_title').html(data[i].name);
-        //     $(this).find('img_desc').html(data[i].description);
-        //     if(data[i].name == '' && data[i].description == '') {
-        //         $(this).find('.img_info').hide();
-        //     }
-        // });
     },
-    // launchLayer: function() { //开启图片模态预览功能
-    //     var _this = this;
-
-    //     $('.img_item').click(function() {
-    //         var src = $(this).attr('data-src'),
-    //             index = $(this).attr('data-index');
-
-    //         _this.deployLayerData(src, index);
-
-    //         _this.layer
-    //             .show()
-    //             .animate({
-    //                 'opacity': 1
-    //             }, 300);
-    //     });
-
-    //     this.layer.find('#back').click(function() {
-    //         _this.layer
-    //             .animate({
-    //                 'opacity': 0
-    //             }, 300, function() {
-    //                 $(this).hide();
-    //             })
-    //     })
-    // },
-    // deployLayerData: function(src, index) { //为弹出层填充数据
-    //     var _this = this;
-
-    //     this.showed_img.attr('src',src).attr('data-index', index);
-    //     this.layer.find('#title').html(_this.data[index].name);
-    //     this.layer.find('#desc').html(_this.data[index].description);
-    // },
-    // changeImage: function() { //弹出层更新数据
-    //     var prev = $('#layer #prev_p'),
-    //         next = $('#layer #next_p');
-    //     var _this = this;
-
-    //     prev.click(function() {
-    //         var index = parseInt(_this.showed_img.attr('data-index')) - 1,
-    //             src = _this.data[index] ? _this.data[index].path : 0;
-
-    //         if(src) {
-    //             _this.deployLayerData(src, index);
-    //         } else {
-    //             _this.warning('the first!');
-    //         }
-    //     });
-
-    //     next.click(function() {
-    //         var index = parseInt(_this.showed_img.attr('data-index')) + 1,
-    //             src = _this.data[index] ? _this.data[index].path : 0;
-
-    //         if(src) {
-    //             _this.deployLayerData(src, index);
-    //         } else {
-    //             _this.warning('the last!');
-    //         }
-    //     });
-    // },
-    // warning: function(warning) { //弹出层警告（当图片为第一张或最后一张）
-    //     $('#warning')
-    //         .html(warning)
-    //         .show()
-    //         .animate({
-    //             'opacity': 1
-    //         }, 1000, function() {
-    //             $(this).animate({
-    //                 'opacity': 0
-    //             }, 1000, function() {
-    //                 $(this).hide();
-    //             });
-    //         });
-    // },
     readHash: function(url) { //读取hash以拉取数据（只有读到了hash才能拉取数据）
         this.hash.read(request, this, url, this.init, imgData);
-        this.hash.read(request, this, imgInfoRequestURL, this.imgInfoCtrl, {})
+        this.hash.read(request, this, imgInfoRequestURL, this.imgInfoCtrl, [{pic_name_visible: '1',pic_des_visible:'0'}])
     },
     imgInfoCtrl: function(data) {
         var data = data[0];
 
         if(data.pic_name_visible == '0') {
             $('.img_title').hide();
-        }
-        if(data.pic_des_visible == '0') {
+
+            if(data.pic_des_visible == '0') {
+                $('.img_info').hide();
+            }
+        } else if(data.pic_des_visible == '0') {
             $('.img_desc').hide();
         }
     }
@@ -184,16 +161,19 @@ function Blog() { //博客
 
     this.prev = $('#blog #prev_b');
     this.next = $('#blog #next_b');
+    this.prevTitle = $('#blog #prev_b .pageUpTitle');
+    this.nextTitle = $('#blog #next_b .pageDownTitle');
+
+    this.warning = $('#warning');
 
     this.hash = new Hash();
     this.PREFIX = 'blog';
 
-    this.model = '<div class="blog_header"><h1 id="article_title"></h1><span id="article_time"></span></div><div id="article_content" class="blog_content"></div>';
+    this.model = '<div class="articleCover" style="background-image: url(( src ))"></div><div class="articleTitle">( title )</div><div class="articleContent">( content )</div>';
 }
 Blog.prototype = {
     constructor: Blog,
     init: function(data) { //初始化
-        this.blog_main.html(this.model);
 
         this.prev.unbind('click');
         this.next.unbind('click');
@@ -205,19 +185,30 @@ Blog.prototype = {
         this.hash.read(request, this, url, this.init, blogData)
     },
     showArticle: function(data) { //部署数据
-        this.data = data[0];
 
-        var date = new Date(parseInt(this.data.time) * 1000),
-            time = date.getFullYear() + '/' + (date.getMonth() + 1)+ '/' + date.getDate();
-
-        this.cid = this.data.column_id;
-
-        this.blog_main.find('#article_title').html(this.data.title);
-        this.blog_main.find('#article_time').html(time);
-        this.blog_main.find('#article_content').html(this.data.content);
-        this.blog_main.attr('data-id', this.data.id);
-
-        this.hash.change(this.PREFIX, this.data.column_id, this.data.id);
+        if(! ( data[0] && (data[0].title || data[0].content) )) {
+            this.openWarning('没有了');
+        } else {
+            document.body.scrollTop = 0;
+            this.blog_main.html('');
+            this.data = data[0];
+            var data = this.data;
+            var config = {
+                src: 'http://img.snsu.me' + data.cover + '@!blog_cover',
+                title: data.title,
+                content: data.content
+            };
+            this.blog_main.append(modelPre(this.model, config));
+            this.blog_main.attr('data-id', this.data.id);
+            this.prevTitle.html(data.preTitle ? data.preTitle : '没有了');
+            this.nextTitle.html(data.nextTitle ? data.nextTitle : '没有了');
+            if(data.cover == '') {
+                this.blog_main.find('.articleCover').hide();
+            } 
+            this.cid = this.data.column_id;
+            this.hash.change(this.PREFIX, this.data.column_id, this.data.id);
+        }
+       
 
     },
     changeArticle: function() { //切换文章（请求时应发送文章id，请求成功后要更改hash）
@@ -225,7 +216,7 @@ Blog.prototype = {
         var data;
 
         this.prev.click(function() {
-            var id = parseInt(_this.blog_main.attr('data-id')) - 1;
+            var id = parseInt(_this.blog_main.attr('data-id'));
 
             data = {
                 "column_id": _this.cid,
@@ -233,11 +224,11 @@ Blog.prototype = {
                 "btn": -1
             }
             /*** ajax ***/
-            request(_this, blogRequestURL, data, _this.showArticle, blogData2)
+            request(_this, blogRequestURL, data, _this.showArticle, 0)
         });
 
         this.next.click(function() {
-            var id = parseInt(_this.blog_main.attr('data-id')) + 1;
+            var id = parseInt(_this.blog_main.attr('data-id'));
 
             data = {
                 "column_id": _this.cid,
@@ -248,8 +239,21 @@ Blog.prototype = {
             request(_this, blogRequestURL, data, _this.showArticle, blogData3)
         });
     },
-    warning: function() { //文章在第一篇或最后一篇时的警告
-
+    openWarning: function(words) { //文章在第一篇或最后一篇时的警告
+        this.warning.html(words)
+            .show()
+            .animate({
+                opacity: 1
+            }, 300, function() {
+                var _this = this;
+                setTimeout(function() {
+                    $(_this).animate({
+                        opacity: 0
+                    }, 300, function() {
+                        $(_this).hide();
+                    })
+                }, 1000);
+            });
     }
 }
 
@@ -265,7 +269,7 @@ function Index() { //首页
 
     this.hash = new Hash();
 
-    this.model = '<div class="vp_item"><a class="vp_link" href=""><div class="vp_img"></div></a><div class="vp_words"><h1 class="vp_title">This is the first picture.</h1><p class="vp_desc">This is a paragraph.</p></div></div>';
+    this.model = '<div class="vp_item"><a class="vp_link" target="_blank" href="( url )"><div class="vp_img" style="background-image: url(( src )@!designIndex)"></div></a><div class="vp_words"><h1 class="vp_title">( title )</h1><p class="vp_desc">( desc )</p></div></div>';
 }
 Index.prototype = {
     constructor: Index,
@@ -273,10 +277,6 @@ Index.prototype = {
         this.data = data;
 
         if(this.item_group.find('.vp_item').length == 0) {
-
-            for(var i=0; i<this.data.length; i++) {
-                this.item_group.append(this.model);
-            }
 
             this.showImage();
             this.launch(this.config);
@@ -288,39 +288,26 @@ Index.prototype = {
     },
     showImage: function() { //部署数据
         var data = this.data;
-        var i;
+        var config = {};
+       
+        for(var i=0; i<data.length; i++) {
+            config.url = data[i].link;
+            config.src = data[i].path;
+            config.title = data[i].name || '<em>暂未添加标题</em>';
+            config.desc = data[i].description || '<em>暂未添加描述</em>';
 
-        i=0;
-        this.item_group.find('.vp_img').each(function() {
-            $(this).css('background-image', 'url('+ (data[i].path.indexOf('Public') != -1 ? data[i].path : GLOBAL_PATH + data[i].path) +')');
-            i++;
-        });
+            this.item_group.prepend(modelPre(this.model, config));
 
-        i=0;
-        this.item_group.find('.vp_title').each(function() {
-            if (data[i].name != '') {
-                $(this).html(data[i].name);
-            } else {
-                $(this).html('<em>暂未添加标题</em>')
-            }
-            i++;
-        });
-
-        i=0;
-        this.item_group.find('.vp_desc').each(function() {
-            $(this).html(data[i++].description);
-        });
-
-        i=0;
+        }
         this.item_group.find('.vp_link').each(function() {
-            if(data[i++].link != '') {
-                $(this).attr('herf', data[i].link);
-            } else {
-                $(this).css('cursor', 'default').click(function() {
+            console.log($(this).attr('href'))
+            if(!$(this).attr('href')) {
+                $(this).css('cursor', 'default')
+                    .click(function() {
                     return false;
                 });
             }
-        })
+        });
     },
     launch: function(config) { //开启轮播
         $().viewpager(config);
@@ -421,7 +408,7 @@ Nav.prototype = {
         }
     },
     bind: function() { //绑定导航条链接事件
-        $('.user_nav a').click(function() {
+        $('.user_nav a').on('click', function() {
             var page = $(this).attr('data-page'); //获取当前链接所对应的页面的类型
 
             $('.user_nav a').removeClass('active'); //移除导航某链接的active状态
@@ -436,7 +423,7 @@ Nav.prototype = {
 
             } else if(page == 'blog') { //依此类推
 
-                aBlog.readHash(blogRequestURL);
+                aBlog.readHash(latestBlogRequestURL);
 
             } else if(page == 'index') {
                 aIndex.readHash(indexRequestURL);
@@ -445,45 +432,68 @@ Nav.prototype = {
             return false;
         });
     },
-    responsive: function(width) {
+    responsive: function(width) { //导航响应式，接受的参数为开启响应式的最小宽度(px)
+        var nav_box = $('#nav_box');
+
         if($(window).width() <= width) {
-            $('#user_nav').addClass('small_nav');
+            nav_box.addClass('small_nav');
         } else {
-            $('#user_nav').removeClass('small_nav');
+            nav_box.removeClass('small_nav');
         }
         $(window).resize(function() {
             if($(this).width() <= width) {
-                $('#user_nav').addClass('small_nav').hide();
+                nav_box.addClass('small_nav').hide();
             } else {
-                $('#user_nav').removeClass('small_nav').show();
+                nav_box.removeClass('small_nav').removeClass('hide').show();
             }
         });
-        $('#nav_btn').click(function() {
-            if($('#user_nav').hasClass('small_nav')) {
-                $('#user_nav').fadeToggle(400);
-            }     
-        });
-        $('#user_nav a').on('click', function() {
-            if($('#user_nav').hasClass('small_nav')) {
-                $('#user_nav').fadeOut(400);
+        $('#si-icon-hamburger-cross').on('touchstart', function() {
+            var path = $('.si-icon path');
+            if(nav_box.hasClass('small_nav')) {
+                if(nav_box.hasClass('show')) {
+
+                    nav_box.removeClass('show').addClass('hide');
+                    setTimeout(function() {
+                        nav_box.hide();
+                    }, 300);
+                    path.css('stroke', 'rgb(0, 0, 0)');
+                } else {
+
+                    nav_box.css('display', 'table').removeClass('hide').addClass('show');
+                    path.css('stroke', 'rgb(255, 255, 255)')
+                }
             }
+        });
+        $('.small_nav a').on('touchstart', function() {
+
+            if(nav_box.css('opacity') == '1') {
+
+                nav_box.removeClass('show').addClass('hide');
+                setTimeout(function() {
+                    nav_box.hide();
+                }, 500);
+                window.aSvgIcon.toggle(true);
+                $('.si-icon path').css('stroke', '#000');
+            }
+            
         });
     }
 }
 
 
-function Info() {
+function Info() { //站点信息
     this.data = '';
 
     this.title = $('title');
     this.siteName = $('#site_name');
     this.siteInfo = $('#site_info');
-    this.siteLogo = $('#site_logo');
+    this.siteLogo = $('.user_avatar');
+    this.logoArea = $('#site_logo');
 }
 Info.prototype = {
     constructor: Info,
     request: function() {
-        request(this, infoRequestURL, {}, this.init, {});
+        request(this, infoRequestURL, {}, this.init, [{name: 'www', sub_title: 'www'}]);
     },
     init: function(data) {
         this.data = data[0];
@@ -491,11 +501,16 @@ Info.prototype = {
     },
     show: function() {
         var data = this.data;
-        var defaultLogo = '/Public/Home/svg/demoAvator.svg';
+        var defaultLogo = '/Public/Home/svg/demoAvator.svg'; //默认logo
 
-        this.title.html(data.name);
+        this.title.html(data.name + ' - 向素');
 
         this.siteName.html(data.name);
+
+        this.logoArea.parent().click(function() {
+            $('.user_nav a[href=#]').trigger('click');
+            return false;
+        })
 
         if(data.sub_title) {
             this.siteInfo.html(data.sub_title);
@@ -504,9 +519,11 @@ Info.prototype = {
         }
 
         if(data.logo_path) {
-            this.siteLogo.attr('src', GLOBAL_PATH + data.logo_path);
+            this.siteLogo.attr('src', data.logo_path );
+            this.logoArea.css('background-image', 'url(' + data.logo_path + ')');
         } else {
-            this.siteLogo.attr('src', defaultLogo);
+            this.siteLogo.css('src', defaultLogo);
+            this.logoArea.css('background-image', 'url(' + defaultLogo + ')');
         }
     }
 }
@@ -524,7 +541,10 @@ function request(_this, url, _data, callback, jiadata) { //ajax请求函数（�
 
     request.success(function(data) {
         if(data == 0) { //非法请求处理。这里的非法请求返回的数据是什么还不确定，暂时使用0代替。
-            ifError();
+            ifError(data);
+            console.log(data)
+        } else if(data.errorCode == 0) {
+            ifError(data.errorCode);
         } else { //如果请求合法，则调用回调函数
             console.log(data)
             callback.call(_this, data);
@@ -533,6 +553,7 @@ function request(_this, url, _data, callback, jiadata) { //ajax请求函数（�
 
     request.error(function(jqXHR, textStatus) { //如果请求失败，则填充假数据，并抛出错误
         callback.call(_this, jiadata);
+        console.log(jiadata)
         throw new Error('Request failed! This is the test data.');
     });
 }
@@ -556,7 +577,7 @@ function initSite() { //在页面刚刚打开时对页面进行初始化
 
 }
 
-function modelPre(model, config) {
+function modelPre(model, config) { //模板渲染函数
     var re_name = /[\(\s*]\w+[\s*\)]/g,
         re_sign = /\(\s*\w+\s*\)/g;
 
@@ -570,34 +591,77 @@ function modelPre(model, config) {
     return model;
 }
 
-function ifError() { //错误处理，一般为非法请求或者请求不到数据时显示的信息，以后需要改写成错误页面切换
-    alert('404');
-}
+function ifError(code) { //错误处理，一般为非法请求或者请求不到数据时显示的信息，以后需要改写成错误页面切换
+    // alert('404');
+    var action = {
+        blank: function() {
+            $('#warning').html('这里暂时没有内容').show().css('opacity', '1');
+        }
+    };
 
+    if(code == 0) {
+
+        console.log('codecodecode!')
+        action.blank();
+    }
+
+    pageControl.addHander('haveContent', function() {
+        $('#warning').hide().css('opacity', '0');
+    });
+}
 
 var aImages = new Images(),
     aBlog = new Blog(),
     aHash = new Hash(),
     aIndex = new Index(),
     aNav = new Nav(),
-    aInfo = new Info();
+    aInfo = new Info(),
+    pageControl = new PageControl();
+
 
 var imgRequestURL = '/ajaxGetGalleryList',
     imgInfoRequestURL = '/ajaxGetOneColumnInfo',
     blogRequestURL = '/ajaxGetOneBlog',
     indexRequestURL = '/ajaxGetIndexPic',
     navRequestURL = '/ajaxGetAllColumn',
-    infoRequestURL = '/getCurWebsiteInfo';
+    infoRequestURL = '/getCurWebsiteInfo',
+    latestBlogRequestURL = '/ajaxGetOneBlog';
 
 aInfo.request(infoRequestURL);
 aNav.request(navRequestURL); //初始化导航
 
-setTimeout(function() {
+setTimeout(function() { //打开页面时的过度效果
     $('body').animate({
         opacity: 1
     }, 1000);
 }, 500);
 
-/*
+
+
+/* *
+ *
+ * 响应式导航按钮
  *
  * */
+(function( window ) {
+    // initialize all
+    
+    [].slice.call( document.querySelectorAll( '.si-icons-default > .si-icon' ) ).forEach( function( el ) {
+        var svgicon = new svgIcon( el, svgIconConfig );
+    } );
+
+    window.aSvgIcon = new svgIcon( document.querySelector( '.si-icon-hamburger-cross' ), svgIconConfig, { easing : mina.backin } );
+
+    setTimeout(function() {
+        $('.si-icon path').css('stroke', '#000');
+
+    }, 100)
+})( window );
+
+var _hmt = _hmt || [];
+(function () {
+    var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?2a1c5b7e4abd07d2a323807bdab9fa08";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+})();

@@ -260,6 +260,18 @@ var check = {
 			}
 		},
 		username: function(obj, error) {
+			var re = /^[\u4e00-\u9fa5_a-zA-Z0-9_]{2,15}$/g;
+			var is = re.test(obj.value);
+
+			if(is) {
+				error.call(obj, 1);
+				return true;
+			} else {
+				error.call(obj);
+				return false;
+			}
+		},
+		userdesc: function(obj, error) {
 			var re = /^\w{2,15}$/g;
 			var is = re.test(obj.value);
 
@@ -279,6 +291,14 @@ var check = {
 			} else {
 				$(this).parent().find('.warning').html('用户名格式不正确');
 				console.log('username is not correct.')
+			}
+		},
+		userdesc: function(e) {
+			if(e) {
+				$(this).parent().find('.warning').empty();
+			} else {
+				$(this).parent().find('.warning').html('请填写个人描述');
+				console.log('userdesc is not correct.')
 			}
 		},
 		emailFormat: function(e) {
@@ -355,7 +375,8 @@ var check = {
 			email: document.forms.registerForm1.email,
 			pwd: document.forms.registerForm1.pwd,
 			authcode: document.forms.registerForm1.authcode,
-			username: document.forms.registerForm2.username
+			username: document.forms.registerForm2.username,
+			userdesc: document.forms.registerForm2.userdesc
 		},
 		fetchPwd: {
 			email: document.forms.getCode.email,
@@ -456,6 +477,7 @@ whenBlurCheck(input.register.email, check.emailFormat, [input.register.email, er
 whenBlurCheck(input.register.pwd, check.pwdFormat, [input.register.pwd, error.pwdFormat])
 // whenBlurCheck(input.register.authcode, check.authCode, [input.register.authcode, error.authCodeError])
 whenBlurCheck(input.register.username, check.username, [input.register.username, error.username])
+//whenBlurCheck(input.register.userdesc, check.userdesc, [input.register.userdesc, error.userdesc])
 whenBlurCheck(input.fetchPwd.authcode, check.eAuthCode, [input.fetchPwd.authcode, error.eAuthCodeIncorrect])
 whenBlurCheck(input.changePwd.first, check.pwdFormat, [input.changePwd.first, error.pwdFormat])
 whenBlurCheck(input.changePwd.second, check.pwdSame, [input.changePwd.first, input.changePwd.second, error.pwdNotSame])
@@ -480,21 +502,36 @@ $('#r_submit1').click(function() {
 	}
 });
 $('#r_submit2').click(function() {
-	var u = input.register.username;
-	var nickname = $('#nickname').val();
+	var u = input.register.username,
+		u2 = input.register.userdesc;
+	var nickname = $('#nickname').val(),
+		userdesc = $('#userdesc').val();
 
-	if(check.username(u, error.username)) {
+	if(check.username(u, error.username) /* && check.userdesc(u2, error.userdesc) */) {
 
 		$.post('/User/setNickName', {nickname: nickname}, function (data) {
 
 			console.log(data);
 			
 			if (data == 1) {
-				closeTheTopArea();
+				// closeTheTopArea();
+				
+				location.href = '/User/index';	
+					
 			} else if (data == 0) {
 				alert('注册失败');
 			}
-		})
+		});
+		// $.post('/User/setIntro', {intro: userdesc}, function (data) {
+
+		// 	console.log(data);
+			
+		// 	if (data == 1) {
+		// 		console.log('set intro success.')
+		// 	} else if (data == 0) {
+		// 		console.log('set intro fail.')
+		// 	}
+		// });
 	}
 });
 
