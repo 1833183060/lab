@@ -1,0 +1,42 @@
+body {
+    text-align: center;
+}
+
+.cal-body {
+    background:url(../img/background.png);
+    margin: 0 auto;
+    width: 400px; height: 500px;
+}
+
+/* display */
+.cal-body .display {
+    box-sizing: border-box;
+    padding: 7px 10px;
+    color: #fff;
+    text-align: right;
+}
+
+.cal-body .display p {
+    margin: 7px 0;
+    font-size: 20px;
+}
+
+/* botton */
+
+.cal-body .button-area {
+    padding: 15px;
+}
+
+.cal-body .key {
+    width: 85px; height: 60px;
+    background-color: #023559;
+    font: 50px Microsoft Yi Baiti;
+    font-weight: 100;
+    color:#d4d4d4;
+    border: 0px;
+    margin: 1.5px; padding: 0px;
+    text-align: center;
+}
+.cal-body .key:hover {
+    background-color: #124b73;
+}
