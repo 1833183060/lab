@@ -222,13 +222,6 @@
         this.exp = '';
         this.resolver = new Resolver( symbolTable );
         this.result = null;
-
-        this.bracketFlag = 0,
-        this.dotFlag = 0,
-        this.symbolFlag = 0;
-        this.numFlag = 0;
-        this.equalFlag = 0;
-        this.lock = 1;
     }
     Calculator.prototype = {
         constructor: Calculator,
@@ -245,63 +238,6 @@
         makeupExp: function( str ) {
 
             // fu*k your uncle
-            switch( true ) {
-                case str == '=' :
-                    if( !this.lock && !this.bracketFlag && !this.equalFlag) {
-                        this.equalFlag = 1;
-                        this.symbolFlag = 0;
-                        this.dotFlag = 1;
-                        this.result = this.exp = this.resolver.evaluate( this.exp );
-                        this.resultArea.innerHTML = this.result;
-                    } else {
-                        alert( 'error!' );
-                    }
-                    break;
-                case str == 'c' :
-                    this.equalFlag = this.numFlag = this.symbolFlag = this.dotFlag = this.bracketFlag = 0,
-                    this.lock = 1;
-                    this.exp = '';
-                    this.display('', '0');
-                    break;
-                case str == '(' : // left bracket
-                    if( this.symbolFlag && !this.dotFlag ) {
-                        this.display( str );
-                        this.bracketFlag++; 
-                    }
-                    this.lock = 1;
-                    this.numFlag = 0;
-                    break;
-                case str == ')' : // right bracket
-                    this.bracketFlag--;
-                    this.display( str );
-                    break;
-                case str == '.' : // dot
-                    this.symbolFlag = 0;
-                    if( !this.dotFlag && !this.lock ) {
-                        this.dotFlag = 1;
-                        this.display( str );
-                    }
-                    break;
-                case isNaN( str ) : // symbol
-                    this.dotFlag = 0;
-                    this.equalFlag = 0;
-                    if( !this.symbolFlag && !this.lock ) {
-                        this.display( str );
-                        this.symbolFlag = 1;
-                    }
-                    break;
-                case ! isNaN( str ) : // number
-                    if( this.equalFlag ) {
-                        this.exp = '';
-                        this.equalFlag = 0;
-                        this.dotFlag = 0;
-                    }
-                    this.symbolFlag = 0;
-                    this.lock = 0;
-                    this.numFlag = 1;
-                    this.display( str );
-                    break;
-            }
         },
 
         display: function( str, num ) {
