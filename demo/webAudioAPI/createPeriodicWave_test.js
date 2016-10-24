@@ -18,6 +18,8 @@
     var ft = new DFT(sharkFinValues.length);
     ft.forward(sharkFinValues);
 
+    console.log( ft );
+
     var audioCtx = new AudioContext(),
         canvasCtx = document.getElementById( 'my_canvas' );
     
