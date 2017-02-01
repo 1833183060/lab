@@ -10,7 +10,7 @@
 
 .page {
 	margin:0px;
-	background:url(../_img/background.png) center;
+	background:url(../img/background.png) center;
 	background-position:center;
 	display:none;
 	}
@@ -21,7 +21,7 @@
 	
 #words {
 	text-align:center;
-	background:url(../_img/bio.png);
+	background:url(../img/bio.png);
 	background-repeat:no-repeat;
 	position: relative;
 	top: 30px;
@@ -70,7 +70,7 @@
     }
 	
 #introduc {
-	background:url(../_img/bubble.png) center ;
+	background:url(../img/bubble.png) center ;
 	width: 1024px; height: 849px;
 	background-repeat:no-repeat;
 	position: relative;
@@ -148,7 +148,7 @@
     }
 	
 #bottom {
-	background:url(../_img/bottom.png);
+	background:url(../img/bottom.png);
 	width:1024px;height:406px;
     }
 	
@@ -161,58 +161,58 @@
     }
 	
 #link1 {
-	background:url(../_img/link-blog.png);
+	background:url(../img/link-blog.png);
 	position:relative;
 	top: 0px;
 	left: 0px;
 	width:70px; height:70px;
 	}
 #link1:hover {
-	background:url(../_img/link-blog2.png);
+	background:url(../img/link-blog2.png);
     }
 
 #link2 {
-	background:url(../_img/link-douban.png);
+	background:url(../img/link-douban.png);
 	position:relative;
 	top: -87px;
 	left: 90px;
 	width:70px; height:70px;
 	}
 #link2:hover {
-	background:url(../_img/link-douban2.png);
+	background:url(../img/link-douban2.png);
     }
 	
 #link3 {
-	background:url(../_img/link-fanfou.png);
+	background:url(../img/link-fanfou.png);
 	position:relative;
 	top: -174px;
 	left: 180px;
 	width:70px; height:70px;
 	}
 #link3:hover {
-	background:url(../_img/link-fanfou2.png);
+	background:url(../img/link-fanfou2.png);
     }
 		
 #link4 {
-	background:url(../_img/link-shu.png);
+	background:url(../img/link-shu.png);
 	position:relative;
 	top: -261px;
 	left: 270px;
 	width:70px; height:70px;
 	}
 #link4:hover {
-	background:url(../_img/link-shu2.png);
+	background:url(../img/link-shu2.png);
     }
 		
 #link5 {
-	background:url(../_img/link-ps.png);
+	background:url(../img/link-ps.png);
 	position:relative;
 	top: -348px;
 	left: 360px;
 	width:70px; height:70px;
 	}
 #link5:hover {
-	background:url(../_img/link-ps2.png);
+	background:url(../img/link-ps2.png);
     }
 	
 	
