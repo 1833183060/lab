@@ -3,11 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <title>Animation Group</title>
+    <style type="text/css">
+.blue_class {
+    color: blue;
+}
+                .green_class {
+                    color: green;
+                }
+    </style>
+    
 </head>
 <body>
 
     <div id="test1">喵喵喵</div>
     <div id="test2">咩咩咩</div>
+    <div id="test3" class="blue_class">汪汪汪</div>
 
     <button id="ImABtn">Click Me!</button>
     <button id="ImABtn2">Click Me!</button>
@@ -19,16 +29,20 @@
 
     var ag_one = new AnimationGroup ({
             prev : {
+                'test1' : {
+                    'transition' : 'all .5s'
+                },
+                'test2' : ['blue_class'],
             },
             next : {
                 'test1' : {
                     'color' : 'red',
                     'top' : '100px',
-                    'transition' : 'all .5s'
                     },
                 'test2' : {
                     'font-size' : '20px',
-                    }
+                    },
+                'test3' : ['green_class'],
             },
             transition : 'all .5s',
         });
