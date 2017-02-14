@@ -1,0 +1,127 @@
+html, body {
+    height: 100%;
+    width: 100%;
+    margin: 0 auto;
+}
+body {
+    position: relative;
+    background: radial-gradient(#780001, #4F0000);
+}
+.green {
+    height: 50px;
+}
+.snowflake {
+    position: relative;
+    margin: auto;
+    /*top: 20%; left: 0; bottom: 0; right: 0;*/
+    /*animation: spin 10s linear infinite;*/
+    /*transform-origin: 50% -50%;*/
+}
+.snowflake .part {
+    transform-origin: 50% 100%;
+}
+.snowflake .part .trunk {
+    position: absolute;
+    bottom: 0;
+}
+.snowflake,
+.snowflake .part,
+.snowflake .part .main,
+.snowflake .part .vice,
+.snowflake .part .trunk,
+.snowflake .part .trunk .branch {
+    margin: 0 auto;
+    width: 0px;
+    background: #fff;
+}
+.snowflake .part2 {
+    transform: rotate(60deg);
+}
+.snowflake .part3 {
+    transform: rotate(120deg);
+}
+.snowflake .part4 {
+    transform: rotate(180deg);
+}
+.snowflake .part5 {
+    transform: rotate(240deg);
+}
+.snowflake .part6 {
+    transform: rotate(300deg);
+}
+.snowflake .part,
+.snowflake .part .vice,
+.snowflake .part .main {
+    position: absolute;
+    height: 200px;
+}
+.snowflake .part .main .trunk,
+.snowflake .part .main .trunk .branch .left,
+.snowflake .part .main .trunk .branch .right,
+.snowflake .part .vice .trunk,
+.snowflake .part .vice .trunk .top {
+    border-color: #fff;
+    border-style: solid;
+}
+.snowflake .part .main .trunk .branch .left,
+.snowflake .part .main .trunk .branch .right,
+.snowflake .part .vice .trunk .top {
+    content: "";
+    display: block;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/*参数控制*/
+
+.snowflake .part .main .trunk,
+.snowflake .part .main .trunk .branch {
+    width: 7px; /*主枝粗细<大于零>*/
+}
+.snowflake .part .main .trunk .branch .left,
+.snowflake .part .main .trunk .branch .right {
+    border-width: 5px; /*主枝分枝粗细<不小于主枝粗细的1/2>*/
+    height: 60px; /*主枝分枝长度<小于等于主枝分支密集度与cos(rotate)的乘积*/
+    border-radius: 10px;
+}
+.snowflake .part .main .trunk {
+    border-width: 4px; /*主枝粗细附加<与主枝粗细之和小于三倍的从枝粗细>*/
+    border-radius: 10px;
+}
+.snowflake .part .main .trunk .branch {
+    position: relative;
+    height: 60px; /*主枝分枝高度（密集度）（n倍的主枝分支高度为主枝长度）<n倍的密集度小于三倍的从枝高度*/
+}
+.snowflake .part .main .trunk .branch .left {
+    position: absolute;
+    transform: rotate(40deg); /*主枝分枝1旋转角度<小于60度>*/
+}
+.snowflake .part .main .trunk .branch .right {
+    transform: rotate(-40deg); /*主枝分枝2旋转角度<大于-60度>*/
+}
+.snowflake .part .vice .trunk {
+    transform: rotate(30deg); /*<不大于45度>*/
+    height: 120px; /*从枝长度<小于200px>*/
+    border-radius: 10px;
+    transform-origin:  50% 100%;
+    width: 14px; /*从枝粗细<不大于主枝粗细的二倍>*/
+}
+.snowflake .part .vice .trunk .top {
+    /*从枝装饰尺寸*/
+    width: 20px;
+    height: 20px;
+    border-width: 10px; /*从枝装饰描边粗细<小于等于从枝粗细的1/2>*/
+    margin-left: -10px; /*<与描边粗细相同>*/
+    margin-top: -40px; /*<描边粗细的二倍加高度>*/
+    border-radius: 30%; /*边缘弧度<0到50>*/
+    transform: rotate(45deg);
+}
+
+
