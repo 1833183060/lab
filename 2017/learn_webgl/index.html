@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Learn WebGL</title>
+    <script src="./sylvester.js"></script>
+    <script src="./glUtils.js"></script>
+</head>
+<body>
+    <canvas id="glcanvas" width=700 height=500></canvas>
+
+    <!--gl_FragColor is a built-in GL variable that is used for the fragment's color. Setting its value establishes the pixel's color.-->
+    <script id="shader-fs" type="x-shader/x-fragment">
+void main( void ) {
+    gl_FragColor = vec4(1.0, 1.0, 1.0, 1.0);
+}
+    </script>
+    <!--the vertex shader defines the position and shape of each vertex-->
+    <script id="shader-vs" type="x-shader/x-vertex">
+attribute vec3 aVertexPosition;
+uniform mat4 uMVMatrix;
+uniform mat4 uPMatrix;
+void main( void ) {
+    gl_Position = uPMatrix * uMVMatrix * vec4( aVertexPosition, 1.0 );
+}
+    </script>
+    <script src="./main.js"></script>
+</body>
+</html>
