@@ -55,6 +55,8 @@ function initShaders () {
 
     vertexPositionAttribute = gl.getAttribLocation( shaderProgram, 'aVertexPosition' )
     gl.enableVertexAttribArray( vertexPositionAttribute )
+    vertexColorAttribute = gl.getAttribLocation( shaderProgram, 'aVertexColor' )
+    gl.enableVertexAttribArray( vertexColorAttribute )
 }
 
 // create a shader
@@ -97,21 +99,32 @@ function getShader ( gl, id, type ) {
 
 
 function initBuffers () {
-    squareVerticesBuffer = gl.createBuffer()
-    gl.bindBuffer( gl.ARRAY_BUFFER, squareVerticesBuffer )
 
     var vertices = [
         1.0, 1.0, 0.0,
         -1.0, 1.0, 0.0,
         1.0, -1.0, 0.0,
-        -1.0, -1.0, 0.0
+        -1.0, -1.0, 0.0,
     ]
 
+    squareVerticesBuffer = gl.createBuffer()
+    gl.bindBuffer( gl.ARRAY_BUFFER, squareVerticesBuffer )
     gl.bufferData( gl.ARRAY_BUFFER, new Float32Array( vertices ), gl.STATIC_DRAW )
+
+    var colors = [
+        1.0, 1.0, 1.0, 1.0,
+        1.0, 0.0, 0.0, 1.0,
+        0.0, 1.0, 0.0, 1.0,
+        0.0, 0.0, 1.0, 1.0,
+    ]
+
+    squareVerticesColorBuffer = gl.createBuffer()
+    gl.bindBuffer( gl.ARRAY_BUFFER, squareVerticesColorBuffer )
+    gl.bufferData( gl.ARRAY_BUFFER, new Float32Array( colors ), gl.STATIC_DRAW )
 }
 
 function drawScene () {
-    gl.clear( gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT )
+    //gl.clear( gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT )
 
     perspectiveMatrix = makePerspective( 45, width / height, 0.1, 100.0 )
     loadIdentity()
@@ -120,6 +133,9 @@ function drawScene () {
     gl.bindBuffer( gl.ARRAY_BUFFER, squareVerticesBuffer )
     gl.vertexAttribPointer( vertexPositionAttribute, 3, gl.FLOAT, false, 0, 0 )
     setMatrixUniforms()
+
+    gl.bindBuffer( gl.ARRAY_BUFFER, squareVerticesColorBuffer )
+    gl.vertexAttribPointer( vertexColorAttribute, 4, gl.FLOAT, false, 0, 0 )
     gl.drawArrays( gl.TRIANGLE_STRIP, 0, 4 )
 }
 
@@ -134,7 +150,7 @@ function mvTranslate( v ) {
 }
 function setMatrixUniforms() {
     var pUniform = gl.getUniformLocation( shaderProgram, 'uPMatrix' )
-    gl.uniformMatrix4fv( pUniform, false, new Float32Array( perspectiveMatrix ) )
+    gl.uniformMatrix4fv( pUniform, false, new Float32Array( perspectiveMatrix.flatten() ) )
     var mvUniform = gl.getUniformLocation( shaderProgram, 'uMVMatrix' )
     gl.uniformMatrix4fv( mvUniform, false, new Float32Array( mvMatrix.flatten() ) )
 }
