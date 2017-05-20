@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>01</title>
+    <script src="./glMatrix.js"></script>
+</head>
+<body>
+    <canvas width=600 height=400 id="glcanvas"></canvas>
+
+   <!--
+       片元着色器
+       定义数字精度 -->
+    <script id="shader-fs" type="x-shader/x-fragment">
+precision mediump float;
+void main( void ) {
+    gl_FragColor = vec4( 1.0, 1.0, 1.0, 1.0 );
+}
+    </script>
+    <!--
+        uniform 类型的变量可以作为着色器和外部通信的桥梁
+        可以将着色器程序看作对象（面向对象意义上的），uniform 变量看作其中的字段
+    -->
+    <script id="shader-vs" type="x-shader/x-vertex">
+attribute vec3 aVertexPosition;
+
+uniform mat4 uMVMatrix;
+uniform mat4 uPMatrix;
+
+void main( void ) {
+    gl_Position = uPMatrix * uMVMatrix * vec4 ( aVertexPosition, 1.0 );
+}
+    </script>
+    <script src="./main.js"></script>
+</body>
+</html>
