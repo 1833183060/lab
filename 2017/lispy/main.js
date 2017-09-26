@@ -1,18 +1,94 @@
 ;(function() {
     /*** Main ***/
-    const Env = Object
+
+    /* Error Defination */
+    class ReferenceError extends Error {
+        constructor(message) {
+            super('Reference Error: ' + message)
+        }
+    }
 
     /* Type Defination */
     class Meta {
-        constructor (value) {
+        constructor(value) {
             this.value = value
         }
     }
     class Sym extends Meta {
-        constructor (value) {
+        constructor(value) {
             super(value)
         }
     }
+    class Procedure {
+        constructor(parms, body, env) {
+            this.parms = parms
+            this.body = body
+            this.env = env
+        }
+        execute(args) {
+            return eval(this.body, new Env(this.parms, args, this.env))
+        }
+    }
+
+    /* Environments */
+    class Env {
+        constructor(parms=[], args=[], outer=null) {
+            this.e = new Object()
+            this.init(parms, args)
+            this.outer = outer
+        }
+        find(vari) {
+            if ((! (vari in this.e)) && (! this.outer)) {
+                throw new ReferenceError('variable ' + vari + ' is undefined.')
+            }
+            return vari in this.e ? this.e : this.outer.find(vari)
+        }
+        init(keys, values) {
+            keys.forEach((key, index) => {
+                this.e[key.value] = values[index]
+            })
+        }
+        assign(subEnv) {
+            Object.assign(this.e, subEnv)
+        }
+        add(key, value) {
+            this.e[key] = value
+        }
+    }
+
+    const baseEnv = {
+            'abs': Math.abs,
+            'max': Math.max,
+            'min': Math.min,
+            'pi': Math.PI,
+            'round': Math.round,
+            'floor': Math.floor,
+            'ceil': Math.ceil,
+            '+': (x, y) => x + y,
+            '-': (x, y) => x - y,
+            '*': (x, y) => x * y,
+            '/': (x, y) => x / y,
+            '>': (x, y) => x > y,
+            '<': (x, y) => x < y,
+            '>=': (x, y) => x >= y,
+            '<=': (x, y) => x <= y,
+            '=': (x, y) => x == y,
+            'car': x => x[0],
+            'cdr': x => x.slice(1),
+            'cons': (x, y) => [x, ...y],
+            'eq?': (x, y) => x === y,
+            'equal?': (x, y) => x instanceof Sym ? x.value == y.value : x == y,
+            'length': x => x.length,
+            'list': function(...e){return e},
+            'list?': x => x instanceof Array,
+            'not': x => ! x,
+            'null?': x => x instanceof Array && x.length == 0,
+            'number?': x => x instanceof Number,
+            'begin': function(){ return Array.prototype.slice(arguments, 1) },
+    }
+    // append, apply, equal?, list, map, procedure?, symbol?
+    let global_env = new Env()
+    global_env.assign(baseEnv)
 
     /* Abstraction Syntax Tree */
     function parse(program) {
@@ -31,6 +107,9 @@
         }
         if ('(' === token) {
             let L = []
+            while (tokens[0] === '') {
+                tokens.shift()
+            }
             while (tokens[0] !== ')') {
                 L.push(read_from_tokens(tokens))
                 while (tokens[0] === '') {
@@ -56,69 +135,48 @@
         }
     }
 
-    /* Environments */
-    function standard_env() {
-        let env = new Env()
-        Env.assign(env, {
-            'abs': Math.abs,
-            'max': Math.max,
-            'min': Math.min,
-            'PI': Math.PI,
-            'round': Math.round,
-            'floor': Math.floor,
-            'ceil': Math.ceil,
-            '+': (x, y) => x + y,
-            '-': (x, y) => x - y,
-            '*': (x, y) => x * y,
-            '/': (x, y) => x / y,
-            '>': (x, y) => x > y,
-            '<': (x, y) => x < y,
-            '>=': (x, y) => x >= y,
-            '<=': (x, y) => x <= y,
-            '=': (x, y) => x == y,
-            'car': x => x[0],
-            'cdr': x => x.slice(1),
-            'cons': (x, y) => [x].push(y),
-            'eq?': (x, y) => x === y,
-            'length': x => x.length,
-            'list?': x => x instanceof Array,
-            'not': x => ! x,
-            'null?': x => x instanceof Array && x.length == 0,
-            'number?': x => x instanceof Number,
-            'begin': function(){ return Array.prototype.slice(arguments, 1) }
-            // begin, append, apply, equal?, list, map, procedure?, symbol?
-        })
-        return env
-    }
-    global_env = standard_env()
-
+    /* Eval */
     function eval(x, env=global_env) {
         if (x instanceof Sym) {
-            return env[x.value]
+            return env.find(x.value)[x.value]
         } else if (! (x instanceof Array)) {
             return x
         } else if (x[0].value == 'if') {
-            [sym, test, conseq, alt] = x
+            let [sym, test, conseq, alt] = x
             let exp = (eval(test, env) ? conseq : alt)
             return eval(exp, env)
         } else if (x[0].value == 'define') {
-            [sym, vari, exp] = x
-            env[vari.value] = eval(exp, env)
+            let [vari, exp] = x.slice(1)
+            env.add(vari.value, eval(exp, env))
+        } else if (x[0].value == 'lambda') {
+            let [parms, body] = x.slice(1)
+            return new Procedure(parms, body, env)
+        } else if (x[0].value == 'quote') {
+            let [sym, exp] = x
+            return exp
         } else {
             let proc = eval(x[0], env)
             let args = []
             x.slice(1).forEach(function(arg) {
                 args.push(eval(arg, env))
             })
+            if (proc instanceof Procedure) {
+                return proc.execute.call(proc, args)
+            }
             return proc.apply(this, args)
         }
     }
 
-    /*** Test ***/
-    let testProgram = '(begin (define r 10) (* pi (* r r)))'
-    //console.log(parse(testProgram))
-
-    eval(parse("(define r 10)"))
-    console.log(eval(parse("(* PI (* r r))")))
-    console.log(eval(parse('(if (> (* 11 11) 120) (* 7 6) oops)')))
+    process.stdin.setEncoding( 'utf8' );
+    process.stdin.on( 'readable', function() {
+        var chunk = process.stdin.read();
+        if (chunk) {
+            try {
+                console.log(eval(parse(chunk)))
+            } catch(err) {
+                console.log(err.message)
+            }
+        }
+        console.log('lispy>')
+    } );
 })()
