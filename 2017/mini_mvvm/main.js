@@ -1,6 +1,6 @@
 ;(function(window) {
 
-  // 一个数据的订阅器，负责通知其订阅者
+  // Dependence, to notify watchers of data
   class Dep {
     constructor() {
       this.watchers = []
@@ -17,7 +17,7 @@
     }
   }
 
-  // 订阅者，其实体为 DOM 中对某数据的引用
+  // Watchers, which entity is the reference of data in DOM
   class Watcher {
     constructor(parn, key, cb) {
       this.parn = parn
@@ -43,7 +43,7 @@
     }
   }
 
-  // 词法环境
+  // Evaluation environment
   class Env {
     constructor(env, parn) {
       this.env = env
@@ -57,35 +57,56 @@
     }
   }
 
-
+  // Built-in directive
   class Directive {
     constructor(parser) {
       this.parser = parser
       this.dirs = {
-        for: function() {
+        for: {
+          p: function(env, exp) {
+          },
+          e: function(env, exp) {
+          },
+          n: true
         },
-        if: function() {
-        },
-        show: function() {
+        if: {
+          p: function(node, env, exp) {
+            // evaluate expression
+          },
+          e: function(node, r) {
+            // operate dom with evaluate result
+          },
+          n: false
+        }
+        show: {
+          p: function(env, exp) {
+          },
+          e: function(env, exp) {
+          },
+          n: false
         }
       }
     }
 
-    check(node, env) {
+    check(node, parnEnv) {
       var childEnv = null
       Object.keys(this.dirs).forEach(dir => {
         var exp = node.getAttribute(dir)
-        // 写到这儿
-        // 只有 for 会形成子作用域
-        if (exp && (!childEnv)) {
-          childEnv = new Env({}, env)
-          childEnv.add()
+        if (exp) {
+          if (this.dirs[dir].n) {
+            if (! childEnv) {
+              childEnv = new Env({}, parnEnv)
+            }
+            this.dirs[dir].p(childEnv, exp)
+          } else {
+            this.dirs[dir].p(parnEnv, exp)
+          }
         }
       })
     }
   }
 
-  // 分析 DOM 中的数据引用处，绑定到 Watcher
+  // Parser, analyze the reference of data in DOM and bind to the specific Watcher
   class Parser {
     constructor(el, env) {
       this.el = el
@@ -123,17 +144,38 @@
       this.dirs.check(node)
     }
 
+    // evaluate
     parseText(node, env) {
       exp = this.reg.exec(node.textContent).split('.')
-      var val = env.find(exp.splice(0, 1)[0])
-      var parn = null
-      while (exp.length !== 0) {
-        parn = val
-        val = parn[exp.splice(0, 1)[0]]
-      }
       new Watcher(parn, val, function(newVal, oldVal) {
         node.textContent = newVal
       })
+    }
+
+    parseExp(exp, env) {
+      return {
+        exp: exp,
+        // key chain array
+        ref: []
+      }
+    }
+
+    // @Exception reference error
+    findAval(keyChain, env) {
+      var parn = env.find(keyChain.splice(0, 1)[0])
+      var child = parn
+      var key
+      while (keyChain.length !== 0) {
+        key = keyChain.splice(0, 1)[0]
+        parn = child
+        child = parn[key]
+      }
+
+      return {
+        parn: parn,
+        key: key,
+        val: child
+      }
     }
   }
 
@@ -148,7 +190,7 @@
       this._mount()
     }
 
-    // 包裹数据，绑定 watch
+    // Wrap data and bind watch function
     _init() {
       this.c.el = getDOM(this.c.el)
       this.__wrapping(this.c.data, this)
@@ -156,7 +198,7 @@
       this.inited()
     }
 
-    // 生成 model
+    // Generate model
     _mount() {
       observe(this.c.data)
       new Parser(this.c.el, new Env(this.c.data, null))
