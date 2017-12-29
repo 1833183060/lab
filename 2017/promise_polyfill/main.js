@@ -1,16 +1,44 @@
 /*
- * A promise comes with some guarantees:
- * 1. Callbacks will never be called before the completion of the current run of the JavaScript event loop
- * 2. Callbacks added with .then even after the success or failure of the asynchronous operation will be called
- * 3. Multiple callbacks may be added by calling .then several times, to be executed independently in insertion order
+ * Status
+ * Handler
+ * Executor
  * */
-function seccessCallback(res) {
-  console.log('success with ' + res)
-}
+const PENDING = 0
+const FULFILLED = 1
+const REJECTED = 2
 
-function failureCallback(error) {
-  console.log('failed with ' + res)
-}
+const executorHandler = (promise, status) => data => {
+  if (promise.status !== PENDING)
+    return false
 
-/* Execute two or more asynchronous operations back to back */
+  setTimeout(() => {
+    promise._status = status
+    promise._result = data
+  })
+}
+class Promise {
+  constructor (executor) {
+    this._status = PENDING
+    this._result = undefined
+
+    executor(executorHandler(this, FULFILLED), executorHandler(this, REJECTED))
+  }
+
+  then(resolve, reject) {
+    resolve = resolve || function() {}
+    reject = reject || function() {}
+
+    switch(this._status) {
+      case FULFILLED:
+        resolve(this._result)
+        break
+      case REJECTED:
+        reject(this._result)
+        break
+    }
+  }
+  
+  catch() {
+  }
+}
 
