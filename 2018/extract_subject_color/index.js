@@ -39,7 +39,7 @@ function getPixel(imgObj) {
  */
 function draw(colors, outputCanvas) {
   outputCanvas.width = 500;
-  outputCanvas.height = 500;
+  outputCanvas.height = 300;
   console.log(outputCanvas)
   const unitWidth = 25;
   const unitHeight = 25;
@@ -58,7 +58,7 @@ function draw(colors, outputCanvas) {
 
 loadImg(imgUri)
   .then((imgObj) => {
-    const colors = extract(getPixel(imgObj), 40, 3);
+    const colors = extract(getPixel(imgObj), 20, 3);
     draw(colors, outputCanvas);
   }).catch((err) => {
     console.log(err.stack);
