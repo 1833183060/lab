@@ -1,4 +1,4 @@
-const imgUri = './test4.png';
+const imgUri = './test3.png';
 const outputCanvas = document.getElementById('palette');
 
 /*
@@ -58,7 +58,7 @@ function draw(colors, outputCanvas) {
 
 loadImg(imgUri)
   .then((imgObj) => {
-    const colors = extract(getPixel(imgObj), 20, 3);
+    const colors = extract(getPixel(imgObj), 40, 3);
     draw(colors, outputCanvas);
   }).catch((err) => {
     console.log(err.stack);

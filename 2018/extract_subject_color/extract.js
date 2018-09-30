@@ -89,7 +89,8 @@ function extract(imgData, topN, fidelity) {
     let r = pixels[base];
     let g = pixels[base + 1];
     let b = pixels[base + 2];
-    let unfoldRGB = unfold(r, g, b);
+    let opted = [optColor(r), optColor(g), optColor(b)];
+    let unfoldRGB = unfold.apply(unfold, opted);
     Octree.insert(unfoldRGB, fidelity);
   }
   const topNNodes = getTheTopN(Octree.getAllLeafNodes(), topN);
@@ -103,17 +104,14 @@ function extract(imgData, topN, fidelity) {
 }
 
 function optColor(c) {
-  let addedCount = 0;
-  let bitCount = 0;
-
-  for (let i = 0; i < 8; i++) {
-    let bit = (c >> i) || 1;
-    if (bit === 1) {
-      bitCount++;
-    } else {
-      if (bitCount)
-      bitCount = 0;
-    }
+  const parts = [c & 127, c & 63, c & 31];
+  switch(true) {
+    case 127 - parts[0] <= 3:
+      return c + 127 - parts[0] + 1;
+    case 63 - parts[1] <= 3:
+      return c + 63 - parts[1] + 1;
+    case 31 - parts[2] <= 3:
+      return c + 31 - parts[2] + 1;
   }
   return c;
 }
