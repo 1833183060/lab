@@ -1,5 +1,5 @@
-const imgUri = './test1.png';
-const outputCanvas = document.getElementById('mycanvas');
+const imgUri = './test4.png';
+const outputCanvas = document.getElementById('palette');
 
 /*
  * @param {String} uri 图片地址
@@ -11,6 +11,7 @@ function loadImg(uri) {
 
   return new Promise(function(resolve, reject) {
     img.onload = function() {
+      document.body.insertBefore(img, palette);
       resolve(img);
     }
     img.onerror = function() {
@@ -33,10 +34,32 @@ function getPixel(imgObj) {
 
   return canvasCtx.getImageData(0, 0, imgObj.width, imgObj.height);
 }
+/*
+ * @param {HTMLCanvasElement} outputCanvas
+ */
+function draw(colors, outputCanvas) {
+  outputCanvas.width = 500;
+  outputCanvas.height = 500;
+  console.log(outputCanvas)
+  const unitWidth = 25;
+  const unitHeight = 25;
+  let originHeight = 0;
+  const ctx = outputCanvas.getContext('2d');
+  for (let i = 0; i < colors.length; i++) {
+    let c = colors[i];
+    let originWidth = unitWidth * (i % (outputCanvas.width / unitWidth));
+    ctx.fillStyle = `rgb(${c[0]},${c[1]},${c[2]})`;
+    if (originHeight / unitHeight < Math.floor((i / (outputCanvas.width / unitWidth)))) {
+      originHeight += unitHeight;
+    }
+    ctx.fillRect(originWidth, originHeight, unitWidth, unitHeight);
+  }
+}
 
 loadImg(imgUri)
   .then((imgObj) => {
-    extract(getPixel(imgObj), outputCanvas);
+    const colors = extract(getPixel(imgObj), 20, 3);
+    draw(colors, outputCanvas);
   }).catch((err) => {
     console.log(err.stack);
   });
