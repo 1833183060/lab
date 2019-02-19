@@ -17,6 +17,7 @@ const Octree = {
    */
   insert: function(valueArr, layer) {
     layer = layer || 5;
+    let _layer = 8;
     let currentNode = this.root;
     while (layer !== 0) {
       const value = valueArr.pop();
@@ -35,7 +36,62 @@ const Octree = {
       layer--;
     }
   },
+  // 取指定层的加权平均结点（未优化）
   average: function(layer) {
+    const parent = this.root;
+    const nodes = this.getAssignedLayer(layer - 1);
+    let node;
+    while (node = nodes.shift()) {
+      let children = node.children;
+      let sum = 0;
+      for (let code in children) {
+        let child = children[code];
+        sum += child.count;
+      }
+      let _code = 0;
+      for (let code in children) {
+        let child = children[code];
+        _code += code * child.count / sum;
+      }
+      _code = _code - 0.5 > Math.floor(_code) ? Math.ceil(_code) : Math.floor(_code);
+      let i = 0;
+      while (true) {
+        if (children[_code - i]) {
+          node.children = { [_code - i] : children[_code - i]};
+          break;
+        } else if (children[_code + i]) {
+          node.children = { [_code + i] : children[_code + i]};
+          break;
+        }
+        i++;
+      }
+    }
+  },
+
+  // 获取一个结点的孩子们
+  getChildrenOfOneNode(node) {
+    const r = [];
+    const childrenSet = node.children;
+    for (let key in childrenSet) {
+      r.push(childrenSet[key]);
+    }
+    return r;
+  },
+
+  // 获取指定层的结点
+  getAssignedLayer: function(num) {
+    let nodes = this.getChildrenOfOneNode(this.root);
+    nodes.push(2);
+    let current = nodes.shift();
+    while (num !== current) {
+      if (typeof current === 'number') {
+        nodes.push(current + 1);
+      } else {
+        nodes = nodes.concat(this.getChildrenOfOneNode(current));
+      }
+      current = nodes.shift();
+    }
+    return nodes;
   },
   /*
    * 获取该树所有的叶子节点
@@ -80,6 +136,7 @@ const Octree = {
  * @return {Array}
  */
 function extract(imgData, topN, fidelity) {
+  Octree.root = new TreeNode();
   topN = topN || 20;
   fidelity = fidelity || 3;
   const pixels = imgData.data;
@@ -89,12 +146,15 @@ function extract(imgData, topN, fidelity) {
     let r = pixels[base];
     let g = pixels[base + 1];
     let b = pixels[base + 2];
+    // let opted = [r, g, b];
     let opted = [optColor(r), optColor(g), optColor(b)];
+    // console.log(r, g, b, opted)
     let unfoldRGB = unfold.apply(unfold, opted);
     Octree.insert(unfoldRGB, fidelity);
   }
+  Octree.average(fidelity - 1);
+  Octree.average(fidelity);
   const topNNodes = getTheTopN(Octree.getAllLeafNodes(), topN);
-  console.log(topNNodes)
   const r = [];
   for (let i = 0; i < topNNodes.length; i++) {
     let unfoldValue = Octree.getAllAncestorsValue(topNNodes[i]);
@@ -107,11 +167,11 @@ function optColor(c) {
   const parts = [c & 127, c & 63, c & 31];
   switch(true) {
     case 127 - parts[0] <= 3:
-      return c + 127 - parts[0] + 1;
+      return c + 127 - parts[0];
     case 63 - parts[1] <= 3:
-      return c + 63 - parts[1] + 1;
+      return c + 63 - parts[1];
     case 31 - parts[2] <= 3:
-      return c + 31 - parts[2] + 1;
+      return c + 31 - parts[2];
   }
   return c;
 }

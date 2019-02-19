@@ -1,5 +1,24 @@
-const imgUri = './test3.png';
 const outputCanvas = document.getElementById('palette');
+const testImgUrls = ['test2.png', 'test3.png', 'test4.png', 'test5.jpg', 'test6.jpg', 'test7.jpg', 'test8.jpg'];
+
+const imgListDOM = document.getElementById('img-list');
+
+for (url of testImgUrls) {
+  imgListDOM.innerHTML += `<li><a href="./${url}" onclick="return false">${url}</a></li>`;
+}
+
+imgListDOM.addEventListener('click', function(e) {
+  if (e.target.nodeName.toLowerCase() === 'a') {
+    const imgUri = e.target.getAttribute('href');
+    loadImg(imgUri)
+      .then((imgObj) => {
+        const colors = extract(getPixel(imgObj), 10, 4);
+        draw(colors, outputCanvas);
+      }).catch((err) => {
+        console.log(err.stack);
+      });
+  }
+})
 
 /*
  * @param {String} uri 图片地址
@@ -11,7 +30,9 @@ function loadImg(uri) {
 
   return new Promise(function(resolve, reject) {
     img.onload = function() {
-      document.body.insertBefore(img, palette);
+      const imgDiv = document.getElementById('img')
+      imgDiv.innerHTML = '';
+      imgDiv.appendChild(img);
       resolve(img);
     }
     img.onerror = function() {
@@ -40,7 +61,6 @@ function getPixel(imgObj) {
 function draw(colors, outputCanvas) {
   outputCanvas.width = 500;
   outputCanvas.height = 300;
-  console.log(outputCanvas)
   const unitWidth = 25;
   const unitHeight = 25;
   let originHeight = 0;
@@ -56,10 +76,3 @@ function draw(colors, outputCanvas) {
   }
 }
 
-loadImg(imgUri)
-  .then((imgObj) => {
-    const colors = extract(getPixel(imgObj), 20, 3);
-    draw(colors, outputCanvas);
-  }).catch((err) => {
-    console.log(err.stack);
-  });
